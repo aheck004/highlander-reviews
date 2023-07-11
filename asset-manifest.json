@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/aheck004/highlander-reviews/static/css/main.073c9b0a.css",
-    "main.js": "/aheck004/highlander-reviews/static/js/main.8061000b.js",
-    "static/js/787.bfc849ad.chunk.js": "/aheck004/highlander-reviews/static/js/787.bfc849ad.chunk.js",
-    "static/media/logo.svg": "/aheck004/highlander-reviews/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/aheck004/highlander-reviews/index.html",
-    "main.073c9b0a.css.map": "/aheck004/highlander-reviews/static/css/main.073c9b0a.css.map",
-    "main.8061000b.js.map": "/aheck004/highlander-reviews/static/js/main.8061000b.js.map",
-    "787.bfc849ad.chunk.js.map": "/aheck004/highlander-reviews/static/js/787.bfc849ad.chunk.js.map"
+    "main.css": "/highlander-reviews/static/css/main.073c9b0a.css",
+    "main.js": "/highlander-reviews/static/js/main.c149e3a4.js",
+    "static/js/787.bfc849ad.chunk.js": "/highlander-reviews/static/js/787.bfc849ad.chunk.js",
+    "static/media/logo.svg": "/highlander-reviews/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/highlander-reviews/index.html",
+    "main.073c9b0a.css.map": "/highlander-reviews/static/css/main.073c9b0a.css.map",
+    "main.c149e3a4.js.map": "/highlander-reviews/static/js/main.c149e3a4.js.map",
+    "787.bfc849ad.chunk.js.map": "/highlander-reviews/static/js/787.bfc849ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.8061000b.js"
+    "static/js/main.c149e3a4.js"
   ]
 }
