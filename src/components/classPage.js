@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Paper } from '@mui/material'
 import Review from './review'
-import { Axios } from 'axios';
 import axios from 'axios';
 
 function ClassPage({Course}) {
