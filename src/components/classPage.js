@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Paper } from '@mui/material'
-import review from './review'
+import Review from './review'
 import { Axios } from 'axios';
+import axios from 'axios';
 
 function ClassPage({Course}) {
-  const [course, setCourse] = useState(null)
-  const [reviews, setReviews] = useState(null)
+  const [course, setCourse] = useState("CS141") //TODO: populate page with reviews
+  const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     async function getReviews() {
-      await Axios.get(process.env.REACT_APP_NODE_SERVER+`/course/${course}`)
+      console.log(process.env.REACT_APP_NODE_SERVER)
+      await axios.get(process.env.REACT_APP_NODE_SERVER+`/course/${course}`)
       .then(response => {
         setReviews(response)
+        console.log(response)
       })
       .catch(error => console.error(error));
     }
@@ -21,7 +24,7 @@ function ClassPage({Course}) {
   return (
     <div className='class-page-root'>
       {reviews.map((review)=>{
-        <div/>
+        <Review comment={review.additional_comments} diff={review.difficulty} date={review.date}/>
       })}
     </div>
   );

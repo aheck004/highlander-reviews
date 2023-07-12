@@ -1,3 +1,4 @@
+const { Double, Int32 } = require("mongodb");
 const mongoose = require("mongoose");
 
 const reviewSchema = {
@@ -8,6 +9,6 @@ const reviewSchema = {
     date: String
 }
 
-const Review = mongoose.model("Review", reviewSchema);
+const Review = mongoose.model("review", reviewSchema);
 
 module.exports = Review; //After exporting, Review is now usable in routes.
