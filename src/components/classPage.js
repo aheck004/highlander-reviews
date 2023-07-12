@@ -10,7 +10,6 @@ function ClassPage({Course}) {
 
   useEffect(() => {
     async function getReviews() {
-      console.log(process.env.REACT_APP_NODE_SERVER)
       await axios.get(process.env.REACT_APP_NODE_SERVER+`/course/${course}`)
       .then(response => {
         setReviews(response.data)
