@@ -24,3 +24,5 @@ yarn-error.log*
 server/.env
 server/node_modules
 server/routes/playground-1.mongodb.js
+src/components/playground-2.mongodb.js
+src/components/playground-1.mongodb.js
