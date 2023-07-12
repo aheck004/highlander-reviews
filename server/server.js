@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 mongoose.connect(process.env.ATLAS_URI);
 
+app.use("/", require("../routes/reviewRoute.js"));
 app.use("/record", records);
 
 // start the Express server
