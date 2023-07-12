@@ -13,8 +13,7 @@ function ClassPage({Course}) {
       console.log(process.env.REACT_APP_NODE_SERVER)
       await axios.get(process.env.REACT_APP_NODE_SERVER+`/course/${course}`)
       .then(response => {
-        setReviews(response)
-        console.log(response)
+        setReviews(response.data)
       })
       .catch(error => console.error(error));
     }
@@ -23,9 +22,11 @@ function ClassPage({Course}) {
 
   return (
     <div className='class-page-root'>
-      {reviews.map((review)=>{
-        <Review comment={review.additional_comments} diff={review.difficulty} date={review.date}/>
-      })}
+      <div className='review-column'>
+        {reviews.map((review)=>{
+          return <Review comment={review.additional_comments} diff={review.difficulty} date={review.date}/>
+        })}
+      </div>
     </div>
   );
 }
