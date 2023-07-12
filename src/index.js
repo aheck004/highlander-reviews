@@ -1,8 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import { render } from 'react-dom'
 import './index.css';
-import App from './App';
 import ClassPage from './components/classPage';
 import {
   BrowserRouter,
@@ -14,7 +12,7 @@ import reportWebVitals from './reportWebVitals';
 const root = document.getElementById("root");
 
 render(
-  <BrowserRouter>
+  <BrowserRouter basename='/'>
      <Routes>
       <Route path="/" element={<ClassPage />} />
     </Routes>
