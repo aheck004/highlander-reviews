@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const records = require('./routes/record.js');
+const records = require('./routes/reviewRoute.js');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 mongoose.connect(process.env.ATLAS_URI);
 
-app.use("/", require("../routes/reviewRoute.js"));
+app.use("/", require("./routes/reviewRoute.js"));
 app.use("/record", records);
 
 // start the Express server
