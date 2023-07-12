@@ -9,7 +9,7 @@ function Review({comment, diff, date}) {
   
 
   return (
-    <Paper elevation='4' className='review'>
+    <Paper elevation={4} className='review'>
       <span className='review-header'>
         <div className='review-difficulty'>
           Difficulty: 
@@ -25,8 +25,8 @@ function Review({comment, diff, date}) {
       <div className='review-comment'>
         {comment}
       </div>
-      <div class="control-bar">
-        <div class="helpful">
+      <div className="control-bar">
+        <div className="helpful">
           <p>
             <b>Helpful?</b>
           </p>
