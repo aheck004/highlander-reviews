@@ -19,7 +19,6 @@ function SearchBar() {
     async function getReviews() {
       await axios.get(process.env.REACT_APP_NODE_SERVER+`/query-course/${inputValue}`)
       .then(response => {
-        console.log(response.data)
         setOptions(response.data)
       })
       .catch(error => console.error(error));
