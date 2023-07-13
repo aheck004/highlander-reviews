@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Review from './review'
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-function ClassPage({Course}) {
-  const [course, setCourse] = useState("CS141") //TODO: populate page with reviews
+function ClassPage() {
   const [reviews, setReviews] = useState([])
+  const { course } = useParams();
 
   useEffect(() => {
     async function getReviews() {

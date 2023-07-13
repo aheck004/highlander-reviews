@@ -16,7 +16,7 @@ render(
   <BrowserRouter basename='/'>
      <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/course" element={<ClassPage />} />
+      <Route path="/course/:course" element={<ClassPage />} />
     </Routes>
   </BrowserRouter>,
   root
