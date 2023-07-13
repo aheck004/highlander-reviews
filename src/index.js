@@ -12,6 +12,14 @@ import reportWebVitals from './reportWebVitals';
 
 const root = document.getElementById("root");
 
+//BrowserRouter lets you create URL Paths 
+//Basename '/' means that the default path (homepage) is '/'
+//With a <Route/> component we specify which route 
+//will draw what component
+//The /course/:course path is handled similar to 
+//the Node server endpoints where it will catch all
+//paths like '/course/ANYTHING'
+
 render(
   <BrowserRouter basename='/'>
      <Routes>
