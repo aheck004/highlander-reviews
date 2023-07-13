@@ -20,7 +20,7 @@ function SearchBar() {
   useEffect(() => {
     let active = true;
 
-    async function getReviews() {
+    async function getReviews() { //Request node server for classes named inputValye
       await axios.get(process.env.REACT_APP_NODE_SERVER+`/query-course/${inputValue}`)
       .then(response => {
         setOptions(response.data)
@@ -33,8 +33,10 @@ function SearchBar() {
     return () => {
       active = false;
     };
-  }, [value, inputValue]);
-
+  }, [value, inputValue]);//only triggered when value, inoutValue changes 
+ 
+  //Documentation for <Autocomplete/> component
+  //https://mui.com/material-ui/react-autocomplete/#search-as-you-type
   return (
     <Autocomplete
       id="UCR_Class_Searchbar"
@@ -56,6 +58,9 @@ function SearchBar() {
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
+        //when a user selects and option the components onChange event is called
+        //Here we navigate the user to the route '/Course/:course'
+        //This route will draw the <ClassPage/> component fro classPage.js
         navigate(`/Course/${newValue.course_name}`)
       }}
       onInputChange={(event, newInputValue) => {
