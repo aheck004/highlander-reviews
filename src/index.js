@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom'
 import './index.css';
 import ClassPage from './components/classPage';
+import HomePage from './components/HomePage';
 import {
   BrowserRouter,
   Routes,
@@ -14,7 +15,8 @@ const root = document.getElementById("root");
 render(
   <BrowserRouter basename='/'>
      <Routes>
-      <Route path="/" element={<ClassPage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/course" element={<ClassPage />} />
     </Routes>
   </BrowserRouter>,
   root
