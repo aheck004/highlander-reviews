@@ -5,23 +5,23 @@ import { useParams } from 'react-router-dom';
 
 function ClassPage() {
   const [reviews, setReviews] = useState([])
-  const { course } = useParams();
+  const { course } = useParams();  //gets the field :course from /course/:course
 
   useEffect(() => {
-    async function getReviews() {
+    async function getReviews() {//request reviews for this course
       await axios.get(process.env.REACT_APP_NODE_SERVER+`/course/${course}`)
       .then(response => {
-        setReviews(response.data)
+        setReviews(response.data)//updates useState reviews to redraw the DOM
       })
       .catch(error => console.error(error));
     }
     getReviews()
-  }, [course])
+  }, [])
 
   return (
     <div className='class-page-root'>
       <div className='review-column'>
-        {reviews.map((review)=>{
+        {reviews.map((review)=>{ //for every review return a <Review/> component
           return <Review comment={review.additional_comments} diff={review.difficulty} date={review.date}/>
         })}
       </div>
