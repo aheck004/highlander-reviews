@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Review = require("../models/reviewModel");
+const Course = require("../models/courseModel");
 
 //
 
@@ -11,6 +12,16 @@ router.route("/course/:name").get((req, res) => {
               res.json(foundReviews)
             }
         )
+})
+
+router.route("/query-course/:course").get((req, res) => {
+  const course_name_regex = new RegExp(req.params.course, 'i');
+  Course.find({ course_name: { $regex: course_name_regex } }).limit(10)
+      .then(
+          foundCourses => {
+            res.json(foundCourses)
+          }
+      )
 })
 
 module.exports = router;
