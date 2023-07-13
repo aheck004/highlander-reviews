@@ -15,7 +15,7 @@ router.route("/course/:name").get((req, res) => {
 })
 
 router.route("/query-course/:course").get((req, res) => {
-  const course_name_regex = new RegExp(req.params.course, 'i');
+  const course_name_regex = new RegExp('.*'+req.params.course.split('').join('.*')+'.*', 'i');
   Course.find({ course_name: { $regex: course_name_regex } }).limit(10)
       .then(
           foundCourses => {

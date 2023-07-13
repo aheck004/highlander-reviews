@@ -23,7 +23,8 @@ function SearchBar() {
       })
       .catch(error => console.error(error));
     }
-    getReviews()
+    if (inputValue != '')
+      getReviews()
 
     return () => {
       active = false;
@@ -35,7 +36,7 @@ function SearchBar() {
       id="UCR_Class_Searchbar"
       sx={{ width: 300 }}
       getOptionLabel={(option) =>
-        typeof option === 'string' ? option : option.description
+        typeof option === 'string' ? option : option.course_name
       }
       filterOptions={(x) => x}
       options={options}
