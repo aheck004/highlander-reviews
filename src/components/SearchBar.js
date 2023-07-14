@@ -6,10 +6,22 @@ import ClassIcon from '@mui/icons-material/Class';
 import Grid from '@mui/material/Grid';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { styled } from '@mui/system';
+
+const GroupHeader = styled('div')(() => ({
+  position: 'sticky',
+  top: '-8px',
+  padding: '4px 10px',
+  color: 'black',
+  backgroundColor: 'grey'
+}));
+
+const GroupItems = styled('ul')({
+  padding: 0,
+});
 
 function SearchBar() {
   const [value, setValue] = useState(null);
@@ -42,7 +54,7 @@ function SearchBar() {
       id="UCR_Class_Searchbar"
       sx={{ width: 300 }}
       getOptionLabel={(option) =>
-        typeof option === 'string' ? option : option.course_name
+        option.course_name
       }
       isOptionEqualToValue={(option, value) => 
         option.course_name === value.course_name
@@ -69,6 +81,16 @@ function SearchBar() {
       renderInput={(params) => (
         <TextField {...params} label="Search for course" fullWidth />
       )}
+      renderGroup={(params) => {
+        return (
+          <li key={params.key}>
+            <GroupHeader>{params.group}</GroupHeader>
+            <GroupItems>
+              {params.children}
+            </GroupItems>
+          </li>
+        )
+      }}
       renderOption={(props, option) => {
         const matches = match(option.course_name, inputValue, { insideWords: true });
         const parts = parse(option.course_name, matches);
