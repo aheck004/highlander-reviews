@@ -11,6 +11,9 @@ import Fade from "@mui/material/Fade";
 import Backdrop from "@mui/material/Backdrop";
 import { green } from "@mui/material/colors";
 import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import date from 'date-and-time';
 
 const style = {
   position: "absolute",
@@ -33,13 +36,15 @@ export default function CreateReviewModal() {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const timer = React.useRef();
+  const { course } = useParams(); //gets the field :course from /course/:course
+  const [rating, setRating] = React.useState(2.5);
 
-  const [values, setValues] = React.useState({
+  const [comment, setComment] = React.useState({
     user_review: "",
   });
 
   const handleChange = (user_review) => (event) => {
-    setValues({ ...values, [user_review]: event.target.value });
+    setComment({ ...comment, [user_review]: event.target.value });
   };
 
   const buttonSx = {
@@ -65,6 +70,34 @@ export default function CreateReviewModal() {
         setSuccess(true);
         setLoading(false);
       }, 2000);
+
+      const currentDate = new Date();
+
+      const newReview = {
+        class_name: course,
+        additional_comments: comment.user_review,
+        difficulty: rating*2, //Align with database
+        date: date.format(currentDate, 'M/D/YYYY') ,
+      };
+
+      async function submitReview(newReview) {
+        //Request node server for classes named inputValye
+        await axios
+          .post(
+            process.env.REACT_APP_NODE_SERVER + `/submit-review`,
+            newReview
+          )
+          .then((response) => {
+            setSuccess(true);
+            setLoading(false);
+            //TODO: Render successful snackbar
+          })
+          .catch((error) => {
+            console.error(error);
+            //TODO: Render snackbar with error
+          });
+      }
+      submitReview(newReview);
     }
   };
 
@@ -103,7 +136,15 @@ export default function CreateReviewModal() {
               }}
             >
               <Typography>Easy</Typography>
-              <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+              <Rating
+                name="half-rating"
+                defaultValue={2.5}
+                precision={0.5}
+                value={rating}
+                onChange={(event, newRating) => {
+                    setRating(newRating);
+                  }}
+              />
               <Typography>Hard</Typography>
             </Stack>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -114,7 +155,7 @@ export default function CreateReviewModal() {
                 inputProps={{
                   maxlength: CHARACTER_LIMIT,
                 }}
-                value={values.name}
+                value={comment.user_review}
                 onChange={handleChange("user_review")}
                 multiline
                 rows={5}
@@ -122,7 +163,7 @@ export default function CreateReviewModal() {
               />
               <Typography
                 sx={{ alignSelf: "flex-end" }}
-              >{`${values.user_review.length}/${CHARACTER_LIMIT}`}</Typography>
+              >{`${comment.user_review.length}/${CHARACTER_LIMIT}`}</Typography>
             </FormControl>
             <Box sx={{ m: 0, position: "relative", width: "fit-content" }}>
               <Button
