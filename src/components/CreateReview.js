@@ -153,7 +153,7 @@ export default function CreateReviewModal() {
             <FormControl sx={{ width: "100%" }}>
               <OutlinedInput
                 inputProps={{
-                  maxlength: CHARACTER_LIMIT,
+                  maxLength: CHARACTER_LIMIT,
                 }}
                 value={comment.user_review}
                 onChange={handleChange("user_review")}
