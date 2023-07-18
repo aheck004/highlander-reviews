@@ -6,12 +6,12 @@ const Course = require("../models/courseModel");
 //
 
 router.route("/course/:name").get((req, res) => {
-    Review.find({ class_name: req.params.name })
-        .then(
-            foundReviews => {
-              res.json(foundReviews)
-            }
-        )
+  Review.find({ class_name: req.params.name })
+      .then(
+          foundReviews => {
+            res.json(foundReviews)
+          }
+      )
 })
 
 router.route("/query-course/:course").get((req, res) => {
