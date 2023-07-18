@@ -3,6 +3,7 @@ import Review from './review'
 import DifficultyGraph from './DifficultyGraph';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import CreateReviewModal from './CreateReview'
 
 function ClassPage() {
   const [reviews, setReviews] = useState([])
@@ -28,6 +29,7 @@ function ClassPage() {
 
   return (
     <div className='class-page-root'>
+      <CreateReviewModal></CreateReviewModal>
       <div className='review-column'>
         {reviews.map((review)=>{ //for every review return a <Review/> component
           return <Review comment={review.additional_comments} diff={review.difficulty} date={review.date}/>
