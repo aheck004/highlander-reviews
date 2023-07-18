@@ -6,26 +6,32 @@ const Course = require("../models/courseModel");
 //
 
 router.route("/course/:name").get((req, res) => {
-  Review.find({ class_name: req.params.name })
-      .then(
-          foundReviews => {
-            res.json(foundReviews)
-          }
-      )
-})
+  Review.find({ class_name: req.params.name }).then((foundReviews) => {
+    res.json(foundReviews);
+  });
+});
 
 router.route("/submit-review").post((req, res) => {
-  Review.create(req.body)
-})
+  Review.create(req.body);
+});
 
 router.route("/query-course/:course").get((req, res) => {
-  const course_name_regex = new RegExp('^'+req.params.course.split('').join('.*')+'.*$', 'i');
-  Course.find({ course_name: { $regex: course_name_regex } }).limit(10)
-      .then(
-          foundCourses => {
-            res.json(foundCourses)
-          }
-      )
-})
+  const course_name_regex = new RegExp(
+    "^" + req.params.course.split("").join(".*") + ".*$",
+    "i"
+  );
+  Course.find({ course_name: { $regex: course_name_regex } })
+    .limit(10)
+    .then((foundCourses) => {
+      res.json(foundCourses);
+    });
+});
+
+router.route("/get-courses-from-subject-code/:subjectCode").get((req, res) => {
+  Course.find({ subject_code: req.params.subjectCode })
+    .then((foundCourses) => {
+      res.json(foundCourses);
+    });
+});
 
 module.exports = router;
