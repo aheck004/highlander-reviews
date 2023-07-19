@@ -45,6 +45,13 @@ router.route("/query-course/:course").get((req, res) => {
     });
 });
 
+router.route("/get-course/:course").get((req, res) => {
+  Course.find({ course_name: req.params.course})
+    .then((foundCourses) => {
+      res.json(foundCourses);
+    });
+});
+
 router.route("/get-courses-from-subject-code/:subjectCode").get((req, res) => {
   Course.find({ subject_code: req.params.subjectCode })
     .then((foundCourses) => {
