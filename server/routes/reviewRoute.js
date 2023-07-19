@@ -14,11 +14,8 @@ router.route("/course/:name").get((req, res) => {
 router.route("/submit-review").post((req, res) => {
   var new_avg = ((req.body["current_review_avg"] * req.body["current_review_count"]) + (req.body["difficulty"])) / (req.body["current_review_count"] + 1)
   new_avg = parseFloat(new_avg.toFixed(2));
-  
-  console.log({class_name: req.body["class_name"]});
-  console.log(new_avg);
 
-  Course.findOneAndUpdate({course_name: "STAT157"}, {$set: {average_diff: 3}}, {new: true})
+  Course.findOneAndUpdate({course_name: req.body["class_name"]}, {$set: {average_diff: new_avg}}, {new: true})
   .then((foundCourses) => {
     console.log(foundCourses);
   })
@@ -28,8 +25,7 @@ router.route("/submit-review").post((req, res) => {
 
   delete req.body["current_review_count"];
   delete req.body["current_review_avg"];
-  console.log(req.body);
-  //Review.create(req.body);
+  Review.create(req.body);
 });
 
 router.route("/query-course/:course").get((req, res) => {
