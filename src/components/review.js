@@ -5,7 +5,6 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import iconClasses from "@mui/material";
 import "./classPage.css";
 import axios from "axios";
 
@@ -13,10 +12,23 @@ function Review({ comment, diff, date }) {
   const [liked, setLiked] = useState(null);
 
   function Liked(bool) {
-    if (bool)
-      setLiked(true);
-    else
-      setLiked(false);
+    if (bool) {
+      if (liked === true) {
+        setLiked(null);
+        //send message to remove like
+        return;
+      } else {
+        setLiked(true);
+      }
+    } else {
+      if (liked === false) {
+        setLiked(null);
+        //send message to remove dislike
+        return;
+      } else {
+        setLiked(false);
+      }
+    }
 
     const data = {
       comment_id: null,
@@ -58,7 +70,7 @@ function Review({ comment, diff, date }) {
             <ThumbDownIcon
               sx={{
                 color:
-                  liked === true ? "grey" : liked === false ? "red" : "grey"
+                  liked === true ? "grey" : liked === false ? "red" : "grey",
               }}
             />
           </IconButton>

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import CreateReviewModal from "./CreateReview";
 import { Box, Paper, Typography, Divider, Chip } from "@mui/material";
 import CourseSlider from "./CourseSlider";
+import SortButton from "./SortButton";
 import "./classPage.css";
 
 function ClassPage() {
@@ -31,7 +32,6 @@ function ClassPage() {
     axios
       .get(process.env.REACT_APP_NODE_SERVER + `/get-course/${course}`)
       .then((response) => {
-        console.log(response);
         setAverageDiff(response.data[0].average_diff);
       });
   }, [subjectCode, courseNumber]);
@@ -41,7 +41,7 @@ function ClassPage() {
       <Box className="course-hero">
         <Box className="course-hero-left">
           <Typography>{course}</Typography>
-          <Typography>{2}/5</Typography>
+          <Typography>{parseFloat(averageDiff / 2).toFixed(2)}/5</Typography>
           <CreateReviewModal total_reviews={reviews.length} />
         </Box>
         <Box className="course-hero-right">
@@ -57,9 +57,22 @@ function ClassPage() {
           <CourseSlider subject={subjectCode} />
         </Box>
       </Box>
-      <Divider orientation="horizontal" sx={{ margin: "10px", width: "90%" }}>
-        <Chip label={reviews.length} />
-      </Divider>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          margin: "10px",
+        }}
+      >
+        <Divider textAlign="right" orientation="horizontal" sx={{ flex: 1 }}>
+          <Chip label={reviews.length} />
+        </Divider>
+        <Divider orientation="horizontal" sx={{ flex: 1 }}>
+          <SortButton reviews={reviews} setReviews={setReviews} />
+        </Divider>
+      </Box>
       <div className="review-column">
         {reviews.map((review) => {
           //for every review return a <Review/> component
