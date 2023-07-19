@@ -18,8 +18,7 @@ router.route("/submit-review").post((req, res) => {
   console.log({class_name: req.body["class_name"]});
   console.log(new_avg);
 
-  //Course.findOneAndReplace({course_name: req.body["class_name"]}, {average_diff: new_avg})
-  Course.findOneAndUpdate({course_name: "STAT169"}, {$set: {average_diff: 2}}, {new: true})
+  Course.findOneAndUpdate({course_name: "STAT157"}, {$set: {average_diff: 3}}, {new: true})
   .then((foundCourses) => {
     console.log(foundCourses);
   })

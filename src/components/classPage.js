@@ -42,7 +42,7 @@ function ClassPage() {
         <Box className="course-hero-left">
           <Typography>{course}</Typography>
           <Typography>{parseFloat(averageDiff / 2).toFixed(2)}/5</Typography>
-          <CreateReviewModal />
+          <CreateReviewModal total_reviews={reviews.length} />
         </Box>
         <Box className="course-hero-right">
           <Paper
