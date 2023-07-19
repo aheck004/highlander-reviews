@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-export default function CreateReviewModal() {
+export default function CreateReviewModal({total_reviews}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -80,6 +80,8 @@ export default function CreateReviewModal() {
         additional_comments: comment.user_review,
         difficulty: rating*2, //Align with database
         date: date.format(currentDate, 'M/D/YYYY') ,
+        current_review_count: total_reviews,
+        current_review_avg: 5, //TODO: Replace 5 with the actual avg REMEMBER: This should be /10
       };
 
       async function submitReview(newReview) {
