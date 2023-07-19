@@ -41,8 +41,8 @@ function ClassPage() {
       <Box className="course-hero">
         <Box className="course-hero-left">
           <Typography>{course}</Typography>
-          <Typography>{averageDiff / 2}/5</Typography>
-          <CreateReviewModal />
+          <Typography>{2}/5</Typography>
+          <CreateReviewModal total_reviews={reviews.length} />
         </Box>
         <Box className="course-hero-right">
           <Paper
