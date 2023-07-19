@@ -73,7 +73,7 @@ function SearchBar() {
         //when a user selects and option the components onChange event is called
         //Here we navigate the user to the route '/Course/:course'
         //This route will draw the <ClassPage/> component fro classPage.js
-        navigate(`/Course/${newValue.course_name}`)
+        navigate(`/Course/${newValue.subject_code}/${newValue.course_number}`)
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);

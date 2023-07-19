@@ -36,7 +36,9 @@ export default function CreateReviewModal() {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const timer = React.useRef();
-  const { course } = useParams(); //gets the field :course from /course/:course
+  const { subjectCode } = useParams();
+  const { courseNumber } = useParams(); 
+  const course = subjectCode+courseNumber //gets the field :course from /course/:course
   const [rating, setRating] = React.useState(2.5);
 
   const [comment, setComment] = React.useState({
@@ -153,7 +155,7 @@ export default function CreateReviewModal() {
             <FormControl sx={{ width: "100%" }}>
               <OutlinedInput
                 inputProps={{
-                  maxlength: CHARACTER_LIMIT,
+                  maxLength: CHARACTER_LIMIT,
                 }}
                 value={comment.user_review}
                 onChange={handleChange("user_review")}

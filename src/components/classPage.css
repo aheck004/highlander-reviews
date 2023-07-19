@@ -6,8 +6,26 @@
   align-items: center;
 }
 
-.review-column {
+.course-hero {
+  display: flex;
+}
 
+.course-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-column {
 }
 
 .review {
