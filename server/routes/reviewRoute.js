@@ -12,7 +12,25 @@ router.route("/course/:name").get((req, res) => {
 });
 
 router.route("/submit-review").post((req, res) => {
-  Review.create(req.body);
+  var new_avg = ((req.body["current_review_avg"] * req.body["current_review_count"]) + (req.body["difficulty"])) / (req.body["current_review_count"] + 1)
+  new_avg = parseFloat(new_avg.toFixed(2));
+  
+  console.log({class_name: req.body["class_name"]});
+  console.log(new_avg);
+
+  //Course.findOneAndReplace({course_name: req.body["class_name"]}, {average_diff: new_avg})
+  Course.findOneAndUpdate({course_name: "STAT169"}, {$set: {average_diff: 2}}, {new: true})
+  .then((foundCourses) => {
+    console.log(foundCourses);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+  delete req.body["current_review_count"];
+  delete req.body["current_review_avg"];
+  console.log(req.body);
+  //Review.create(req.body);
 });
 
 router.route("/query-course/:course").get((req, res) => {
