@@ -26,12 +26,27 @@
 }
 
 .review-column {
+  gap: 15px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-column :last-child {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 400px) {
+  .review-column {
+    width: 350px; /* change width depending on screen size */
+  }
 }
 
 .review {
-  margin: 10px;
   background-color: white;
-  width: 500px;
+  min-width: '350px';
+  max-width: '500px';
+  width: 100%;
 }
 
 .review-header {
