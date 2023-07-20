@@ -78,9 +78,7 @@ function ClassPage() {
           //for every review return a <Review/> component
           return (
             <Review
-              comment={review.additional_comments}
-              diff={review.difficulty}
-              date={review.date}
+              review={review}
             />
           );
         })}
