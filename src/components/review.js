@@ -8,14 +8,15 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import "./classPage.css";
 import axios from "axios";
 
-function Review({ comment, diff, date }) {
+function Review({ review }) {
   const [liked, setLiked] = useState(null);
 
   function Liked(bool) {
+    var type = bool ? "liked" : "disliked";
     if (bool) {
       if (liked === true) {
         setLiked(null);
-        //send message to remove like
+        type = "remove-liked";
         return;
       } else {
         setLiked(true);
@@ -23,7 +24,7 @@ function Review({ comment, diff, date }) {
     } else {
       if (liked === false) {
         setLiked(null);
-        //send message to remove dislike
+        type = "remove-disliked";
         return;
       } else {
         setLiked(false);
@@ -31,8 +32,8 @@ function Review({ comment, diff, date }) {
     }
 
     const data = {
-      comment_id: null,
-      like: bool,
+      comment_id: review._id,
+      type: type
     };
 
     axios
@@ -46,27 +47,29 @@ function Review({ comment, diff, date }) {
       <span className="review-header">
         <div className="review-difficulty">
           <Typography>Difficulty: </Typography>
-          {[...Array(Math.floor(diff / 2))].map((_, count) => {
+          {[...Array(Math.floor(review.difficulty / 2))].map((_, count) => {
             return <StarIcon />;
           })}
-          {diff % 2 == 0 ? <></> : <StarHalfIcon />}
-          {[...Array(Math.floor(5 - diff / 2))].map((_, count) => {
+          {review.difficulty % 2 == 0 ? <></> : <StarHalfIcon />}
+          {[...Array(Math.floor(5 - review.difficulty / 2))].map((_, count) => {
             return <StarOutlineIcon />;
           })}
         </div>
-        <div className="review-date">{date}</div>
+        <div className="review-date">{review.date}</div>
       </span>
       <Divider />
-      <div className="review-comment">{comment}</div>
+      <div className="review-comment">{review.additional_comments}</div>
       <div className="control-bar">
         <div className="helpful">
           <p>
             <b>Helpful?</b>
           </p>
           <IconButton onClick={() => Liked(true)}>
+            <Typography>{liked===true ? review.like+1:review.like}</Typography>
             <ThumbUpIcon sx={{ color: liked ? "green" : "grey" }} />
           </IconButton>
           <IconButton onClick={() => Liked(false)}>
+            <Typography>{liked===false ? review.dislike+1:review.dislike}</Typography>
             <ThumbDownIcon
               sx={{
                 color:
