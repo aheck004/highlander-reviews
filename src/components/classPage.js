@@ -37,12 +37,43 @@ function ClassPage() {
   }, [subjectCode, courseNumber]);
 
   return (
-    <div className="class-page-root">
-      <Box className="course-hero">
-        <Box className="course-hero-left">
-          <Typography>{course}</Typography>
-          <Typography>{parseFloat(averageDiff / 2).toFixed(2)}/5</Typography>
-          <CreateReviewModal total_reviews={reviews.length} avg_diff={averageDiff}/>
+    <Box
+      className="class-page-root"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        flexDirection: "column",
+      }}
+    >
+      <Box
+        className="course-hero"
+        sx={{
+          display: "flex",
+          gap: "20px",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems:'center',
+          margin:'10px'
+        }}
+      >
+        <Box
+          className="course-hero-left"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h1">{course}</Typography>
+          <Typography variant="h3">
+            {parseFloat(averageDiff / 2).toFixed(2)}/5
+          </Typography>
+          <CreateReviewModal
+            total_reviews={reviews.length}
+            avg_diff={averageDiff}
+          />
         </Box>
         <Box className="course-hero-right">
           <Paper
@@ -66,24 +97,20 @@ function ClassPage() {
           margin: "10px",
         }}
       >
-        <Divider textAlign="right" orientation="horizontal" sx={{ flex: 1 }}>
+        <Divider orientation="horizontal" sx={{flex:1}}/>
+        <Divider orientation="horizontal" sx={{ flex: 1 }}>
           <Chip label={reviews.length} />
         </Divider>
         <Divider orientation="horizontal" sx={{ flex: 1 }}>
           <SortButton reviews={reviews} setReviews={setReviews} />
         </Divider>
       </Box>
-      <div className="review-column">
+      <Box className="review-column">
         {reviews.map((review) => {
-          //for every review return a <Review/> component
-          return (
-            <Review
-              review={review}
-            />
-          );
+          return <Review review={review} />;
         })}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

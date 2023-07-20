@@ -17,7 +17,6 @@ function Review({ review }) {
       if (liked === true) {
         setLiked(null);
         type = "remove-liked";
-        return;
       } else {
         setLiked(true);
       }
@@ -25,7 +24,6 @@ function Review({ review }) {
       if (liked === false) {
         setLiked(null);
         type = "remove-disliked";
-        return;
       } else {
         setLiked(false);
       }
@@ -33,7 +31,7 @@ function Review({ review }) {
 
     const data = {
       comment_id: review._id,
-      type: type
+      type: type,
     };
 
     axios
@@ -48,11 +46,15 @@ function Review({ review }) {
         <div className="review-difficulty">
           <Typography>Difficulty: </Typography>
           {[...Array(Math.floor(review.difficulty / 2))].map((_, count) => {
-            return <StarIcon />;
+            return <StarIcon sx={{ color: "gold" }} />;
           })}
-          {review.difficulty % 2 == 0 ? <></> : <StarHalfIcon />}
+          {review.difficulty % 2 == 0 ? (
+            <></>
+          ) : (
+            <StarHalfIcon sx={{ color: "gold" }} />
+          )}
           {[...Array(Math.floor(5 - review.difficulty / 2))].map((_, count) => {
-            return <StarOutlineIcon />;
+            return <StarOutlineIcon sx={{ color: "gold" }} />;
           })}
         </div>
         <div className="review-date">{review.date}</div>
@@ -65,11 +67,20 @@ function Review({ review }) {
             <b>Helpful?</b>
           </p>
           <IconButton onClick={() => Liked(true)}>
-            <Typography>{liked===true ? review.like+1:review.like}</Typography>
+            <Typography sx={{ color: liked ? "green" : "grey" }}>
+              {liked === true ? review.like + 1 : review.like}
+            </Typography>
             <ThumbUpIcon sx={{ color: liked ? "green" : "grey" }} />
           </IconButton>
           <IconButton onClick={() => Liked(false)}>
-            <Typography>{liked===false ? review.dislike+1:review.dislike}</Typography>
+            <Typography
+              sx={{
+                color:
+                  liked === true ? "grey" : liked === false ? "red" : "grey",
+              }}
+            >
+              {liked === false ? review.dislike + 1 : review.dislike}
+            </Typography>
             <ThumbDownIcon
               sx={{
                 color:
