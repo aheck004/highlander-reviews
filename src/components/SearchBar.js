@@ -11,6 +11,8 @@ import axios from 'axios';
 import { styled } from '@mui/system';
 import { InputBase, Paper } from '@mui/material';
 import Popper from '@mui/material/Popper';
+import SearchIcon from '@mui/icons-material/Search'
+import IconButton from '@mui/material/IconButton';  
 
 const GroupHeader = styled('div')(() => ({
   position: 'sticky',
@@ -99,8 +101,18 @@ function SearchBar() {
             }}  
           >
             <InputBase {...params.InputProps} {...rest}
-              sx={{ padding:'10px', paddingLeft:'20px', paddingRight:'20px'}}
-              defaultValue="Searh for Course"
+              sx={{ padding:'10px', paddingLeft:'20px' }}
+              placeholder="Searh for Course"
+              endAdornment={
+                <div style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)'}}>
+                  <IconButton
+                  onClick={()=>{
+                    navigate(`/Course/${options[0].subject_code}/${options[0].course_number}`)
+                  }}>
+                    <SearchIcon />
+                  </IconButton>
+                </div>
+              }
               
             />
           </Paper>
