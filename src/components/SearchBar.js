@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { styled } from '@mui/system';
 import { InputBase, Paper } from '@mui/material';
+import Popper from '@mui/material/Popper';
 
 const GroupHeader = styled('div')(() => ({
   position: 'sticky',
@@ -28,14 +29,7 @@ function SearchBar() {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const navigate = useNavigate()
-  const inputRef = useRef(null);
-
-  const handleInputClick = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
+  
   useEffect(() => {
     let active = true;
 
@@ -65,6 +59,13 @@ function SearchBar() {
       }
       isOptionEqualToValue={(option, value) => 
         option.course_name === value.course_name
+      }
+      PopperComponent={(props)=>
+        <Popper {...props} style={{paddingTop:'8px', width:'475px'}}>
+          <Paper style={{ maxHeight: '300px', overflowY: 'auto' }}>
+            {props.children}
+          </Paper>
+        </Popper>
       }
       filterOptions={(x) => x}
       options={options}
@@ -100,10 +101,10 @@ function SearchBar() {
             <InputBase {...params.InputProps} {...rest}
               sx={{ padding:'10px', paddingLeft:'20px', paddingRight:'20px'}}
               defaultValue="Searh for Course"
+              
             />
           </Paper>
         )
-        //<TextField {...params} label="Search for course" fullWidth />
       }}
       renderGroup={(params) => {
         return (
