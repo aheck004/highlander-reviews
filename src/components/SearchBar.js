@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import ClassIcon from '@mui/icons-material/Class';
 import Grid from '@mui/material/Grid';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { styled } from '@mui/system';
+import { InputBase, Paper } from '@mui/material';
 
 const GroupHeader = styled('div')(() => ({
   position: 'sticky',
@@ -28,6 +28,13 @@ function SearchBar() {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const navigate = useNavigate()
+  const inputRef = useRef(null);
+
+  const handleInputClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   useEffect(() => {
     let active = true;
@@ -46,13 +53,13 @@ function SearchBar() {
       active = false;
     };
   }, [value, inputValue]);//only triggered when value, inoutValue changes 
- 
+
   //Documentation for <Autocomplete/> component
   //https://mui.com/material-ui/react-autocomplete/#search-as-you-type
   return (
     <Autocomplete
       id="UCR_Class_Searchbar"
-      sx={{ width: 300 }}
+      sx={{ width: 500 }}
       getOptionLabel={(option) =>
         option.course_name
       }
@@ -63,6 +70,7 @@ function SearchBar() {
       options={options}
       groupBy={(option) => option.subject_code}
       autoComplete
+      freeSolo
       includeInputInList
       filterSelectedOptions
       value={value}
@@ -78,9 +86,25 @@ function SearchBar() {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      renderInput={(params) => (
-        <TextField {...params} label="Search for course" fullWidth />
-      )}
+      renderInput={(params) => {
+        const {InputLabelProps,InputProps,...rest} = params;
+        return (
+          <Paper
+            sx={{
+              borderBottomRightRadius:"20px",
+              borderBottomLeftRadius:"20px",
+              borderTopRightRadius:"20px",
+              borderTopLeftRadius:"20px",
+            }}  
+          >
+            <InputBase {...params.InputProps} {...rest}
+              sx={{ padding:'10px', paddingLeft:'20px', paddingRight:'20px'}}
+              defaultValue="Searh for Course"
+            />
+          </Paper>
+        )
+        //<TextField {...params} label="Search for course" fullWidth />
+      }}
       renderGroup={(params) => {
         return (
           <li key={params.key}>
@@ -106,7 +130,7 @@ function SearchBar() {
                     <Box
                       key={index}
                       component="span"
-                      sx={{ fontWeight: part.highlight ? 'bold' : 'regular' }}
+                      sx={{ fontWeight: part.highlight ? 'bold' : 'regular'}}
                     >
                       {part.text}
                     </Box>
