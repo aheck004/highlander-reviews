@@ -107,9 +107,10 @@ function SearchBar() {
                 <div style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)'}}>
                   <IconButton
                   onClick={()=>{
-                    navigate(`/Course/${options[0].subject_code}/${options[0].course_number}`)
+                    if (options[0])  
+                      navigate(`/Course/${options[0].subject_code}/${options[0].course_number}`)
                   }}>
-                    <SearchIcon />
+                    <SearchIcon/>
                   </IconButton>
                 </div>
               }
