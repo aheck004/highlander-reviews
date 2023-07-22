@@ -32,7 +32,7 @@
   flex-direction: column;
 }
 
-.review-column :last-child {
+.review-column .review:last-child {
   margin-bottom: 10px;
 }
 

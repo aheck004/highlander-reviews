@@ -101,11 +101,17 @@ function ClassPage() {
         <Divider orientation="horizontal" sx={{ flex: 1 }}>
           <Chip label={reviews.length} />
         </Divider>
-        <Divider orientation="horizontal" sx={{ flex: 1 }}>
-          <SortButton reviews={reviews} setReviews={setReviews} />
-        </Divider>
+        <Divider orientation="horizontal" sx={{ flex: 1 }}/>
       </Box>
       <Box className="review-column">
+        <Box
+         sx={{
+            display:"flex",
+            justifyContent: "flex-end",
+            alignItems: "center"
+        }}>
+        <SortButton reviews={reviews} setReviews={setReviews}/>
+      </Box>
         {reviews.map((review) => {
           return <Review review={review} />;
         })}
