@@ -7,7 +7,9 @@ import CreateReviewModal from "./CreateReview";
 import { Box, Paper, Typography, Divider, Chip } from "@mui/material";
 import CourseSlider from "./CourseSlider";
 import SortButton from "./SortButton";
+import PrimarySearchAppBar from "./Header"; 
 import "./classPage.css";
+
 
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
@@ -41,12 +43,14 @@ function ClassPage() {
       className="class-page-root"
       sx={{
         display: "flex",
+        overflow: "hidden",
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
         flexDirection: "column",
       }}
     >
+      <PrimarySearchAppBar key={course} title={course}/>
       <Box
         className="course-hero"
         sx={{
@@ -66,7 +70,7 @@ function ClassPage() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h1">{course}</Typography>
+          <Typography variant="h1" align="center">{subjectCode} {courseNumber}</Typography>
           <Typography variant="h3">
             {parseFloat(averageDiff / 2).toFixed(2)}/5
           </Typography>
@@ -85,7 +89,9 @@ function ClassPage() {
           >
             <DifficultyGraph review_data={graphData} />
           </Paper>
-          <CourseSlider subject={subjectCode} />
+          <Box key={subjectCode}>
+            <CourseSlider subject={subjectCode} />
+          </Box>
         </Box>
       </Box>
       <Box
