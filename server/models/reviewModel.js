@@ -5,7 +5,9 @@ const reviewSchema = {
     class_name: String,
     additional_comments: String,
     difficulty: Number,
-    date: String
+    date: String,
+    like: Number,
+    dislike: Number
 }
 
 const Review = mongoose.model("review", reviewSchema);

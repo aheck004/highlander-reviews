@@ -4,6 +4,7 @@ import StarIcon from '@mui/icons-material/Star';
 import TodayIcon from '@mui/icons-material/Today';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Menu, Button, MenuItem } from '@mui/material';
 import { useState } from 'react';
 
@@ -36,12 +37,12 @@ function SortButton({ reviews, setReviews }) {
       setReviews(sortedReviews);
     } else if (sortType === "mosthelpful") {
       const sortedReviews = [...reviews].sort((a, b) => {
-        return b.liked - a.liked;
+        return (b.like-b.dislike) - (a.like-a.dislike);
       });
       setReviews(sortedReviews);
     } else if (sortType === "leasthelpful") {
       const sortedReviews = [...reviews].sort((a, b) => { 
-        return a.disliked - b.disliked;
+        return (b.dislike-b.like) - (a.dislike-a.like);
       });
       setReviews(sortedReviews);
     }
@@ -51,15 +52,21 @@ function SortButton({ reviews, setReviews }) {
   return (
     <div>
       <Button
+        sx={{width:'170px',
+          display:'flex', 
+          justifyContent:'center', 
+          alignItems:'center'
+        }}
         variant='contained'
+        startIcon={<SortIcon/>}
+        endIcon={<ArrowDropDownIcon/>}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <SortIcon/>
-        Dashboard
+        Sort By...
       </Button>
       <Menu
         id="basic-menu"

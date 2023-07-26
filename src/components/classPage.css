@@ -26,12 +26,23 @@
 }
 
 .review-column {
+  gap: 15px;
+  max-width: 550px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
 }
 
+.review-column .review:last-child {
+  margin-bottom: 10px;
+}
+
+
 .review {
-  margin: 10px;
   background-color: white;
-  width: 500px;
+  min-width: '350px';
+  max-width: '500px';
+  width: 100%;
 }
 
 .review-header {

@@ -6,7 +6,7 @@ function DifficultyGraph({ review_data }) {
     <BarChart
       xAxis={[{ scaleType: "band", data: ["5", "4", "3", "2", "1"] }]}
       series={[{ data: review_data }]}
-      width={500}
+      width={350}
       height={300}
     />
   );
