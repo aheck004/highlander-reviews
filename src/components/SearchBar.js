@@ -20,12 +20,14 @@ const GroupHeader = styled("div")(() => ({
   position: "sticky",
   top: "-8px",
   padding: "4px 10px",
-  color: "black",
-  backgroundColor: "grey",
+  color: theme.palette.text.main,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 const GroupItems = styled("ul")({
   padding: 0,
+  color: theme.palette.text.main,
+  backgroundColor: theme.palette.background.main,
 });
 
 function SearchBar({ width, height }) {
@@ -108,12 +110,17 @@ function SearchBar({ width, height }) {
                 borderBottomLeftRadius: "20px",
                 borderTopRightRadius: "20px",
                 borderTopLeftRadius: "20px",
+                color: 'text.main',
+                bgcolor:'background.main',
               }}
             >
               <InputBase
                 {...params.InputProps}
                 {...rest}
-                sx={{ paddingLeft: "20px" }}
+                sx={{
+                  paddingLeft: "20px",
+                  color: 'text.main',
+                }}
                 placeholder="Search for Course"
                 endAdornment={
                   <div
@@ -133,7 +140,7 @@ function SearchBar({ width, height }) {
                           );
                       }}
                     >
-                      <SearchIcon />
+                      <SearchIcon sx={{ color: 'text.main'}}/>
                     </IconButton>
                   </div>
                 }
@@ -159,7 +166,7 @@ function SearchBar({ width, height }) {
             <li {...props}>
               <Grid container alignItems="center">
                 <Grid item sx={{ display: "flex", width: 44 }}>
-                  <MenuBookIcon sx={{ color: "text.secondary" }} />
+                  <MenuBookIcon sx={{ color: "text.main" }} />
                 </Grid>
                 <Grid
                   item
