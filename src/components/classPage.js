@@ -7,9 +7,10 @@ import CreateReviewModal from "./CreateReview";
 import { Box, Paper, Typography, Divider, Chip } from "@mui/material";
 import CourseSlider from "./CourseSlider";
 import SortButton from "./SortButton";
-import PrimarySearchAppBar from "./Header"; 
+import PrimarySearchAppBar from "./Header";
 import "./classPage.css";
-
+import { ThemeProvider} from "@mui/material/styles";
+import theme from "./theme.js";
 
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
@@ -39,90 +40,96 @@ function ClassPage() {
   }, [subjectCode, courseNumber]);
 
   return (
-    <Box
-      className="class-page-root"
-      sx={{
-        display: "flex",
-        overflow: "hidden",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        flexDirection: "column",
-      }}
-    >
-      <PrimarySearchAppBar key={course} title={course}/>
+    <ThemeProvider theme={theme}>
       <Box
-        className="course-hero"
+        className="class-page-root"
+        bgcolor="background.main"
         sx={{
           display: "flex",
-          gap: "20px",
-          flexWrap: "wrap",
+          overflow: "hidden",
           justifyContent: "center",
-          alignItems:'center',
-          margin:'10px'
+          alignItems: "center",
+          width: "100%",
+          flexDirection: "column",
         }}
       >
+        <PrimarySearchAppBar key={course} title={course} />
         <Box
-          className="course-hero-left"
+          className="course-hero"
           sx={{
             display: "flex",
+            gap: "20px",
+            flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
+            margin: "10px",
           }}
         >
-          <Typography variant="h1" align="center">{subjectCode} {courseNumber}</Typography>
-          <Typography variant="h3">
-            {parseFloat(averageDiff / 2).toFixed(2)}/5
-          </Typography>
-          <CreateReviewModal
-            total_reviews={reviews.length}
-            avg_diff={averageDiff}
-          />
-        </Box>
-        <Box className="course-hero-right">
-          <Paper
+          <Box
+            className="course-hero-left"
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <DifficultyGraph review_data={graphData} />
-          </Paper>
-          <Box key={subjectCode}>
-            <CourseSlider subject={subjectCode} />
+            <Typography variant="h1" align="center" color="text.main">
+              {subjectCode} {courseNumber}
+            </Typography>
+            <Typography variant="h3" color="text.main">
+              {parseFloat(averageDiff / 2).toFixed(2)}/5
+            </Typography>
+            <CreateReviewModal
+              total_reviews={reviews.length}
+              avg_diff={averageDiff}
+            />
+          </Box>
+          <Box className="course-hero-right">
+            <Paper
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <DifficultyGraph review_data={graphData} />
+            </Paper>
+            <Box key={subjectCode}>
+              <CourseSlider subject={subjectCode} />
+            </Box>
           </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          margin: "10px",
-        }}
-      >
-        <Divider orientation="horizontal" sx={{flex:1}}/>
-        <Divider orientation="horizontal" sx={{ flex: 1 }}>
-          <Chip label={reviews.length} />
-        </Divider>
-        <Divider orientation="horizontal" sx={{ flex: 1 }}/>
-      </Box>
-      <Box className="review-column">
         <Box
-         sx={{
-            display:"flex",
-            justifyContent: "flex-end",
-            alignItems: "center"
-        }}>
-        <SortButton reviews={reviews} setReviews={setReviews}/>
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            margin: "10px",
+          }}
+        >
+          <Divider orientation="horizontal" sx={{ flex: 1 }} />
+          <Divider orientation="horizontal" sx={{ flex: 1 }}>
+            <Chip color="accent" label={reviews.length} />
+          </Divider>
+          <Divider orientation="horizontal" sx={{ flex: 1 }} />
+        </Box>
+        <Box className="review-column">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+            <SortButton reviews={reviews} setReviews={setReviews} />
+          </Box>
+          {reviews.map((review) => {
+            return <Review review={review} />;
+          })}
+        </Box>
       </Box>
-        {reviews.map((review) => {
-          return <Review review={review} />;
-        })}
-      </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 

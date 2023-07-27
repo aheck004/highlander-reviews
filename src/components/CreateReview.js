@@ -14,6 +14,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import date from 'date-and-time';
+import { ThemeProvider} from "@mui/material/styles";
+import theme from "./theme.js";
 
 const style = {
   position: "absolute",
@@ -106,8 +108,9 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
-      <Button onClick={handleOpen} variant="outlined">
+      <Button onClick={handleOpen} variant="contained" color="primary">
         Write a review for this course
       </Button>
       <Modal
@@ -196,5 +199,6 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
         </Fade>
       </Modal>
     </div>
+    </ThemeProvider>
   );
 }
