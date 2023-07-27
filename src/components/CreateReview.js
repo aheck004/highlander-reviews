@@ -24,8 +24,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   maxWidth: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: theme.palette.background.main,
+  border: `2px solid ${theme.palette.text.main}`,
   boxShadow: 24,
   p: 4,
 };
@@ -123,15 +123,16 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
         slotProps={{
           backdrop: {
             timeout: 500,
+            style: {backgroundColor: "text"}, //Changes color when a color is specified but is too solid.
           },
         }}
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography id="modal-modal-title" variant="h6" component="h2" color="text.main">
               Write a Review
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }} color="text.main">
               How difficult was this course?
             </Typography>
             <Stack
@@ -142,25 +143,36 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
                 alignItems: "center",
               }}
             >
-              <Typography>Easy</Typography>
+              <Typography color="text.main">Easy</Typography>
               <Rating
                 name="half-rating"
                 defaultValue={2.5}
                 precision={0.5}
                 value={rating}
+                sx={{
+                  '& .MuiRating-iconFilled': {
+                    color: 'accent.main',
+                  },
+                  '& .MuiRating-iconHover': {
+                    color: 'accent.main',
+                  },
+                }}
                 onChange={(event, newRating) => {
                     setRating(newRating);
                   }}
               />
-              <Typography>Hard</Typography>
+              <Typography color="text.main">Hard</Typography>
             </Stack>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }} color="text.main">
               What are your thoughts on this course?
             </Typography>
             <FormControl sx={{ width: "100%" }}>
               <OutlinedInput
                 inputProps={{
                   maxLength: CHARACTER_LIMIT,
+                  sx: {
+                    color: "text.main",
+                  },
                 }}
                 value={comment.user_review}
                 onChange={handleChange("user_review")}
@@ -170,6 +182,7 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
               />
               <Typography
                 sx={{ alignSelf: "flex-end" }}
+                color="text.main"
               >{`${comment.user_review.length}/${CHARACTER_LIMIT}`}</Typography>
             </FormControl>
             <Box sx={{ m: 0, position: "relative", width: "fit-content" }}>
@@ -178,6 +191,7 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
                 sx={buttonSx}
                 disabled={loading}
                 onClick={handleButtonClick}
+                color="primary"
               >
                 Submit Review
               </Button>
