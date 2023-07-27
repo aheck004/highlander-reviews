@@ -123,7 +123,7 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
         slotProps={{
           backdrop: {
             timeout: 500,
-            style: {backgroundColor: "text"}, //Backdrop color
+            style: {backgroundColor: "text"}, //Changes color when a color is specified but is too solid.
           },
         }}
       >
@@ -170,6 +170,9 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
               <OutlinedInput
                 inputProps={{
                   maxLength: CHARACTER_LIMIT,
+                  sx: {
+                    color: "text.main",
+                  },
                 }}
                 value={comment.user_review}
                 onChange={handleChange("user_review")}
