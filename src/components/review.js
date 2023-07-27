@@ -7,6 +7,8 @@ import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import "./classPage.css";
 import axios from "axios";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme.js";
 
 function Review({ review }) {
   const [liked, setLiked] = useState(null);
@@ -41,56 +43,61 @@ function Review({ review }) {
   }
 
   return (
-    <Paper elevation={4} className="review">
-      <span className="review-header">
-        <div className="review-difficulty">
-          <Typography>Difficulty: </Typography>
-          {[...Array(Math.floor(review.difficulty / 2))].map((_, count) => {
-            return <StarIcon sx={{ color: "gold" }} />;
-          })}
-          {review.difficulty % 2 == 0 ? (
-            <></>
-          ) : (
-            <StarHalfIcon sx={{ color: "gold" }} />
-          )}
-          {[...Array(Math.floor(5 - review.difficulty / 2))].map((_, count) => {
-            return <StarOutlineIcon sx={{ color: "gold" }} />;
-          })}
+    <ThemeProvider theme={theme}>
+      <Paper elevation={4} className="review" style={{ backgroundColor: theme.palette.secondary.main }}
+>
+        <span className="review-header">
+          <div className="review-difficulty">
+            <Typography color="text.main">Difficulty: </Typography>
+            {[...Array(Math.floor(review.difficulty / 2))].map((_, count) => {
+              return <StarIcon color="accent" />;
+            })}
+            {review.difficulty % 2 == 0 ? (
+              <></>
+            ) : (
+              <StarHalfIcon color="accent" />
+            )}
+            {[...Array(Math.floor(5 - review.difficulty / 2))].map(
+              (_, count) => {
+                return <StarOutlineIcon color="accent" />;
+              }
+            )}
+          </div>
+          <div className="review-date"> <Typography color="text.main">{review.date}</Typography></div>
+        </span>
+        <Divider />
+        <div className="review-comment"><Typography color="text.main">{review.additional_comments}</Typography></div>
+        <div className="control-bar">
+          <div className="helpful">
+            <p>
+              <Typography color="text.main" fontWeight={'bold'}>Helpful?</Typography>
+            </p>
+            <IconButton onClick={() => Liked(true)}>
+              <Typography sx={{ color: liked ? "green" : theme.palette.accent.main }}>
+                {liked === true ? review.like + 1 : review.like}
+              </Typography>
+              <ThumbUpIcon sx={{ color: liked ? "green" : theme.palette.accent.main }} />
+            </IconButton>
+            <IconButton onClick={() => Liked(false)}>
+              <Typography
+                sx={{
+                  color:
+                    liked === true ? theme.palette.accent.main : liked === false ? "red" : theme.palette.accent.main,
+                }}
+              >
+                {liked === false ? review.dislike + 1 : review.dislike}
+              </Typography>
+              <ThumbDownIcon
+                sx={{
+                  color:
+                    liked === true ? theme.palette.accent.main : liked === false ? "red" : theme.palette.accent.main,
+                }}
+              />
+            </IconButton>
+          </div>
         </div>
-        <div className="review-date">{review.date}</div>
-      </span>
-      <Divider />
-      <div className="review-comment">{review.additional_comments}</div>
-      <div className="control-bar">
-        <div className="helpful">
-          <p>
-            <b>Helpful?</b>
-          </p>
-          <IconButton onClick={() => Liked(true)}>
-            <Typography sx={{ color: liked ? "green" : "grey" }}>
-              {liked === true ? review.like + 1 : review.like}
-            </Typography>
-            <ThumbUpIcon sx={{ color: liked ? "green" : "grey" }} />
-          </IconButton>
-          <IconButton onClick={() => Liked(false)}>
-            <Typography
-              sx={{
-                color:
-                  liked === true ? "grey" : liked === false ? "red" : "grey",
-              }}
-            >
-              {liked === false ? review.dislike + 1 : review.dislike}
-            </Typography>
-            <ThumbDownIcon
-              sx={{
-                color:
-                  liked === true ? "grey" : liked === false ? "red" : "grey",
-              }}
-            />
-          </IconButton>
-        </div>
-      </div>
-    </Paper>
+      </Paper>
+    </ThemeProvider>
   );
 }
 
