@@ -67,9 +67,9 @@ export default function PrimarySearchAppBar({ title }) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 
-  const user = Cookie.get("googleUser");
+  var user = Cookie.get("googleUser");
   if (user)
-    JSON.parse(user.slice(2))
+    user = JSON.parse(user.slice(2))
   console.log(user);
 
   const navigate = useNavigate();
