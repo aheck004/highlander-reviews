@@ -1,7 +1,6 @@
 const axios = require("axios");
 const qs = require("qs");
 const log = require("loglevel");
-const { Mode } = require("@mui/icons-material");
 
 async function getGoogleOAuthTokens(code) {
   const url = "https://oauth2.googleapis.com/token";
