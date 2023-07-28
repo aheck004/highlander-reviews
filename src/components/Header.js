@@ -15,6 +15,9 @@ import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
+import getGoogleOAuthURL from "../getGoogleURL";
+import Cookie from "js-cookie";
+import { Avatar } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,6 +65,9 @@ export default function PrimarySearchAppBar({ title }) {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const user = JSON.parse(Cookie.get("googleUser").slice(2));
+  console.log(user);
 
   const navigate = useNavigate();
 
@@ -153,7 +159,7 @@ export default function PrimarySearchAppBar({ title }) {
                 navigate("/");
               }}
             >
-              <HomeIcon color="background"/>
+              <HomeIcon color="background" />
             </IconButton>
             <Typography
               variant="h6"
@@ -168,17 +174,26 @@ export default function PrimarySearchAppBar({ title }) {
             </Box>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+              {user ? (
+                <Box sx={{ display: "flex", alignItems: "center", gap:"10px" }}>
+                  <Typography variant="h6" noWrap component="div">
+                    Welcome, {user.given_name}!
+                    </Typography>
+                  <Avatar src={user.picture}/>
+                </Box>
+              ) : (
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  href={getGoogleOAuthURL()}
+                  color="inherit"
+                >
+                  <AccountCircle/>
+                </IconButton>
+              )}
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
