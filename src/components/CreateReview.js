@@ -84,6 +84,8 @@ export default function CreateReviewModal({total_reviews, avg_diff}) {
         date: date.format(currentDate, 'M/D/YYYY') ,
         current_review_count: total_reviews,
         current_review_avg: avg_diff,
+        like: 0,
+        dislike: 0
       };
 
       async function submitReview(newReview) {
