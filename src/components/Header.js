@@ -72,7 +72,6 @@ export default function PrimarySearchAppBar({ title }) {
   React.useEffect(() => {
     if (Cookie.get("googleUser"))
       setGoogleUser(JSON.parse(Cookie.get("googleUser").slice(2)))
-    console.log(googleUser);
   }, []);
 
   const navigate = useNavigate();
