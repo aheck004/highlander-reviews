@@ -50,12 +50,22 @@ router.route("/liked").post((req, res) => {
     });
 });
 
-router.route("/submit-review").post((req, res) => {
+router.route("/submit-review").post(async(req, res) => {
   var new_avg =
     (req.body["current_review_avg"] * req.body["current_review_count"] +
       req.body["difficulty"]) /
     (req.body["current_review_count"] + 1);
   new_avg = parseFloat(new_avg.toFixed(2));
+
+  try {
+    const foundReviews = await Review.find({ user_email: req.body["user_email"], class_name: req.body["class_name"] });
+    if (foundReviews.length !== 0) {
+      console.log(`user ${req.body["user_email"]} already reviewed ${req.body["class_name"]}`)
+      return res.json(`You already reviewed ${req.body["class_name"]}`);
+    }
+  } catch (err) {
+    console.log(err);
+  }
 
   Course.findOneAndUpdate(
     { course_name: req.body["class_name"] },

@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom'
 import './index.css';
 import ClassPage from './components/classPage';
 import HomePage from './components/HomePage';
+import { createRoot } from 'react-dom/client';
 import {
   BrowserRouter,
   Routes,
@@ -10,7 +10,8 @@ import {
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
-const root = document.getElementById("root");
+const container = document.getElementById('root');
+const root = createRoot(container);
 
 //BrowserRouter lets you create URL Paths 
 //Basename '/' means that the default path (homepage) is '/'
@@ -20,14 +21,13 @@ const root = document.getElementById("root");
 //the Node server endpoints where it will catch all
 //paths like '/course/ANYTHING'
 
-render(
+root.render(
   <BrowserRouter basename='/'>
      <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/Course/:subjectCode/:courseNumber" element={<ClassPage />} />
     </Routes>
-  </BrowserRouter>,
-  root
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

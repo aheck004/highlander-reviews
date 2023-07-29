@@ -4,13 +4,16 @@ import DifficultyGraph from "./DifficultyGraph";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import CreateReviewModal from "./CreateReview";
-import { Box, Paper, Typography, Divider, Chip } from "@mui/material";
+import { Box, Paper, Typography, Divider, Chip, Button } from "@mui/material";
 import CourseSlider from "./CourseSlider";
 import SortButton from "./SortButton";
 import PrimarySearchAppBar from "./Header";
+import GoogleIcon from "@mui/icons-material/Google";
 import "./classPage.css";
-import { ThemeProvider} from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
+import Cookie from "js-cookie";
+import getGoogleOAuthURL from "../getGoogleURL.js";
 
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
@@ -19,6 +22,12 @@ function ClassPage() {
   const { subjectCode } = useParams();
   const { courseNumber } = useParams();
   const course = subjectCode + courseNumber;
+  const [googleUser, setGoogleUser] = React.useState(null);
+
+  React.useEffect(() => {
+    if (Cookie.get("googleUser"))
+      setGoogleUser(JSON.parse(Cookie.get("googleUser").slice(2)));
+  }, []);
 
   useEffect(() => {
     axios
@@ -79,10 +88,21 @@ function ClassPage() {
             <Typography variant="h3" color="text.main">
               {parseFloat(averageDiff / 2).toFixed(2)}/5
             </Typography>
-            <CreateReviewModal
-              total_reviews={reviews.length}
-              avg_diff={averageDiff}
-            />
+            {googleUser ? (
+              <CreateReviewModal
+                total_reviews={reviews.length}
+                avg_diff={averageDiff}
+              />
+            ) : (
+              <Button
+                endIcon={<GoogleIcon />}
+                variant="contained"
+                color="primary"
+                href={getGoogleOAuthURL(window.location.href)}
+              >
+                Login to Review
+              </Button>
+            )}
           </Box>
           <Box className="course-hero-right">
             <Paper
@@ -124,8 +144,8 @@ function ClassPage() {
           >
             <SortButton reviews={reviews} setReviews={setReviews} />
           </Box>
-          {reviews.map((review) => {
-            return <Review review={review} />;
+          {reviews.map((review, _id) => {
+            return <Review key={_id} review={review} />;
           })}
         </Box>
       </Box>

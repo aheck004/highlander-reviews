@@ -69,9 +69,10 @@ function CourseSlider({ subject }) {
             padding: "10px",
           }}
         >
-          {similarCourses.map((course) => {
+          {similarCourses.map((course, _id) => {
             return (
               <ButtonBase
+                key={_id}
                 onClick={() => {
                   navigate(
                     `/Course/${course.subject_code}/${course.course_number}`
