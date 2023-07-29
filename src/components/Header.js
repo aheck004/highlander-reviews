@@ -62,15 +62,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar({ title }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [URL, setURL] = React.useState(window.location.href);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const [googleUser, setGoogleUser] = React.useState('');
 
-  var user = Cookie.get("googleUser");
-  if (user)
-    user = JSON.parse(user.slice(2))
-  console.log(user);
+  React.useEffect(() => {
+    if (Cookie.get("googleUser"))
+      setGoogleUser(JSON.parse(Cookie.get("googleUser").slice(2)))
+  }, []);
 
   const navigate = useNavigate();
 
@@ -142,7 +144,7 @@ export default function PrimarySearchAppBar({ title }) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Login</p>
+        <Typography>Login</Typography>
       </MenuItem>
     </Menu>
   );
@@ -177,12 +179,12 @@ export default function PrimarySearchAppBar({ title }) {
             </Box>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {user ? (
+              {googleUser ? (
                 <Box sx={{ display: "flex", alignItems: "center", gap:"10px" }}>
                   <Typography variant="h6" noWrap component="div">
-                    Welcome, {user.given_name}!
-                    </Typography>
-                  <Avatar src={user.picture}/>
+                    Welcome, {googleUser.given_name}!
+                  </Typography>
+                  <Avatar src={googleUser.picture}/>
                 </Box>
               ) : (
                 <IconButton
@@ -191,7 +193,7 @@ export default function PrimarySearchAppBar({ title }) {
                   aria-label="account of current user"
                   aria-controls={menuId}
                   aria-haspopup="true"
-                  href={getGoogleOAuthURL()}
+                  href={getGoogleOAuthURL(URL)}
                   color="inherit"
                 >
                   <AccountCircle/>

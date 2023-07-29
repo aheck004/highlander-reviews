@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const cors = require('cors');
 const records = require('./routes/reviewRoute.js');
 const mongoose = require('mongoose');
@@ -20,12 +19,13 @@ app.use("/", require("./routes/reviewRoute.js"));
 app.use("/record", records);
 
 app.get("/oauth2callback", async(req, res) => {
+  const redirect = req.query.state;
   const code = req.query.code;
   const {id_token, access_token} = await getGoogleOAuthTokens(code);
   const googleUser = await getGoogleUser(id_token, access_token);
   //jwt.decode(id_token);
   res.cookie("googleUser", googleUser, { maxAge: 30 * 60 * 1000 })
-  res.redirect("http://localhost:3000");
+  res.redirect(redirect);
 });
 
 // start the Express server

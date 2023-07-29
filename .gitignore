@@ -22,8 +22,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+playground-*.*
 server/.env
 server/node_modules
-server/routes/playground-1.mongodb.js
-src/components/playground-2.mongodb.js
-src/components/playground-1.mongodb.js
+server/routes/playground-*.*
+src/components/playground-*.*

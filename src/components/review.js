@@ -50,7 +50,7 @@ function Review({ review }) {
           <div className="review-difficulty">
             <Typography color="text.main">Difficulty: </Typography>
             {[...Array(Math.floor(review.difficulty / 2))].map((_, count) => {
-              return <StarIcon color="accent" />;
+              return <StarIcon key={count} color="accent" />;
             })}
             {review.difficulty % 2 == 0 ? (
               <></>
@@ -59,7 +59,7 @@ function Review({ review }) {
             )}
             {[...Array(Math.floor(5 - review.difficulty / 2))].map(
               (_, count) => {
-                return <StarOutlineIcon color="accent" />;
+                return <StarOutlineIcon key={count} color="accent" />;
               }
             )}
           </div>
@@ -69,9 +69,7 @@ function Review({ review }) {
         <div className="review-comment"><Typography color="text.main">{review.additional_comments}</Typography></div>
         <div className="control-bar">
           <div className="helpful">
-            <p>
-              <Typography color="text.main" fontWeight={'bold'}>Helpful?</Typography>
-            </p>
+            <Typography color="text.main" fontWeight={'bold'}>Helpful?</Typography>
             <IconButton onClick={() => Liked(true)}>
               <Typography sx={{ color: liked ? "green" : theme.palette.accent.main }}>
                 {liked === true ? review.like + 1 : review.like}

@@ -1,4 +1,4 @@
-function getGoogleOAuthURL() {
+function getGoogleOAuthURL(URL) {
   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
 
   const options = {
@@ -11,6 +11,7 @@ function getGoogleOAuthURL() {
       "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/userinfo.email",
     ].join(" "),
+    state: URL,
   };
 
   const qs = new URLSearchParams(options);
