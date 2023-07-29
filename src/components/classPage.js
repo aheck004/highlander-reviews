@@ -110,6 +110,7 @@ function ClassPage() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                bgcolor: theme.palette.secondary.main
               }}
             >
               <DifficultyGraph review_data={graphData} />

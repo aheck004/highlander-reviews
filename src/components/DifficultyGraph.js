@@ -7,7 +7,7 @@ function DifficultyGraph({ review_data }) {
   return (
     <ThemeProvider theme={theme}>
       <BarChart
-        colors={[theme.palette.accent.main]}
+        colors={[theme.palette.primary.main]}
         xAxis={[{ scaleType: "band", data: ["5", "4", "3", "2", "1"] }]}
         series={[{ data: review_data }]}
         width={350}
