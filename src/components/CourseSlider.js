@@ -54,6 +54,7 @@ function CourseSlider({ subject }) {
           justifyContent: "center",
           alignItems: "center",
           width: "375",
+          bgcolor: theme.palette.secondary.main
         }}
       >
         <Typography variant="h5" color="text.main">

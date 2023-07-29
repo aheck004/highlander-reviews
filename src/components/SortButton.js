@@ -21,10 +21,15 @@ function SortButton({ reviews, setReviews }) {
   };
 
   const sortReviews = (sortType) => {
-    if (sortType === "date") {
+    if (sortType === "leastrecent") {
       const sortedReviews = [...reviews].sort((a, b) => {
         return new Date(a.date) - new Date(b.date);
       });
+      setReviews(sortedReviews);
+    } else if (sortType === "mostrecent") {
+      const sortedReviews = [...reviews].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      })
       setReviews(sortedReviews);
     } else if (sortType === "highestdifficulty") {
       const sortedReviews = [...reviews].sort((a, b) => {
@@ -83,12 +88,22 @@ function SortButton({ reviews, setReviews }) {
         >
           <MenuItem
             onClick={() => {
-              sortReviews("date");
+              sortReviews("mostrecent");
             }}
           >
             <TodayIcon color="text"/>
             <Typography color="text.main">
-              Date
+              Most Recent
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              sortReviews("leastrecent")
+            }}
+          >
+            <TodayIcon color="text"/>
+            <Typography color="text.main">
+              Least Recent
             </Typography>
           </MenuItem>
           <MenuItem
