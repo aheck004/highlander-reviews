@@ -7,7 +7,7 @@ const Course = require("../models/courseModel");
 
 router.route("/course/:name").get((req, res) => {
   try {
-    Review.find({ class_name: req.params.name }).then((foundReviews) => {
+    Review.find({ class_name: req.params.name }).select('-user_email').then((foundReviews) => {
       res.json(foundReviews);
     });
   } catch (err) {
