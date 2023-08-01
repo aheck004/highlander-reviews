@@ -26,6 +26,6 @@ playground-*.*
 server/.env
 server/node_modules
 server/routes/playground-*.*
-server/server_scripts/config.json
+server/server_scripts/*.json
 server/server_scripts/*.tsv
 src/components/playground-*.*
