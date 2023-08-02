@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const records = require('./routes/reviewRoute.js');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 const { getGoogleOAuthTokens, getGoogleUser } = require('./services/googleservices.js');
 require('dotenv').config();
 

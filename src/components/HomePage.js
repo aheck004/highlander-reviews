@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 import PrimarySearchAppBar from "./Header";
 import { ThemeProvider} from "@mui/material/styles";
 import theme from "./theme.js";
+import Footer from "./footer";
 
 function HomePage() {
   const isMobile = window.innerWidth < 700;
@@ -32,6 +33,7 @@ function HomePage() {
           </Box>
         </Box>
       </Box>
+      <Footer />
     </ThemeProvider>
   );
 }

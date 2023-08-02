@@ -134,18 +134,22 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
           .then((response) => {
             if (response.data === `You already reviewed ${course}`) {
               setStatus("warning");
-            } else {
+            } 
+            else if (response.data === 'Something went wrong') {
+              //TODO Render a snakcbar for this error 
+            } 
+            else 
+            {
               setStatus("success");
             }
+
             setLoading(false);
             setOpen(false);
-            //TODO: Render successful snackbar
             setOpenSnackbar(true);
           })
           .catch((error) => {
             console.error(error);
             setStatus("error");
-            //TODO: Render snackbar with error
             setOpenSnackbar(true);
           });
       }
