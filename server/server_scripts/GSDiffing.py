@@ -17,8 +17,7 @@ def download_new_sheet():
     client = gspread.authorize(credentials)
 
     spreadsheet = client.open_by_url(
-            'https://docs.google.com/spreadsheets/d/\
-                    1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0')
+            'https://docs.google.com/spreadsheets/d/1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0')
 
     worksheet = spreadsheet.worksheet('Sheet1')
 
@@ -44,8 +43,8 @@ def compare_files():
                 as new_sheet:
             old_lines = [line.rstrip('\n') for line in old_sheet.readlines()]
             new_lines = [line.rstrip('\n') for line in new_sheet.readlines()]
-            i = 0
-            j = 0
+            i = 2
+            j = 2
             current_course = 'START'
             # find the difference between the old and new file
             while i < len(old_lines) and j < len(new_lines):
@@ -53,6 +52,7 @@ def compare_files():
                 if new_line_data[0] != '':
                     current_course = new_line_data[0]
                 if (old_lines[i] != new_lines[j]):
+                    print(j, new_line_data)
                     new_review = {"class_name": current_course,
                                   "additional_comments": new_line_data[2],
                                   "difficulty": new_line_data[3],

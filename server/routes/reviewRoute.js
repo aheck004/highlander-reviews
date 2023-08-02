@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Review = require("../models/reviewModel");
 const Course = require("../models/courseModel");
+const fill_form = require("../services/puppeteer_service");
 
 //
 
@@ -88,6 +89,12 @@ router.route("/submit-review").post(async(req, res) => {
     .catch((err) => {
       console.log(err);
     });
+  try {
+    fill_form(req.body)
+  }
+  catch{
+    return res.json("Something went wrong")
+  }
 });
 
 router.route("/query-course/:course").get((req, res) => {
