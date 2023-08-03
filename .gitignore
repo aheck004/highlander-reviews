@@ -34,3 +34,4 @@ server/coursedata.txt
 server/coursedata1.json
 server/courses_data.json
 server/server_scripts/test.py
+server/services/*.json
