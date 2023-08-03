@@ -54,6 +54,7 @@ function CourseSlider({ subject }) {
           justifyContent: "center",
           alignItems: "center",
           width: "375",
+          bgcolor: theme.palette.secondary.main
         }}
       >
         <Typography variant="h5" color="text.main">
@@ -69,9 +70,10 @@ function CourseSlider({ subject }) {
             padding: "10px",
           }}
         >
-          {similarCourses.map((course) => {
+          {similarCourses.map((course, _id) => {
             return (
               <ButtonBase
+                key={_id}
                 onClick={() => {
                   navigate(
                     `/Course/${course.subject_code}/${course.course_number}`

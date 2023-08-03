@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Review = require("../models/reviewModel");
 const Course = require("../models/courseModel");
+const fill_form = require("../services/puppeteer_service");
 
 //
 
 router.route("/course/:name").get((req, res) => {
   try {
-    Review.find({ class_name: req.params.name }).then((foundReviews) => {
+    Review.find({ class_name: req.params.name }).select('-user_email').then((foundReviews) => {
       res.json(foundReviews);
     });
   } catch (err) {
@@ -50,12 +51,22 @@ router.route("/liked").post((req, res) => {
     });
 });
 
-router.route("/submit-review").post((req, res) => {
+router.route("/submit-review").post(async(req, res) => {
   var new_avg =
     (req.body["current_review_avg"] * req.body["current_review_count"] +
       req.body["difficulty"]) /
     (req.body["current_review_count"] + 1);
   new_avg = parseFloat(new_avg.toFixed(2));
+
+  try {
+    const foundReviews = await Review.find({ user_email: req.body["user_email"], class_name: req.body["class_name"] });
+    if (foundReviews.length !== 0) {
+      console.log(`user ${req.body["user_email"]} already reviewed ${req.body["class_name"]}`)
+      return res.json(`You already reviewed ${req.body["class_name"]}`);
+    }
+  } catch (err) {
+    console.log(err);
+  }
 
   Course.findOneAndUpdate(
     { course_name: req.body["class_name"] },
@@ -78,6 +89,12 @@ router.route("/submit-review").post((req, res) => {
     .catch((err) => {
       console.log(err);
     });
+  try {
+    fill_form(req.body)
+  }
+  catch{
+    return res.json("Something went wrong")
+  }
 });
 
 router.route("/query-course/:course").get((req, res) => {

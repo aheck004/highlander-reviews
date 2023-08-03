@@ -84,7 +84,6 @@ function SearchBar({ width, height }) {
         onChange={(event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
           setValue(newValue);
-          console.log("Im changing ", value);
           //when a user selects and option the components onChange event is called
           //Here we navigate the user to the route '/Course/:course'
           //This route will draw the <ClassPage/> component fro classPage.js
@@ -93,7 +92,6 @@ function SearchBar({ width, height }) {
           );
         }}
         onInputChange={(event, newInputValue) => {
-          console.log(newInputValue);
           setInputValue(newInputValue);
         }}
         renderInput={(params) => {
