@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 
 const courseSchema = {
-  course_name: String,
+  class_name: String,
   subject_code: String,
   course_number: String,
-  average_diff: Number
+  average_diff: Number,
+  course_title: String,
+  course_description: String
 }
 
 const Course = mongoose.model("course", courseSchema);

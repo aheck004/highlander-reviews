@@ -29,4 +29,9 @@ server/routes/playground-*.*
 server/server_scripts/*.json
 server/server_scripts/*.tsv
 src/components/playground-*.*
+server/coursedata.json
+server/coursedata.txt
+server/coursedata1.json
+server/courses_data.json
+server/server_scripts/test.py
 server/services/*.json

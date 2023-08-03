@@ -97,7 +97,7 @@ function CourseSlider({ subject }) {
                     {parseFloat(course.average_diff / 2).toFixed(2)}/5
                   </Typography>
                   <Typography color={textColor(course.average_diff / 2)}>
-                    {course.course_name}
+                    {course.class_name}
                   </Typography>
                 </Paper>
               </ButtonBase>
