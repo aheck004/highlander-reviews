@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.1",
     "loglevel": "^1.8.1",
     "mongodb": "^5.7.0",
-    "mongoose": "^7.3.3"
+    "mongoose": "^7.3.3",
+    "puppeteer": "^21.0.0"
   }
 }

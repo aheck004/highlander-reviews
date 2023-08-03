@@ -29,3 +29,4 @@ server/routes/playground-*.*
 server/server_scripts/*.json
 server/server_scripts/*.tsv
 src/components/playground-*.*
+server/services/*.json
