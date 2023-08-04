@@ -1,12 +1,14 @@
 import React from "react";
 import { Badge, Box, ThemeProvider, Typography } from "@mui/material";
 import { Avatar, IconButton } from "@mui/material";
-import { LinkedIn, Twitter } from "@mui/icons-material";
+import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import theme from "./theme";
+import { getUnit } from "@mui/material/styles/cssUtils";
 
-function BioSquare({ name, title, description, image, linkedin, twitter, flag}) {
+function BioSquare({ name, title, description, image, linkedin=null, twitter=null, github=null, flag}) {
+  console.log(github)
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -41,16 +43,27 @@ function BioSquare({ name, title, description, image, linkedin, twitter, flag}) 
           </Stack>
           <Box flex={1}/>
           <Box>
+            {linkedin ?
             <IconButton
               href={linkedin}
             >
               <LinkedIn color="accent"/>
             </IconButton>
+            : null}
+            {twitter ?
             <IconButton
               href={twitter}
             >
               <Twitter color="accent"/>
             </IconButton>
+            : null}
+            {github ?  
+            <IconButton
+            href={github}
+            >
+              <GitHub color="accent"/>
+            </IconButton>
+            : null}
           </Box>
         </Box>
         <Typography variant="h6" component="div" color="text.secondary">

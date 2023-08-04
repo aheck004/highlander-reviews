@@ -8,7 +8,7 @@ Highlander Reviews is a web application designed to allow students from the Univ
 
 1. **Course Reviews**: Students can view and submit reviews for the courses they have taken. Each review includes essential information such as course name, rating, and comments.
 
-2. **Search and Filter**: Users can search for specific courses or filter reviews based on various criteria like course name, rating, or department.
+2. **Search and Filter**: Users can search from over 6,700+ courses and filter reviews based on various criteria like course name, rating, or department.
 
 3. **Course Statistics**: The application provides overall statistics for each course, such as the average rating and the number of reviews it has received.
 
@@ -18,13 +18,22 @@ Highlander Reviews is a web application designed to allow students from the Univ
 
 ## Data Source
 
-The review data for the Highlander Reviews application is sourced from the UCR course database, available in a Google Sheets document. The data can be accessed using the following link: [UCR Course Database](https://docs.google.com/spreadsheets/d/1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0).
+The review data for the Highlander Reviews application is sourced from the UCR class difficulty database, available in a Google Sheets document. The data can be accessed using the following link: [UCR Class Difficulty Database](https://docs.google.com/spreadsheets/d/1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0).
 
 The data in the spreadsheet includes the following columns:
 - Course Name
 - Rating (numeric, ranging from 1 to 10)
 - Comments
 - Date
+
+The list of courses available for users to review was gathered from the [UCR Course Catalog](https://registrationssb.ucr.edu/StudentRegistrationSsb/ssb/registration/registration). from the Term: Winter 2024. 
+
+The data gathered from the course catalog includes more than 6,700 courses each along with:
+- Course Name
+- Course Number
+- Course Title
+- Course Description
+- Subject Code
 
 ## Technology Stack
 

@@ -16,6 +16,7 @@ mongoose.connect(process.env.ATLAS_URI).catch((err)=>{
 app.use("/", require("./routes/reviewRoute.js"));
 app.use("/", require("./routes/courseRoute.js"))
 
+
 app.get("/oauth2callback", async(req, res) => {
   const redirect = req.query.state;
   const code = req.query.code;
