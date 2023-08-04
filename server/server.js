@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const records = require('./routes/reviewRoute.js');
 const mongoose = require('mongoose');
 const { getGoogleOAuthTokens, getGoogleUser } = require('./services/googleservices.js');
 require('dotenv').config();
@@ -15,7 +14,7 @@ mongoose.connect(process.env.ATLAS_URI).catch((err)=>{
 });
 
 app.use("/", require("./routes/reviewRoute.js"));
-app.use("/record", records);
+app.use("/", require("./routes/courseRoute.js"))
 
 app.get("/oauth2callback", async(req, res) => {
   const redirect = req.query.state;

@@ -25,5 +25,8 @@
     "mongodb": "^5.7.0",
     "mongoose": "^7.3.3",
     "puppeteer": "^21.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
