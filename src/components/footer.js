@@ -21,7 +21,7 @@ function Footer() {
         <BioSquare 
           name="Arthur Hecker"
           title="Web Developer"
-          description=""
+          description="Developer of Highlander Reviews and many more to come"
           image="https://media.licdn.com/dms/image/D5603AQGgvBYO9mk7Hw/profile-displayphoto-shrink_400_400/0/1691143938268?e=1696464000&v=beta&t=7LlX22qNJfWhIrQjxYBAWuT9li4CxkUek4n7pEHiAjw"
           github="https://github.com/aheck004"
           linkedin="https://www.linkedin.com/in/arthur-hecker-a56663230"

@@ -129,4 +129,21 @@ router.route("/get-courses-from-subject-code/:subjectCode").get((req, res) => {
   }
 });
 
+/*This is not tested*/
+router
+  .route("/get-review-count-from-course/:subjectCode/:courseNumber")
+  .get((req, res) => {
+    try {
+      Review.countDocuments({ 
+        class_name: req.params.subjectCode + req.params.courseNumber}).then(
+        (reviewCount) => {
+          res.json(reviewCount);
+          console.log(req);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
 module.exports = router;
