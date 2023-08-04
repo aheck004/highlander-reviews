@@ -16,6 +16,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
 
+
 const GroupHeader = styled("div")(() => ({
   position: "sticky",
   top: "-8px",
@@ -73,7 +74,7 @@ function SearchBar({ width, height }) {
           </Popper>
         )}
         filterOptions={(x) => x}
-        options={options}
+        options={options.sort()}
         groupBy={(option) => option.subject_code}
         autoComplete
         freeSolo
@@ -155,10 +156,10 @@ function SearchBar({ width, height }) {
           );
         }}
         renderOption={(props, option) => {
-          const matches = match(option.class_name, inputValue, {
+          const matches = match(option.class_name + " " + option.course_title, inputValue, {
             insideWords: true,
           });
-          const parts = parse(option.class_name, matches);
+          const parts = parse(option.class_name + " " + option.course_title, matches);
 
           return (
             <li {...props}>

@@ -55,7 +55,9 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))
-      setGoogleUser(JSON.parse(Cookie.get("googleUser").slice(2)));
+      setGoogleUser(JSON.parse(Cookie.get("googleUser").slice(2)))
+    else
+      window.location.reload()
   }, []);
 
   React.useEffect(() => {
