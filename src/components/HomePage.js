@@ -27,6 +27,9 @@ function HomePage() {
             <Typography variant="h1" align="center" color="text.main">
               Highlander Reviews
             </Typography>
+            <Typography variant="h4" align="center" color="text.main">
+              Find reviews for courses at University of California, Riverside
+            </Typography>
           </Box>
           <Box className="homepage-center">
             <SearchBar width={isMobile ? 350 : 500} height={50} />
