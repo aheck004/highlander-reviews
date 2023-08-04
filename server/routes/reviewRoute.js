@@ -69,7 +69,7 @@ router.route("/submit-review").post(async(req, res) => {
   }
 
   Course.findOneAndUpdate(
-    { course_name: req.body["class_name"] },
+    { class_name: req.body["class_name"] },
     { $set: { average_diff: new_avg } },
     { new: true }
   )
@@ -98,12 +98,12 @@ router.route("/submit-review").post(async(req, res) => {
 });
 
 router.route("/query-course/:course").get((req, res) => {
-  const course_name_regex = new RegExp(
+  const class_name_regex = new RegExp(
     "^" + req.params.course.split("").join(".*") + ".*$",
     "i"
   );
   try {
-    Course.find({ course_name: { $regex: course_name_regex } })
+    Course.find({ class_name: { $regex: class_name_regex } })
       .limit(10)
       .then((foundCourses) => {
         res.json(foundCourses);
@@ -114,7 +114,7 @@ router.route("/query-course/:course").get((req, res) => {
 });
 
 router.route("/get-course/:course").get((req, res) => {
-  Course.find({ course_name: req.params.course }).then((foundCourses) => {
+  Course.find({ class_name: req.params.course }).then((foundCourses) => {
     res.json(foundCourses);
   });
 });

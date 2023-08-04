@@ -61,9 +61,9 @@ function SearchBar({ width, height }) {
     <ThemeProvider theme={theme}>
       <Autocomplete
         id="UCR_Class_Searchbar"
-        getOptionLabel={(option) => option.course_name}
+        getOptionLabel={(option) => option.class_name}
         isOptionEqualToValue={(option, value) =>
-          option.course_name === value.course_name
+          option.class_name === value.class_name
         }
         PopperComponent={(props) => (
           <Popper {...props} style={{ paddingTop: "8px", width: width }}>
@@ -155,10 +155,10 @@ function SearchBar({ width, height }) {
           );
         }}
         renderOption={(props, option) => {
-          const matches = match(option.course_name, inputValue, {
+          const matches = match(option.class_name, inputValue, {
             insideWords: true,
           });
-          const parts = parse(option.course_name, matches);
+          const parts = parse(option.class_name, matches);
 
           return (
             <li {...props}>
