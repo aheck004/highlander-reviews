@@ -170,7 +170,8 @@ export default function PrimarySearchAppBar({ title }) {
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", sm: "block" },
+              marginRight: "5px"}}
             >
               {title}
             </Typography>

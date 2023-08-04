@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import './index.css';
 import ClassPage from './components/classPage';
 import HomePage from './components/HomePage';
+import subjectPage from './components/subjectPage';
 import { createRoot } from 'react-dom/client';
 import {
   BrowserRouter,
@@ -9,6 +10,7 @@ import {
   Route
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import SubjectPage from './components/subjectPage';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -25,6 +27,7 @@ root.render(
   <BrowserRouter basename='/'>
      <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/Course/:subjectCode" element={<SubjectPage />} />
       <Route path="/Course/:subjectCode/:courseNumber" element={<ClassPage />} />
     </Routes>
   </BrowserRouter>
