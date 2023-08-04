@@ -49,7 +49,11 @@ function SearchBar({ width, height }) {
         })
         .catch((error) => console.error(error));
     }
-    if (inputValue != "" || inputValue != "") getReviews();
+    if (inputValue === "") {
+      setOptions(value ? [value] : []);
+      return undefined;
+    }
+    getReviews();
 
     return () => {
       active = false;
@@ -62,7 +66,7 @@ function SearchBar({ width, height }) {
     <ThemeProvider theme={theme}>
       <Autocomplete
         id="UCR_Class_Searchbar"
-        getOptionLabel={(option) => option.class_name}
+        getOptionLabel={(option) => typeof option === 'object' ?  option.subject_code : ''}
         isOptionEqualToValue={(option, value) =>
           option.class_name === value.class_name
         }
@@ -74,7 +78,7 @@ function SearchBar({ width, height }) {
           </Popper>
         )}
         filterOptions={(x) => x}
-        options={options.sort()}
+        options={options}
         groupBy={(option) => option.subject_code}
         autoComplete
         freeSolo
@@ -83,17 +87,17 @@ function SearchBar({ width, height }) {
         value={value}
         noOptionsText="No course"
         onChange={(event, newValue) => {
-          setOptions(newValue ? [newValue, ...options] : options);
-          setValue(newValue);
-          //when a user selects and option the components onChange event is called
-          //Here we navigate the user to the route '/Course/:course'
-          //This route will draw the <ClassPage/> component fro classPage.js
-          navigate(
-            `/Course/${newValue.subject_code}/${newValue.course_number}`
-          );
+          if (newValue) {
+            setValue(newValue);
+            if (newValue.subject_code && newValue.course_number) {
+              navigate(`/Course/${newValue.subject_code}/${newValue.course_number}`);
+            } else if (options.length > 0) {
+              navigate(`/Course/${options[0].subject_code}`);
+            }
+          }
         }}
         onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
+          setInputValue(newInputValue ? newInputValue : ""); 
         }}
         renderInput={(params) => {
           const { InputLabelProps, InputProps, ...rest } = params;
@@ -162,7 +166,7 @@ function SearchBar({ width, height }) {
           const parts = parse(option.class_name + " " + option.course_title, matches);
 
           return (
-            <li {...props}>
+            <li {...props} key={option.class_name}>
               <Grid container alignItems="center">
                 <Grid item sx={{ display: "flex", width: 44 }}>
                   <MenuBookIcon sx={{ color: "text.main" }} />
