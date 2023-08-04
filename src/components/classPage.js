@@ -44,7 +44,6 @@ function ClassPage() {
     axios
       .get(process.env.REACT_APP_NODE_SERVER + `/get-course/${course}`)
       .then((response) => {
-        console.log(response.data[0])
         setCourseData(response.data[0])
       });
   }, [subjectCode, courseNumber]);

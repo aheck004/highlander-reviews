@@ -97,20 +97,42 @@ router.route("/submit-review").post(async(req, res) => {
   }
 });
 
-router.route("/query-course/:course").get((req, res) => {
-  const class_name_regex = new RegExp(
-    "^" + req.params.course.split("").join(".*") + ".*$",
-    "i"
-  );
-  try {
-    Course.find({ class_name: { $regex: class_name_regex } })
-      .limit(10)
-      .then((foundCourses) => {
-        res.json(foundCourses);
+router.route("/query-course/:course").get(async (req, res) => {
+  const class_name_regex = new RegExp("^"+req.params.course, "i");
+  const course_title_regex = new RegExp(req.params.course, "i");
+
+  if (req.params.course.length <= 5) {
+    try {
+      const subject_code_results = await Course.find({"class_name": {$regex: class_name_regex}}).select("-_id -__v").limit(10).then((foundCourses) => {
+        return foundCourses
       });
-  } catch (err) { 
-    console.log(err); 
+      if (subject_code_results.length < 10) {
+        const course_title_results = await Course.find({"course_title": {$regex: course_title_regex}}).select("-_id -__v").limit(subject_code_results.length-10).then((foundCourses) => {
+          return foundCourses
+        });
+        const set = new Set([...subject_code_results, ...course_title_results])
+        const response = Array.from(set)
+        res.json(response)
+      }
+    else {
+      res.json(subject_code_results)
+    }
+    } catch (err) {
+      console.log(err);
+    }
   }
+  else {
+    try {
+      Course.find({ $or: [ {"class_name": {$regex: class_name_regex}}, {"course_title": {$regex: class_name_regex}}] })
+        .select("-_id -__v")
+        .limit(10)
+        .then((foundCourses) => {
+          res.json(foundCourses);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
 });
 
 router.route("/get-course/:course").get((req, res) => {
