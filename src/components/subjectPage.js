@@ -36,11 +36,12 @@ function SubjectPage() {
         setSimilarCourseCount(response.data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [subjectCode]);
 
   return (
     <ThemeProvider theme={theme}>
       <Box
+        key={"subject-page-" + subjectCode}
         className="subject-page-root"
         bgcolor="background.main"
         sx={{
@@ -98,7 +99,9 @@ function SubjectPage() {
           <Divider orientation="horizontal" sx={{ flex: 1 }} />
         </Box>
         </Box>
-        <Subject subject={subjectCode}></Subject>
+        <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%"}}>
+          <Subject subject={subjectCode} />
+        </Box>
       </Box>
     </ThemeProvider>
   );

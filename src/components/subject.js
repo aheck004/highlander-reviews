@@ -50,7 +50,6 @@ function Subject({ subject }) {
       )
       .then((response) => {
         setSimilarCourses(response.data);
-        console.log("Response Data: ", response.data);
       })
       .catch((error) => console.error(error));
   }, []);
