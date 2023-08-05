@@ -17,7 +17,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
 import getGoogleOAuthURL from "../getGoogleURL";
 import Cookie from "js-cookie";
-import { Avatar } from "@mui/material";
+import { Avatar, List } from "@mui/material";
+import { Breadcrumbs, Link } from "@mui/material";
+import { useParams } from "react-router-dom";
+import ListIcon from '@mui/icons-material/List';
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,6 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar({ title }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const { subjectCode, courseNumber } = useParams();
   const [URL, setURL] = React.useState(window.location.href);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -178,6 +184,25 @@ export default function PrimarySearchAppBar({ title }) {
             <Box sx={{ marginLeft: "5px" }}>
               <SearchBar width={isMobile ? 200 : 300} height={35} />
             </Box>
+            <Breadcrumbs color="background.main" sx={{marginLeft:"10px", display: "flex", justifyContent: "center", alignItems:"center"}} separator={<ArrowRightIcon/>} maxItems={3} aria-label="breadcrumb">
+              <Link sx={{ gap:"3px", display:"flex", justifyContent:"center", alignItems:"center"}} underline="hover" color="inherit" href="/">
+                <HomeIcon color="background" 
+                sx={{ marginRight: "5px" }} fontSize="small" />
+                <Typography color="background.main">Home</Typography>
+              </Link>
+              {subjectCode && (
+              <Link sx={{ gap:"3px", display:"flex", justifyContent:"center", alignItems:"center"}} underline="hover" color="inherit" href={`/Course/${subjectCode}`}>
+                <ListIcon color="background" sx={{ marginRight: "5px" }} fontSize="small" />
+                <Typography color="background.main">{subjectCode} </Typography>
+              </Link>
+              )}
+              {courseNumber && (
+              <Link sx={{ gap: "3px", display:"flex", justifyContent:"center", alignItems:"center"}} underline="hover" color="inherit" href={`/Course/${subjectCode}/${courseNumber}`}>
+                <RateReviewIcon color="background" sx={{ marginRight: "5px" }} fontSize="small" />
+                <Typography color="background.main">{courseNumber}</Typography>
+              </Link>
+              )}
+            </Breadcrumbs>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {googleUser ? (

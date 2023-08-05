@@ -4,7 +4,15 @@ import DifficultyGraph from "./DifficultyGraph";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import CreateReviewModal from "./CreateReview";
-import { Box, Paper, Typography, Divider, Chip, Button, Skeleton } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  Divider,
+  Chip,
+  Button,
+  Skeleton,
+} from "@mui/material";
 import CourseSlider from "./CourseSlider";
 import SortButton from "./SortButton";
 import PrimarySearchAppBar from "./Header";
@@ -18,7 +26,7 @@ import getGoogleOAuthURL from "../getGoogleURL.js";
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
   const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
-  const [courseData, setCourseData] = useState(null)
+  const [courseData, setCourseData] = useState(null);
   const { subjectCode } = useParams();
   const { courseNumber } = useParams();
   const course = subjectCode + courseNumber;
@@ -44,7 +52,7 @@ function ClassPage() {
     axios
       .get(process.env.REACT_APP_NODE_SERVER + `/get-course/${course}`)
       .then((response) => {
-        setCourseData(response.data[0])
+        setCourseData(response.data[0]);
       });
   }, [subjectCode, courseNumber]);
 
@@ -59,10 +67,13 @@ function ClassPage() {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
+          minHeight: "100vh",
           flexDirection: "column",
         }}
       >
-        <PrimarySearchAppBar title={courseData ? courseData.class_name : null} />
+        <PrimarySearchAppBar
+          title={courseData ? courseData.class_name : null}
+        />
         <Box
           className="course-hero"
           sx={{
@@ -75,25 +86,25 @@ function ClassPage() {
             margin: "10px",
           }}
         >
-          {courseData ?
+          {courseData ? (
             <Typography variant="h2" align="center" color="text.main">
               {courseData.class_name}
             </Typography>
-          :
+          ) : (
             <Skeleton variant="rectangular" width={210} height={118} />
-          }
-          
-          {courseData ? 
-          <Typography variant="h2"align="center" color="text.main">              
-            {courseData.course_title}
-          </Typography>
-          :
+          )}
+
+          {courseData ? (
+            <Typography variant="h2" align="center" color="text.main">
+              {courseData.course_title}
+            </Typography>
+          ) : (
             <Skeleton variant="rectangular" width={210} height={118} />
-          }
+          )}
           <Box
             sx={{
-              display:"flex",
-              gap: 10
+              display: "flex",
+              gap: 10,
             }}
           >
             <Box
@@ -103,23 +114,32 @@ function ClassPage() {
                 justifyContent: "center",
                 alignItems: "center",
                 width: 350,
-                gap: 5
+                gap: 5,
               }}
             >
-              {courseData ? 
-              <Box>
-                <Typography sx={{
-                  alignSelf: 'start',
-                  fontWeight: 'bold'
-                }}variant="body1" color="text.main">
-                  Course Description:
-                </Typography>
-                <Typography variant="subtitle1" color="text.main" fontSize={'.9rem'}>
-                 {courseData.course_description} 
-                </Typography>
-              </Box>
-              : <Skeleton variant="rectangular" width={350} height={300}/>
-              }
+              {courseData ? (
+                <Box>
+                  <Typography
+                    sx={{
+                      alignSelf: "start",
+                      fontWeight: "bold",
+                    }}
+                    variant="body1"
+                    color="text.main"
+                  >
+                    Course Description:
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    color="text.main"
+                    fontSize={".9rem"}
+                  >
+                    {courseData.course_description}
+                  </Typography>
+                </Box>
+              ) : (
+                <Skeleton variant="rectangular" width={350} height={300} />
+              )}
               {googleUser && courseData ? (
                 <CreateReviewModal
                   total_reviews={reviews.length}
@@ -139,7 +159,7 @@ function ClassPage() {
             <Box className="course-hero-right">
               <Paper
                 sx={{
-                  position: 'relative',
+                  position: "relative",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -147,35 +167,38 @@ function ClassPage() {
                   flexDirection: "column-reverse",
                 }}
               >
-                {courseData ? 
-                <>
-                <DifficultyGraph review_data={graphData} />
-                  <Box sx={{
-                    position:'absolute',
-                    top: '10px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}>
-                    <Typography color="text.main">
+                {courseData ? (
+                  <>
+                    <DifficultyGraph review_data={graphData} />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography color="text.main">
                         Average Difficulty
-                    </Typography>
-                    <Typography variant="h2" color="text.main">
-                      {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
-                    </Typography>
-                  </Box>
+                      </Typography>
+                      <Typography variant="h2" color="text.main">
+                        {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
+                      </Typography>
+                    </Box>
                   </>
-                  : 
+                ) : (
                   <Skeleton variant="rectangular" width={350} height={300} />
-                }
-                </Paper>
-              {courseData ?
-              <Box key={courseData.subject_code}>
-                <CourseSlider subject={courseData.subject_code} />
-              </Box>
-              : <Skeleton variant="rounded" width={300} height={150} />
-              }
+                )}
+              </Paper>
+              {courseData ? (
+                <Box key={courseData.subject_code}>
+                  <CourseSlider subject={courseData.subject_code} />
+                </Box>
+              ) : (
+                <Skeleton variant="rounded" width={300} height={150} />
+              )}
             </Box>
           </Box>
         </Box>
@@ -194,20 +217,27 @@ function ClassPage() {
           </Divider>
           <Divider orientation="horizontal" sx={{ flex: 1 }} />
         </Box>
-        <Box className="review-column">
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
-            <SortButton reviews={reviews} setReviews={setReviews} />
+        {reviews.length > 0 ? (
+          <Box className="review-column">
+            <Box sx={{alignSelf:'flex-end'}}>
+              <SortButton
+                reviews={reviews}
+                setReviews={setReviews}
+              />
+            </Box>
+            {reviews.map((review, _id) => {
+              return <Review key={_id} review={review} />;
+            })}
           </Box>
-          {reviews.map((review, _id) => {
-            return <Review key={_id} review={review} />;
-          })}
-        </Box>
+        ) : (
+          <Typography
+            sx={{marginBottom: 'auto'}}
+            variant="h2"
+            color="text.main"
+          >
+            No Reviews Yet
+          </Typography>
+        )}
       </Box>
     </ThemeProvider>
   );

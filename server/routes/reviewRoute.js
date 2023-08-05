@@ -70,7 +70,7 @@ router.route("/submit-review").post(async(req, res) => {
 
   Course.findOneAndUpdate(
     { class_name: req.body["class_name"] },
-    { $set: { average_diff: new_avg } },
+    { $set: {average_diff: new_avg, number_of_reviews: {$inc: 1}} },
     { new: true }
   )
     .then((foundCourses) => {
