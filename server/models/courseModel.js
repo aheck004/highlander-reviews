@@ -6,7 +6,8 @@ const courseSchema = {
   course_number: String,
   average_diff: Number,
   course_title: String,
-  course_description: String
+  course_description: String,
+  number_of_reviews: Number
 }
 
 const Course = mongoose.model("course", courseSchema);
