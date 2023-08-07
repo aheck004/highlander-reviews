@@ -10,6 +10,8 @@ def fixCourseTitle(courseTitle):
     courseTitle = courseTitle.capitalize()
     def capitalize_word(match):
         word = match.group()
+        if word.lower() in ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x']:
+            return word.upper()
         if word.lower() not in ['a', 'is', 'in', 'an', 'at', 'and', 'the', 'for', 'of', 'to', 'by']:
             return word.capitalize()
         return word

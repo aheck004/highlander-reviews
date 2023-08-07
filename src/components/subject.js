@@ -50,7 +50,6 @@ function Subject({ subject }) {
       )
       .then((response) => {
         setSimilarCourses(response.data);
-        console.log("Response Data: ", response.data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -97,7 +96,7 @@ function Subject({ subject }) {
                   {parseFloat(course.average_diff / 2).toFixed(1)}
                 </Avatar>
                 <Typography color="text.main" marginTop={"10px"} marginLeft={"10px"}>
-                Based on 0 total reviews
+                Based on {course.number_of_reviews} total reviews
               </Typography>
               </Box>
             </Paper>
