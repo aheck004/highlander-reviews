@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import "./hompage.css";
 import { Box, Typography } from "@mui/material";
 import PrimarySearchAppBar from "./Header";
 import { ThemeProvider} from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 import Footer from "./footer";
 
 function HomePage() {
   const isMobile = window.innerWidth < 700;
+
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
 
   return (
     <ThemeProvider theme={theme}>

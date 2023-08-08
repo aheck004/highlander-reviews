@@ -1,4 +1,5 @@
-import * as React from "react";
+/*import * as React from "react";*/
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,7 +15,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 import getGoogleOAuthURL from "../getGoogleURL";
 import Cookie from "js-cookie";
 import { Avatar, List } from "@mui/material";
@@ -74,6 +75,9 @@ export default function PrimarySearchAppBar({ title }) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const [googleUser, setGoogleUser] = React.useState('');
+
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))

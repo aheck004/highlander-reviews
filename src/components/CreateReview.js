@@ -1,4 +1,5 @@
-import * as React from "react";
+/*import * as React from "react";*/
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -15,7 +16,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import date from "date-and-time";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 import Cookie from "js-cookie";
 import { Snackbar, Alert } from "@mui/material";
 
@@ -26,8 +27,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   maxWidth: 400,
-  bgcolor: theme.palette.background.main,
-  border: `2px solid ${theme.palette.text.main}`,
+  /*bgcolor: theme.palette.background.main,*/
+  /*border: `2px solid ${theme.palette.text.main}`,*/
   boxShadow: 24,
   p: 4,
 };
@@ -52,6 +53,9 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
   });
 
   const [googleUser, setGoogleUser] = React.useState("");
+
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))

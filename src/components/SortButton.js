@@ -8,9 +8,12 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Menu, Button, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 
 function SortButton({ reviews, setReviews }) {
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

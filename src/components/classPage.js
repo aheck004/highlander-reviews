@@ -19,7 +19,7 @@ import PrimarySearchAppBar from "./Header";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./classPage.css";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
 
@@ -31,6 +31,8 @@ function ClassPage() {
   const { courseNumber } = useParams();
   const course = subjectCode + courseNumber;
   const [googleUser, setGoogleUser] = React.useState(null);
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))

@@ -8,10 +8,13 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import "./classPage.css";
 import axios from "axios";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 
 function Review({ review }) {
   const [liked, setLiked] = useState(null);
+
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
 
   function Liked(bool) {
     var type = bool ? "liked" : "disliked";

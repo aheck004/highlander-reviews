@@ -12,9 +12,9 @@ import "./subjectPage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 
-function ColorMap(difficulty) {
+function ColorMap(difficulty, theme) {
   if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.main;
   } else if (difficulty <= 3.49) {
@@ -26,7 +26,7 @@ function ColorMap(difficulty) {
   }
 }
 
-function textColor(difficulty) {
+function textColor(difficulty, theme) {
   if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.contrastText;
   } else if (difficulty <= 3.49) {
@@ -39,6 +39,9 @@ function textColor(difficulty) {
 }
 
 function Subject({ subject }) {
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = themes[themeMode];
+
   const [similarCourses, setSimilarCourses] = useState([]);
   const navigate = useNavigate();
 
@@ -88,8 +91,8 @@ function Subject({ subject }) {
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Avatar
                   sx={{
-                    color: textColor(course.average_diff/2),
-                    bgcolor: ColorMap(course.average_diff/2),
+                    color: textColor(course.average_diff/2, theme),
+                    bgcolor: ColorMap(course.average_diff/2, theme),
                     marginTop: "10px",
                   }}
                 >
