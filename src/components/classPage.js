@@ -23,12 +23,14 @@ import theme from "./theme.js";
 import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
 
+const REVIEW_LIMIT = 10;
+//TODO: Change to add transition group
+
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
   const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
   const [courseData, setCourseData] = useState(null);
-  const { subjectCode } = useParams();
-  const { courseNumber } = useParams();
+  const { subjectCode, courseNumber } = useParams();
   const course = subjectCode + courseNumber;
   const [googleUser, setGoogleUser] = React.useState(null);
 
@@ -38,8 +40,12 @@ function ClassPage() {
   }, []);
 
   useEffect(() => {
+    const query_params = new URLSearchParams({
+      skip: reviews.length,
+      limit: REVIEW_LIMIT,
+    });
     axios
-      .get(process.env.REACT_APP_NODE_SERVER + `/course/${course}`)
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
       .then((response) => {
         setReviews(response.data); //updates useState reviews to redraw the DOM
         const data = [0, 0, 0, 0, 0];
@@ -55,6 +61,16 @@ function ClassPage() {
         setCourseData(response.data[0]);
       });
   }, [subjectCode, courseNumber]);
+
+  const loadMoreReviews = () => {
+    const query_params = new URLSearchParams({
+      skip: reviews.length,
+      limit: REVIEW_LIMIT,
+    });
+    axios.get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`).then((response) => {
+      setReviews([...reviews, ...response.data]);
+    });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,6 +95,7 @@ function ClassPage() {
           sx={{
             display: "flex",
             gap: "20px",
+            widht: "100%",
             flexWrap: "wrap",
             flexDirection: "column",
             justifyContent: "center",
@@ -87,7 +104,8 @@ function ClassPage() {
           }}
         >
           {courseData ? (
-            <Typography variant="h2" align="center" color="text.main">
+            <Typography sx={{ textAlign: "center"}}
+              variant="h2" align="center" color="text.main">
               {courseData.class_name}
             </Typography>
           ) : (
@@ -95,7 +113,8 @@ function ClassPage() {
           )}
 
           {courseData ? (
-            <Typography variant="h2" align="center" color="text.main">
+            <Typography sx={{ textAlign: "center", textWrap: "balance" }} 
+              variant="h2" align="center" color="text.main">
               {courseData.course_title}
             </Typography>
           ) : (
@@ -213,7 +232,11 @@ function ClassPage() {
         >
           <Divider orientation="horizontal" sx={{ flex: 1 }} />
           <Divider orientation="horizontal" sx={{ flex: 1 }}>
-            <Chip color="accent" label={reviews.length} />
+            {courseData ? (
+            <Chip color="accent" label={courseData.number_of_reviews} />
+            ) : (
+            <Skeleton variant="circular" width={10} height={10} />
+            )}
           </Divider>
           <Divider orientation="horizontal" sx={{ flex: 1 }} />
         </Box>
@@ -226,18 +249,23 @@ function ClassPage() {
               />
             </Box>
             {reviews.map((review, _id) => {
-              return <Review key={_id} review={review} />;
+              return (
+                <Review key={review.class_name+":"+_id} count={_id%REVIEW_LIMIT} review={review} />
+              ) 
             })}
           </Box>
         ) : (
           <Typography
-            sx={{marginBottom: 'auto'}}
+            sx={{marginBottom: 'auto', textAlign:'center', whiteSpace:'normal', marginTop: 'auto', textWrap: 'balance'}}
             variant="h2"
             color="text.main"
           >
             No Reviews Yet
           </Typography>
         )}
+        {courseData && reviews.length > 0 && reviews.length < courseData.number_of_reviews ? (
+          <Button color="primary" onClick={loadMoreReviews}>Load More</Button>
+        ) : null}
       </Box>
     </ThemeProvider>
   );
