@@ -5,10 +5,8 @@ import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import theme from "./theme";
-import { getUnit } from "@mui/material/styles/cssUtils";
 
 function BioSquare({ name, title, description, image, linkedin=null, twitter=null, github=null, flag}) {
-  console.log(github)
   return (
     <ThemeProvider theme={theme}>
       <Box

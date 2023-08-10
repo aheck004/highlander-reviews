@@ -6,9 +6,12 @@ const fill_form = require("../services/puppeteer_service");
 
 //
 
-router.route("/course/:name").get((req, res) => {
+router.route("/course-reviews/:name").get((req, res) => {
   try {
-    Review.find({ class_name: req.params.name }).select('-user_email').then((foundReviews) => {
+    Review.find({ class_name: req.params.name })
+      .skip(req.query.skip).limit(req.query.limit)
+      .select('-user_email')
+      .then((foundReviews) => {
       res.json(foundReviews);
     });
   } catch (err) {
@@ -20,32 +23,28 @@ router.route("/liked").post((req, res) => {
   if (req.body.type === "liked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { like: 1 } },
-      { new: true }
+      { $inc: { like: 1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} liked`);
     });
   else if (req.body.type === "disliked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { dislike: 1 } },
-      { new: true }
+      { $inc: { dislike: 1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} disliked`);
     });
   else if (req.body.type === "remove-liked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { like: -1 } },
-      { new: true }
+      { $inc: { like: -1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} undid liked`);
     });
   else if (req.body.type === "remove-disliked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { dislike: -1 } },
-      { new: true }
+      { $inc: { dislike: -1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} undid disliked`);
     });
