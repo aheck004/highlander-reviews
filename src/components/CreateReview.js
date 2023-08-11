@@ -21,19 +21,6 @@ import { useTheme } from "./ThemeContext";
 import Cookie from "js-cookie";
 import { Snackbar, Alert } from "@mui/material";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80%",
-  maxWidth: 400,
-  /*bgcolor: theme.palette.background.main,*/
-  /*border: `2px solid ${theme.palette.text.main}`,*/
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function CreateReviewModal({ total_reviews, avg_diff }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -115,9 +102,6 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
   const handleButtonClick = () => {
     if (!loading) {
       setLoading(true);
-      timer.current = window.setTimeout(() => {
-        setLoading(false);
-      }, 2000);
 
       const currentDate = new Date();
 
@@ -184,19 +168,32 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
           }}
         >
           <Fade in={open}>
-            <Box sx={style}>
+            <Box sx={
+              {
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "80%",
+              maxWidth: 400,
+              bgcolor: "background.main",
+              border: `2px solid ${theme.palette.text.main}`,
+              boxShadow: 24,
+              p: 4,
+            }
+            }>
               <Typography
                 id="modal-modal-title"
                 variant="h6"
                 component="h2"
-                color="text.main"
+                color="background.contrastText"
               >
                 Write a Review
               </Typography>
               <Typography
                 id="modal-modal-description"
                 sx={{ mt: 2 }}
-                color="text.main"
+                color="background.contrastText"
               >
                 How difficult was this course?
               </Typography>
@@ -208,7 +205,7 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
                   alignItems: "center",
                 }}
               >
-                <Typography color="text.main">Easy</Typography>
+                <Typography color="background.contrastText">Easy</Typography>
                 <Rating
                   name="half-rating"
                   defaultValue={2.5}
@@ -226,12 +223,12 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
                     setRating(newRating);
                   }}
                 />
-                <Typography color="text.main">Hard</Typography>
+                <Typography color="background.contrastText">Hard</Typography>
               </Stack>
               <Typography
                 id="modal-modal-description"
                 sx={{ mt: 2 }}
-                color="text.main"
+                color="background.contrastText"
               >
                 What are your thoughts on this course?
               </Typography>
@@ -240,7 +237,7 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
                   inputProps={{
                     maxLength: CHARACTER_LIMIT,
                     sx: {
-                      color: "text.main",
+                      color: "background.contrastText",
                     },
                   }}
                   value={comment.user_review}
@@ -251,7 +248,7 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
                 />
                 <Typography
                   sx={{ alignSelf: "flex-end" }}
-                  color="text.main"
+                  color="background.contrastText"
                 >{`${comment.user_review.length}/${CHARACTER_LIMIT}`}</Typography>
               </FormControl>
               <Box sx={{ m: 0, position: "relative", width: "fit-content" }}>
