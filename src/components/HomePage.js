@@ -24,10 +24,15 @@ function HomePage() {
           }}
         >
           <Box sx={{ marginBottom: "20px" }}>
-            <Typography variant="h1" align="center" color="text.main">
-              Highlander Reviews
-            </Typography>
-            <Typography variant="h4" align="center" color="text.main">
+            <Box sx={{display:'flex', gap:5}}>
+              <Typography variant="h1" align="center" color="text.primary">
+                Highlander{" "}
+              </Typography>
+              <Typography variant="h1" align="center" color="text.main">
+                Reviews
+              </Typography>
+            </Box>
+            <Typography variant="subtitle1" align="center" color="text.main">
               Find reviews for courses at University of California, Riverside
             </Typography>
           </Box>
