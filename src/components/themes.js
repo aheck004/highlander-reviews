@@ -8,20 +8,21 @@ export const themes = {
         contrastText: '#f6fcfe',
       },
       secondary: {
-        main: '#cadde2',
+        main: '#DEEAED',
         contrastText: '#041216',
       },
       background: {
         main: '#f6fcfe',
+        contrastText: '#041216',
       },
       text: {
         main: '#041216',
       },
       accent: {
-        main: '#4E757E',
+        main: '#4F767D',
         contrastText: '#f6fcfe',
       },
-      divider: "#4E757E",
+      divider: "#4F767D",
       difficultyColor1: {
           main: '#00c853',
           contrastText: '#041216'
@@ -54,20 +55,21 @@ export const themes = {
         contrastText: '#f6fcfe',
       },
       secondary: {
-        main: '#cadde2',
+        main: '#121E21',
         contrastText: '#f6fcfe',
       },
       background: {
-        main: '#041216',
+        main: '#050505',
+        contrastText: '#f6fcfe',
       },
       text: {
         main: '#f6fcfe',
       },
       accent: {
-        main: '#4E757E',
+        main: '#A1BFC4',
         contrastText: '#041216',
       },
-      divider: "#4E757E",
+      divider: "#A1BFC4",
       difficultyColor1: {
           main: '#00c853',
           contrastText: '#041216'

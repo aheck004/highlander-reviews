@@ -37,7 +37,7 @@ function BioSquare({ name, title, description, image, linkedin=null, twitter=nul
               <Avatar
                 sx={{ width: 70, height: 70 }}
                 variant="rounded"
-                alt="Juan Alvarez"
+                alt={name}
                 src={image}
               />
             </Badge>
@@ -67,17 +67,17 @@ function BioSquare({ name, title, description, image, linkedin=null, twitter=nul
             : null}
           </Box>
         </Box>
-        <Typography variant="h6" component="div" color="text.secondary">
+        <Typography variant="h6" component="div" color="secondary.contrastText">
           {name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="secondary.contrastText">
           {title}
         </Typography>
         <Divider sx={{
           marginTop: "5px",
           marginBottom: "5px",
         }}/>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="secondary.contrastText">
           {description}
         </Typography>
       </Box>

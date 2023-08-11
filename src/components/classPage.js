@@ -107,7 +107,7 @@ function ClassPage() {
         >
           {courseData ? (
             <Typography sx={{ textAlign: "center"}}
-              variant="h2" align="center" color="text.main">
+              variant="h2" align="center" color="background.contrastText">
               {courseData.class_name}
             </Typography>
           ) : (
@@ -116,7 +116,7 @@ function ClassPage() {
 
           {courseData ? (
             <Typography sx={{ textAlign: "center", textWrap: "balance" }} 
-              variant="h2" align="center" color="text.main">
+              variant="h2" align="center" color="background.contrastText">
               {courseData.course_title}
             </Typography>
           ) : (
@@ -146,13 +146,13 @@ function ClassPage() {
                       fontWeight: "bold",
                     }}
                     variant="body1"
-                    color="text.main"
+                    color="background.contrastText"
                   >
                     Course Description:
                   </Typography>
                   <Typography
                     variant="subtitle1"
-                    color="text.main"
+                    color="background.contrastText"
                     fontSize={".9rem"}
                   >
                     {courseData.course_description}
@@ -201,10 +201,10 @@ function ClassPage() {
                         alignItems: "center",
                       }}
                     >
-                      <Typography color="text.main">
+                      <Typography color="secondary.contrastText">
                         Average Difficulty
                       </Typography>
-                      <Typography variant="h2" color="text.main">
+                      <Typography variant="h2" color="secondary.contrastText">
                         {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
                       </Typography>
                     </Box>
@@ -260,7 +260,7 @@ function ClassPage() {
           <Typography
             sx={{marginBottom: 'auto', textAlign:'center', whiteSpace:'normal', marginTop: 'auto', textWrap: 'balance'}}
             variant="h2"
-            color="text.main"
+            color="background.contrastText"
           >
             No Reviews Yet
           </Typography>
