@@ -92,14 +92,12 @@ function SubjectPage() {
             margin: "10px",
           }}
         >
-          <Divider orientation="horizontal" sx={{ flex: 1 }} />
-          <Divider orientation="horizontal" sx={{ flex: 1 }}>
-            <Chip color="accent" label={similarCourseCount} />
-          </Divider>
-          <Divider orientation="horizontal" sx={{ flex: 1 }} />
         </Box>
         </Box>
-        <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%"}}>
+      <Divider orientation="horizontal" sx={{ flex: 1, width:"80%"}}>
+        <Chip color="accent" label={similarCourseCount} />
+      </Divider>
+      <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%"}}>
           <Subject subject={subjectCode} />
         </Box>
       </Box>

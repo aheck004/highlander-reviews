@@ -23,12 +23,12 @@ const root = createRoot(container);
 //the Node server endpoints where it will catch all
 //paths like '/course/ANYTHING'
 
-root.render(
+root.render( 
   <BrowserRouter basename='/'>
      <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} /> f
       <Route path="/Course/:subjectCode" element={<SubjectPage />} />
-      <Route path="/Course/:subjectCode/:courseNumber" element={<ClassPage />} />
+      <Route path="/Course/:subjectCode/:courseNumber" element={<ClassPage />} /> f
     </Routes>
   </BrowserRouter>
 );

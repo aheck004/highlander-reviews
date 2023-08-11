@@ -99,7 +99,7 @@ with tqdm(total=len(course_data_list), desc="Requesting Descriptions", unit="req
         update_operation = {'$set': {
             "class_name": course["subjectCode"]+course["courseNumber"], 
             "subject_code": course["subjectCode"], 
-            "course_number": course["courseNumber"],
+            "course_number": course["courseNumber"].strip('.'),
             "course_title": fixCourseTitle(course["courseTitle"]),
             "course_description": course["courseDescription"].strip('\n')
         }}
