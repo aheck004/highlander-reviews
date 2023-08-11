@@ -43,6 +43,9 @@ export const themes = {
           main: '#d50000',
           contrastText: '#f6fcfe'
       },
+      name: {
+        main: 'light'
+      }
     },
   }),
   
@@ -90,6 +93,9 @@ export const themes = {
           main: '#d50000',
           contrastText: '#f6fcfe'
       },
+      name: {
+        main: 'dark'
+      }
     },
   }),
 
