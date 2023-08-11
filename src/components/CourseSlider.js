@@ -3,9 +3,10 @@ import { Paper, Box, ButtonBase, Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
-function ColorMap(difficulty) {
+function ColorMap(difficulty, theme) {
   if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.main;
   } else if (difficulty <= 3.49) {
@@ -17,7 +18,7 @@ function ColorMap(difficulty) {
   }
 }
 
-function textColor(difficulty) {
+function textColor(difficulty, theme) {
   if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.contrastText;
   } else if (difficulty <= 3.49) {
@@ -32,6 +33,7 @@ function textColor(difficulty) {
 function CourseSlider({ subject }) {
   const [similarCourses, setSimilarCourses] = useState([]);
   const navigate = useNavigate();
+  const theme = themes[useTheme().theme];
 
   useEffect(() => {
     axios
@@ -54,7 +56,7 @@ function CourseSlider({ subject }) {
           justifyContent: "center",
           alignItems: "center",
           width: "375",
-          bgcolor: theme.palette.secondary.main
+          bgcolor: theme.palette.secondary.main,
         }}
       >
         <Typography variant="h5" color="text.main">
@@ -88,15 +90,15 @@ function CourseSlider({ subject }) {
                     width: "100px",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: ColorMap(course.average_diff / 2),
+                    backgroundColor: ColorMap(course.average_diff / 2, theme),
                     borderRadius: "10px",
                     border: "1px solid black",
                   }}
                 >
-                  <Typography color={textColor(course.average_diff / 2)}>
+                  <Typography color={textColor(course.average_diff / 2, theme)}>
                     {parseFloat(course.average_diff / 2).toFixed(2)}/5
                   </Typography>
-                  <Typography color={textColor(course.average_diff / 2)}>
+                  <Typography color={textColor(course.average_diff / 2, theme)}>
                     {course.class_name}
                   </Typography>
                 </Paper>

@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState } from "react";
 import { ThemeProvider } from "@mui/system"
 import { Box, Typography, Paper, Divider } from "@mui/material";
-import theme from "./theme";
+import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 import BioSquare from "./BioSquare.js";
 
 function Footer() {
+  const theme = themes[useTheme().theme];
 
   return (
     <ThemeProvider theme={theme}>
