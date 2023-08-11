@@ -9,12 +9,12 @@ import "./classPage.css";
 import axios from "axios";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 function Review({ review }) {
   const [liked, setLiked] = useState(null);
 
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   function Liked(bool) {
     var type = bool ? "liked" : "disliked";

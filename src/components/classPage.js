@@ -22,6 +22,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
+import { useTheme } from "./ThemeContext";
 
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
@@ -31,8 +32,7 @@ function ClassPage() {
   const { courseNumber } = useParams();
   const course = subjectCode + courseNumber;
   const [googleUser, setGoogleUser] = React.useState(null);
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))

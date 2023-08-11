@@ -9,10 +9,10 @@ import { Menu, Button, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 function SortButton({ reviews, setReviews }) {
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

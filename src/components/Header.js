@@ -1,4 +1,3 @@
-/*import * as React from "react";*/
 import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -16,6 +15,7 @@ import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 import getGoogleOAuthURL from "../getGoogleURL";
 import Cookie from "js-cookie";
 import { Avatar, List } from "@mui/material";
@@ -24,6 +24,8 @@ import { useParams } from "react-router-dom";
 import ListIcon from '@mui/icons-material/List';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -76,8 +78,7 @@ export default function PrimarySearchAppBar({ title }) {
 
   const [googleUser, setGoogleUser] = React.useState('');
 
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))

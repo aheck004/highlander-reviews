@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 
 const GroupHeader = styled("div")(({ theme }) => ({
@@ -37,8 +38,7 @@ function SearchBar({ width, height }) {
   const [options, setOptions] = useState([]);
   const navigate = useNavigate();
 
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   useEffect(() => {
     let active = true;

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 function DifficultyGraph({ review_data }) {
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   return (
     <ThemeProvider theme={theme}>

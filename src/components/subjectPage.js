@@ -6,6 +6,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import "./subjectPage.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
 import SearchBar from "./SearchBar";
@@ -21,8 +22,7 @@ import {
 } from "@mui/material";
 
 function SubjectPage() {
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   const isMobile = window.innerWidth < 700;
   const [similarCourseCount, setSimilarCourseCount] = useState([]);

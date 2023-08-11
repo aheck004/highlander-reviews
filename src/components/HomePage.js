@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import "./hompage.css";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import PrimarySearchAppBar from "./Header";
 import { ThemeProvider} from "@mui/material/styles";
 import { themes } from "./themes";
 import Footer from "./footer";
+import { useTheme } from "./ThemeContext";
 
 function HomePage() {
   const isMobile = window.innerWidth < 700;
 
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
+  const setTheme = useTheme().toggleTheme; //
+  //console.log("What is this: ", useTheme().theme);
+  //console.log("Set Theme", setTheme);
 
   return (
     <ThemeProvider theme={theme}>
@@ -33,6 +36,9 @@ function HomePage() {
             <Typography variant="h4" align="center" color="text.main">
               Find reviews for courses at University of California, Riverside
             </Typography>
+            <Button onClick={setTheme}>
+              Change theme
+              </Button>
           </Box>
           <Box className="homepage-center">
             <SearchBar width={isMobile ? 350 : 500} height={50} />

@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import date from "date-and-time";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 import Cookie from "js-cookie";
 import { Snackbar, Alert } from "@mui/material";
 
@@ -54,8 +55,7 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
 
   const [googleUser, setGoogleUser] = React.useState("");
 
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))

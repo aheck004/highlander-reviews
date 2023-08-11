@@ -5,11 +5,10 @@ import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { themes } from "./themes";
-import { getUnit } from "@mui/material/styles/cssUtils";
+import { useTheme } from "./ThemeContext";
 
 function BioSquare({ name, title, description, image, linkedin=null, twitter=null, github=null, flag}) {
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   console.log(github)
   return (

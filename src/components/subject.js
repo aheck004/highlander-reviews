@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 function ColorMap(difficulty, theme) {
   if (difficulty <= 2.49) {
@@ -39,8 +40,7 @@ function textColor(difficulty, theme) {
 }
 
 function Subject({ subject }) {
-  const [themeMode, setThemeMode] = useState("light");
-  const theme = themes[themeMode];
+  const theme = themes[useTheme().theme];
 
   const [similarCourses, setSimilarCourses] = useState([]);
   const navigate = useNavigate();
