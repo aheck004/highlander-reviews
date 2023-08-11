@@ -265,7 +265,7 @@ export default function PrimarySearchAppBar() {
             )}
             <Box sx={{ flexGrow: 1 }} />
             {!isSearchBarOpen && (
-              <Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
                 <IconButton
                   sx={{ color: "primary.contrastText" }}
                   onClick={() => {
