@@ -14,10 +14,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 
-const GroupHeader = styled("div")(() => ({
+const GroupHeader = styled("div")(({ theme }) => ({
   position: "sticky",
   top: "-8px",
   padding: "4px 10px",
@@ -25,17 +26,19 @@ const GroupHeader = styled("div")(() => ({
   backgroundColor: theme.palette.secondary.main,
 }));
 
-const GroupItems = styled("ul")({
+const GroupItems = styled("ul")(({ theme }) => ({
   padding: 0,
   color: theme.palette.text.main,
   backgroundColor: theme.palette.background.main,
-});
+}));
 
 function SearchBar({ width, height }) {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const navigate = useNavigate();
+
+  const theme = themes[useTheme().theme];
 
   useEffect(() => {
     let active = true;
@@ -154,8 +157,8 @@ function SearchBar({ width, height }) {
         renderGroup={(params) => {
           return (
             <li key={params.key}>
-              <GroupHeader>{params.group}</GroupHeader>
-              <GroupItems>{params.children}</GroupItems>
+              <GroupHeader theme={theme}>{params.group}</GroupHeader>
+              <GroupItems theme={theme}>{params.children}</GroupItems>
             </li>
           );
         }}

@@ -13,10 +13,13 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import "./classPage.css";
 import axios from "axios";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 function Review({ count, review }) {
   const [liked, setLiked] = useState(null);
+
+  const theme = themes[useTheme().theme];
 
   function Liked(bool) {
     var type = bool ? "liked" : "disliked";

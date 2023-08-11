@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Badge, Box, ThemeProvider, Typography } from "@mui/material";
 import { Avatar, IconButton } from "@mui/material";
 import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import theme from "./theme";
+import { themes } from "./themes";
+import { useTheme } from "./ThemeContext";
 
 function BioSquare({ name, title, description, image, linkedin=null, twitter=null, github=null, flag}) {
+  const theme = themes[useTheme().theme];
+
   return (
     <ThemeProvider theme={theme}>
       <Box

@@ -19,9 +19,10 @@ import PrimarySearchAppBar from "./Header";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./classPage.css";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme.js";
+import { themes } from "./themes";
 import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
+import { useTheme } from "./ThemeContext";
 
 const REVIEW_LIMIT = 10;
 //TODO: Change to add transition group
@@ -33,6 +34,7 @@ function ClassPage() {
   const { subjectCode, courseNumber } = useParams();
   const course = subjectCode + courseNumber;
   const [googleUser, setGoogleUser] = React.useState(null);
+  const theme = themes[useTheme().theme];
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))
