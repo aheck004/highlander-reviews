@@ -13,7 +13,7 @@ function HomePage() {
 
   const theme = themes[useTheme().theme];
   const setTheme = useTheme().toggleTheme; //
-  //console.log("What is this: ", useTheme().theme);
+  //console.log("The theme is: ", useTheme().theme);
   //console.log("Set Theme", setTheme);
 
   return (
@@ -41,9 +41,6 @@ function HomePage() {
             <Typography variant="subtitle1" align="center" color="text.main">
               Find reviews for courses at University of California, Riverside
             </Typography>
-            <Button onClick={setTheme}>
-              Change theme
-              </Button>
           </Box>
           <Box className="homepage-center">
             <SearchBar width={isMobile ? 350 : 500} height={50} />
