@@ -10,7 +10,6 @@ import { useTheme } from "./ThemeContext";
 function BioSquare({ name, title, description, image, linkedin=null, twitter=null, github=null, flag}) {
   const theme = themes[useTheme().theme];
 
-  console.log(github)
   return (
     <ThemeProvider theme={theme}>
       <Box

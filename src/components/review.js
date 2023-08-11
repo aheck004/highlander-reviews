@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Paper, Divider, Typography, IconButton } from "@mui/material";
+import { Paper, 
+  Divider, 
+  Typography, 
+  IconButton,
+  Zoom
+} from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import StarIcon from "@mui/icons-material/Star";
@@ -11,7 +16,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
-function Review({ review }) {
+function Review({ count, review }) {
   const [liked, setLiked] = useState(null);
 
   const theme = themes[useTheme().theme];
@@ -44,11 +49,11 @@ function Review({ review }) {
       .then((response) => {})
       .catch((error) => {});
   }
-
+  
   return (
     <ThemeProvider theme={theme}>
-      <Paper elevation={4} className="review" style={{ backgroundColor: theme.palette.secondary.main }}
->
+      <Zoom in={true} timeout={500} style={{transitionDelay:50*count}}>
+      <Paper elevation={4} className="review" style={{ backgroundColor: theme.palette.secondary.main }}>
         <span className="review-header">
           <div className="review-difficulty">
             <Typography color="text.main">Difficulty: </Typography>
@@ -98,6 +103,7 @@ function Review({ review }) {
           </div>
         </div>
       </Paper>
+      </Zoom>
     </ThemeProvider>
   );
 }

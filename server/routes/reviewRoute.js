@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Review = require("../models/reviewModel");
 const Course = require("../models/courseModel");
-const fill_form = require("../services/puppeteer_service");
+const ps = require("../services/puppeteer_service.js");
 
-//
 
-router.route("/course/:name").get((req, res) => {
+router.route("/course-reviews/:name").get((req, res) => {
   try {
-    Review.find({ class_name: req.params.name }).select('-user_email').then((foundReviews) => {
+    Review.find({ class_name: req.params.name })
+      .skip(req.query.skip).limit(req.query.limit)
+      .select('-user_email')
+      .then((foundReviews) => {
       res.json(foundReviews);
     });
   } catch (err) {
@@ -20,32 +22,28 @@ router.route("/liked").post((req, res) => {
   if (req.body.type === "liked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { like: 1 } },
-      { new: true }
+      { $inc: { like: 1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} liked`);
     });
   else if (req.body.type === "disliked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { dislike: 1 } },
-      { new: true }
+      { $inc: { dislike: 1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} disliked`);
     });
   else if (req.body.type === "remove-liked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { like: -1 } },
-      { new: true }
+      { $inc: { like: -1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} undid liked`);
     });
   else if (req.body.type === "remove-disliked")
     Review.findOneAndUpdate(
       { _id: req.body.comment_id },
-      { $inc: { dislike: -1 } },
-      { new: true }
+      { $inc: { dislike: -1 } }
     ).then((foundReviews) => {
       console.log(`comment ${req.body.comment_id} undid disliked`);
     });
@@ -59,6 +57,13 @@ router.route("/submit-review").post(async(req, res) => {
   new_avg = parseFloat(new_avg.toFixed(2));
 
   try {
+    await ps.fill_form(req.body)
+  }
+  catch (err){
+    return res.json("Something went wrong")
+  }
+
+  try {
     const foundReviews = await Review.find({ user_email: req.body["user_email"], class_name: req.body["class_name"] });
     if (foundReviews.length !== 0) {
       console.log(`user ${req.body["user_email"]} already reviewed ${req.body["class_name"]}`)
@@ -66,35 +71,35 @@ router.route("/submit-review").post(async(req, res) => {
     }
   } catch (err) {
     console.log(err);
+    return res.json("Something went wrong");
   }
 
-  Course.findOneAndUpdate(
+  await Course.findOneAndUpdate(
     { class_name: req.body["class_name"] },
-    { $set: {average_diff: new_avg, number_of_reviews: {$inc: 1}} },
+    { 
+      $set: {average_diff: new_avg},
+      $inc: {number_of_reviews: 1}
+    },
     { new: true }
-  )
+    )
     .then((foundCourses) => {
       console.log(`course ${req.body["class_name"]} updated`);
     })
     .catch((err) => {
       console.log(err);
+      return res.json("Something went wrong");
     });
 
   delete req.body["current_review_count"];
   delete req.body["current_review_avg"];
-  Review.create(req.body)
+  await Review.create(req.body)
     .then((createdReview) => {
-      res.json(`new review created: ${createdReview}`);
     })
     .catch((err) => {
       console.log(err);
     });
-  try {
-    fill_form(req.body)
-  }
-  catch{
-    return res.json("Something went wrong")
-  }
+  
+  res.json(`new review created`);
 });
 
 router.route("/query-course/:course").get(async (req, res) => {
@@ -151,7 +156,6 @@ router.route("/get-courses-from-subject-code/:subjectCode").get((req, res) => {
   }
 });
 
-/*This is not tested*/
 router
   .route("/get-review-count-from-course/:subjectCode/:courseNumber")
   .get((req, res) => {

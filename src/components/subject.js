@@ -6,6 +6,7 @@ import {
   Divider,
   Typography,
   IconButton,
+  Zoom,
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import "./subjectPage.css";
@@ -61,6 +62,7 @@ function Subject({ subject }) {
     <ThemeProvider theme={theme}>
       {similarCourses.map((course, _id) => {
         return (
+          <Zoom in={true} timeout={500} style={{transitionDelay: 100*Math.sqrt(_id)}} >
           <ButtonBase
             key={_id}
             onClick={() => {
@@ -104,6 +106,7 @@ function Subject({ subject }) {
               </Box>
             </Paper>
           </ButtonBase>
+          </Zoom>
         );
       })}
     </ThemeProvider>
