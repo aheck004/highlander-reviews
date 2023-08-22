@@ -223,7 +223,7 @@ export default function PrimarySearchAppBar() {
                     }}
                     underline="hover"
                     color="inherit"
-                    href={`/Course/${subjectCode}`}
+                    href={`/#/Course/${subjectCode}`}
                   >
                     {!isMobile && (
                       <ListIcon
@@ -247,7 +247,7 @@ export default function PrimarySearchAppBar() {
                     }}
                     underline="hover"
                     color="inherit"
-                    href={`/Course/${subjectCode}/${courseNumber}`}
+                    href={`/#/Course/${subjectCode}/${courseNumber}`}
                   >
                     {!isMobile && (
                       <RateReviewIcon
