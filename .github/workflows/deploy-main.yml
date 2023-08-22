@@ -1,30 +1,46 @@
+#
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: master
+    permissions: #add write permission
+        contents: write
 
     steps:
+      - uses: actions/checkout@v2
       - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set Environment Variables
+        env:
+          REACT_APP_NODE_SERVER: ${{ secrets.REACT_APP_NODE_SERVER }}
+          REACT_APP_GOOGLE_CLIENT_ID: ${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
         run: |
-          echo "REACT_APP_NODE_SERVER=${{ secrets.REACT_APP_NODE_SERVER }}" > .env.local
-          echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}" >> .env.local
-          echo "REACT_APP_GOOGLE_CLIENT_SECRET=${{ secrets.REACT_APP_NODE_SERVER }}" >> .env.local
-          echo "REACT_APP_GOOGLE_OATH_REDIRECT_URL=${{ secrets.REACT_APP_NODE_SERVER }}/oauth2callback" >> .env.local
-
-      - name: Install Dependencies and Build
+          echo "REACT_APP_NODE_SERVER=${REACT_APP_NODE_SERVER}" > .env.local
+          echo "REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}" >> .env.local
+          echo "REACT_APP_GOOGLE_CLIENT_SECRET=${REACT_APP_NODE_SERVER}" >> .env.local
+          echo "REACT_APP_GOOGLE_OATH_REDIRECT_URL=${REACT_APP_NODE_SERVER}/oauth2callback" >> .env.local
+          
+      - name: Install Dependencies
         run: |
           npm install
+          
+      - name: Set CI to false
+        run: echo "CI=false" >> $GITHUB_ENV
+
+      - name: Run Build #build
+        run: |
           npm run build
 
+      - name: Add CNAME File
+        run: |
+          echo "highlander.reviews" > ./build/CNAME
+          
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
