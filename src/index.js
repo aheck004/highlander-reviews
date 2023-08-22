@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import HasRouter from "react-router-dom"
+import HashRouter from "react-router-dom"
 import "./index.css";
 import ClassPage from "./components/classPage";
 import HomePage from "./components/HomePage";
@@ -23,7 +23,7 @@ const root = createRoot(container);
 
 root.render(
   <ThemeProvider>
-    <HasRouter basename="/">
+    <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Course/:subjectCode" element={<SubjectPage />} />
@@ -32,7 +32,7 @@ root.render(
           element={<ClassPage />}
         />
       </Routes>
-    </HasRouter>
+    </HashRouter>
   </ThemeProvider>
 );
 
