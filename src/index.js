@@ -4,7 +4,7 @@ import ClassPage from "./components/classPage";
 import HomePage from "./components/HomePage";
 import subjectPage from "./components/subjectPage";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import SubjectPage from "./components/subjectPage";
 import { ThemeProvider } from "./components/ThemeContext.js";
@@ -22,7 +22,7 @@ const root = createRoot(container);
 
 root.render(
   <ThemeProvider>
-    <BrowserRouter basename="/">
+    <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Course/:subjectCode" element={<SubjectPage />} />
@@ -31,7 +31,7 @@ root.render(
           element={<ClassPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </ThemeProvider>
 );
 

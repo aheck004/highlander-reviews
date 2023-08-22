@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PrimarySearchAppBar from "./Header";
-import GoogleIcon from "@mui/icons-material/Google";
 import "./subjectPage.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
-import Cookie from "js-cookie";
-import getGoogleOAuthURL from "../getGoogleURL.js";
 import SearchBar from "./SearchBar";
 import Subject from "./subject.js"
 import {
@@ -27,7 +24,6 @@ function SubjectPage() {
   const isMobile = window.innerWidth < 700;
   const [similarCourseCount, setSimilarCourseCount] = useState([]);
   const { subjectCode } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios

@@ -13,8 +13,7 @@ function HomePage() {
 
   const theme = themes[useTheme().theme];
   const setTheme = useTheme().toggleTheme; //
-  //console.log("The theme is: ", useTheme().theme);
-  //console.log("Set Theme", setTheme);
+  console.log("Test Secret: ", process.env.TEST_SECRET);
 
   return (
     <ThemeProvider theme={theme}>
