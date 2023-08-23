@@ -199,6 +199,7 @@ export default function PrimarySearchAppBar() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    color: "primary.contrastText"
                   }}
                   underline="hover"
                   color="inherit"
@@ -245,6 +246,7 @@ export default function PrimarySearchAppBar() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      color: "primary.contrastText"
                     }}
                     underline="hover"
                     color="inherit"
@@ -252,12 +254,12 @@ export default function PrimarySearchAppBar() {
                   >
                     {!isMobile && (
                       <RateReviewIcon
-                        color="background"
+                        color="primary.contrastText"
                         sx={{ marginRight: "5px" }}
                         fontSize="small"
                       />
                     )}
-                    <Typography color="background.main">
+                    <Typography color="primary.contrastText">
                       {courseNumber}
                     </Typography>
                   </Link>
