@@ -189,7 +189,7 @@ export default function PrimarySearchAppBar() {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                separator={<ArrowRightIcon />}
+                separator={<ArrowRightIcon/>}
                 maxItems={3}
                 aria-label="breadcrumb"
               >
