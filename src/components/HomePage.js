@@ -30,10 +30,10 @@ function HomePage() {
         >
           <Box sx={{ marginBottom: "20px" }}>
             <Box sx={{display:'flex', gap:5}}>
-              <Typography variant="h1" align="center" color="text.primary">
+              <Typography variant="h1" align="center" color="primary.main">
                 Highlander{" "}
               </Typography>
-              <Typography variant="h1" align="center" color="text.main">
+              <Typography variant="h1" align="center" color="accent.main">
                 Reviews
               </Typography>
             </Box>
