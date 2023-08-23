@@ -86,7 +86,7 @@ function Subject({ subject }) {
               }}
               style={{ backgroundColor: theme.palette.secondary.main }}
             >
-              <Typography color="text.main">
+              <Typography color="secondary.contrastText">
                 {course.class_name} - {course.course_title}
               </Typography>
               <Divider orientation="horizontal" sx={{ flex: 1 }} />
@@ -100,7 +100,7 @@ function Subject({ subject }) {
                 >
                   {parseFloat(course.average_diff / 2).toFixed(1)}
                 </Avatar>
-                <Typography color="text.main" marginTop={"10px"} marginLeft={"10px"}>
+                <Typography color="secondary.contrastText" marginTop={"10px"} marginLeft={"10px"}>
                 Based on {course.number_of_reviews} total reviews
               </Typography>
               </Box>

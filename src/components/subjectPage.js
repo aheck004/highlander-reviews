@@ -94,7 +94,10 @@ function SubjectPage() {
         </Box>
         </Box>
       <Divider orientation="horizontal" sx={{ flex: 1, width:"80%"}}>
-        <Chip color="accent" label={similarCourseCount} />
+        <Chip color="accent"
+          label={similarCourseCount}
+          sx={{ color: `${theme.palette.accent.contrastText}` }}
+        />
       </Divider>
       <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%"}}>
           <Subject subject={subjectCode} />
