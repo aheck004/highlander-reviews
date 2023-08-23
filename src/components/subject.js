@@ -17,7 +17,9 @@ import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
 function ColorMap(difficulty, theme) {
-  if (difficulty <= 2.49) {
+  if (difficulty <= 0) {
+    return theme.palette.difficultyColor0.main;
+  } else if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.main;
   } else if (difficulty <= 3.49) {
     return theme.palette.difficultyColor3.main;
@@ -29,7 +31,9 @@ function ColorMap(difficulty, theme) {
 }
 
 function textColor(difficulty, theme) {
-  if (difficulty <= 2.49) {
+  if (difficulty <= 0) {
+    return theme.palette.difficultyColor0.contrastText;
+  } else if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.contrastText;
   } else if (difficulty <= 3.49) {
     return theme.palette.difficultyColor3.contrastText;

@@ -23,6 +23,10 @@ export const themes = {
         contrastText: '#f6fcfe',
       },
       divider: "#4F767D",
+      difficultyColor0: {
+        main: '#455a64',
+        contrastText: '#f6fcfe'
+      },
       difficultyColor1: {
           main: '#00c853',
           contrastText: '#041216'
@@ -73,6 +77,10 @@ export const themes = {
         contrastText: '#041216',
       },
       divider: "#A1BFC4",
+      difficultyColor0: {
+        main: '#455a64',
+        contrastText: '#f6fcfe'
+      },
       difficultyColor1: {
           main: '#00c853',
           contrastText: '#041216'
