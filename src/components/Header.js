@@ -189,7 +189,7 @@ export default function PrimarySearchAppBar() {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                separator={<ArrowRightIcon />}
+                separator={<ArrowRightIcon sx={{ color:"primary.contrastText" }} />}
                 maxItems={3}
                 aria-label="breadcrumb"
               >
@@ -207,11 +207,11 @@ export default function PrimarySearchAppBar() {
                   {!isMobile && (
                     <HomeIcon
                       color="background"
-                      sx={{ marginRight: "5px" }}
+                      sx={{ marginRight: "5px", color: "primary.contrastText"}}
                       fontSize="small"
                     />
                   )}
-                  <Typography color="background.main">Home</Typography>
+                  <Typography color="primary.contrastText">Home</Typography>
                 </Link>
                 {subjectCode && (
                   <Link
@@ -220,19 +220,20 @@ export default function PrimarySearchAppBar() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      color: "primary.contrastText"
                     }}
                     underline="hover"
-                    color="inherit"
+                    color="primary.contrastText"
                     href={`/#/Course/${subjectCode}`}
                   >
                     {!isMobile && (
                       <ListIcon
-                        color="background"
+                        color="primary.contrastText"
                         sx={{ marginRight: "5px" }}
                         fontSize="small"
                       />
                     )}
-                    <Typography color="background.main">
+                    <Typography color="primary.contrastText">
                       {subjectCode}{" "}
                     </Typography>
                   </Link>
