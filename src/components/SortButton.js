@@ -67,6 +67,7 @@ function SortButton({ reviews, setReviews }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            color: `${theme.palette.accent.contrastText}` //Text elements within the button
           }}
           variant="contained"
           startIcon={<SortIcon />}

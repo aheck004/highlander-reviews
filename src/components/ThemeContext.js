@@ -1,12 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
+import Cookies from "js-cookie";
+
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light"); // Initial theme
-  //console.log("theme provider children: ", children);
+  const cookie_theme = Cookies.get("theme");
+  const [theme, setTheme] = useState(cookie_theme ? cookie_theme : "light"); // Initial theme
 
   const toggleTheme = () => {
+    Cookies.set("theme", theme === "light" ? "dark" : "light");
     setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
   };
 

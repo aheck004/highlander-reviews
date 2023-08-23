@@ -17,7 +17,9 @@ import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
 function ColorMap(difficulty, theme) {
-  if (difficulty <= 2.49) {
+  if (difficulty <= 0) {
+    return theme.palette.difficultyColor0.main;
+  } else if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.main;
   } else if (difficulty <= 3.49) {
     return theme.palette.difficultyColor3.main;
@@ -29,7 +31,9 @@ function ColorMap(difficulty, theme) {
 }
 
 function textColor(difficulty, theme) {
-  if (difficulty <= 2.49) {
+  if (difficulty <= 0) {
+    return theme.palette.difficultyColor0.contrastText;
+  } else if (difficulty <= 2.49) {
     return theme.palette.difficultyColor1.contrastText;
   } else if (difficulty <= 3.49) {
     return theme.palette.difficultyColor3.contrastText;
@@ -86,7 +90,7 @@ function Subject({ subject }) {
               }}
               style={{ backgroundColor: theme.palette.secondary.main }}
             >
-              <Typography color="text.main">
+              <Typography color="secondary.contrastText">
                 {course.class_name} - {course.course_title}
               </Typography>
               <Divider orientation="horizontal" sx={{ flex: 1 }} />
@@ -100,7 +104,7 @@ function Subject({ subject }) {
                 >
                   {parseFloat(course.average_diff / 2).toFixed(1)}
                 </Avatar>
-                <Typography color="text.main" marginTop={"10px"} marginLeft={"10px"}>
+                <Typography color="secondary.contrastText" marginTop={"10px"} marginLeft={"10px"}>
                 Based on {course.number_of_reviews} total reviews
               </Typography>
               </Box>

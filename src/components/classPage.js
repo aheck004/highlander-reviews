@@ -235,7 +235,10 @@ function ClassPage() {
           <Divider orientation="horizontal" sx={{ flex: 1 }} />
           <Divider orientation="horizontal" sx={{ flex: 1 }}>
             {courseData ? (
-            <Chip color="accent" label={courseData.number_of_reviews} />
+            <Chip color="accent" 
+              label={courseData.number_of_reviews}
+              sx={{ color: `${theme.palette.accent.contrastText}` }}
+            />
             ) : (
             <Skeleton variant="circular" width={10} height={10} />
             )}
@@ -266,7 +269,7 @@ function ClassPage() {
           </Typography>
         )}
         {courseData && reviews.length > 0 && reviews.length < courseData.number_of_reviews ? (
-          <Button color="primary" onClick={loadMoreReviews}>Load More</Button>
+          <Button color="accent" onClick={loadMoreReviews}>Load More</Button>
         ) : null}
       </Box>
     </ThemeProvider>

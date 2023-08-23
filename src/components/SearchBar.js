@@ -22,14 +22,14 @@ const GroupHeader = styled("div")(({ theme }) => ({
   position: "sticky",
   top: "-8px",
   padding: "4px 10px",
-  color: theme.palette.text.main,
-  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.accent.contrastText,
+  backgroundColor: theme.palette.accent.main,
 }));
 
 const GroupItems = styled("ul")(({ theme }) => ({
   padding: 0,
-  color: theme.palette.text.main,
-  backgroundColor: theme.palette.background.main,
+  color: theme.palette.secondary.contrastText,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 function SearchBar({ width, height }) {
@@ -117,7 +117,15 @@ function SearchBar({ width, height }) {
                 borderTopRightRadius: "20px",
                 borderTopLeftRadius: "20px",
                 color: 'text.main',
-                bgcolor:'background.main',
+                bgcolor: inputValue === "" ? 'background.main' : 'secondary.main',
+                border: inputValue === "" ? `1px solid ${theme.palette.text.main}`:'0',
+                margin: inputValue === "" ? '0px' : '1px',
+                '&:hover': {
+                  bgcolor: 'secondary.main', // Background color on hover
+                  border: '0',
+                  margin: '1px',
+                  boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.3)'
+                },
               }}
             >
               <InputBase

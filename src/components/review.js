@@ -56,7 +56,7 @@ function Review({ count, review }) {
       <Paper elevation={4} className="review" style={{ backgroundColor: theme.palette.secondary.main }}>
         <span className="review-header">
           <div className="review-difficulty">
-            <Typography color="text.main">Difficulty: </Typography>
+            <Typography color="secondary.contrastText">Difficulty: </Typography>
             {[...Array(Math.floor(review.difficulty / 2))].map((_, count) => {
               return <StarIcon key={count} color="accent" />;
             })}
@@ -71,13 +71,13 @@ function Review({ count, review }) {
               }
             )}
           </div>
-          <div className="review-date"> <Typography color="text.main">{review.date}</Typography></div>
+          <div className="review-date"> <Typography color="secondary.contrastText">{review.date}</Typography></div>
         </span>
         <Divider />
-        <div className="review-comment"><Typography color="text.main">{review.additional_comments}</Typography></div>
+        <div className="review-comment"><Typography color="secondary.contrastText">{review.additional_comments}</Typography></div>
         <div className="control-bar">
           <div className="helpful">
-            <Typography color="text.main" fontWeight={'bold'}>Helpful?</Typography>
+            <Typography color="secondary.contrastText" fontWeight={'bold'}>Helpful?</Typography>
             <IconButton onClick={() => Liked(true)}>
               <Typography sx={{ color: liked ? "green" : theme.palette.accent.main }}>
                 {liked === true ? review.like + 1 : review.like}
