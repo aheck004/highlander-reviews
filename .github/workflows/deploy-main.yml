@@ -10,7 +10,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: master
-    permissions: #add write permission
+    permissions: 
         contents: write
 
     steps:
@@ -24,10 +24,7 @@ jobs:
           echo "REACT_APP_NODE_SERVER=${REACT_APP_NODE_SERVER}" > .env.local
           echo "REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}" >> .env.local
           echo "REACT_APP_GOOGLE_CLIENT_SECRET=${REACT_APP_NODE_SERVER}" >> .env.local
-          echo "REACT_APP_GOOGLE_OATH_REDIRECT_URL=${REACT_APP_NODE_SERVER}/oath2callback" >> .env.local
-          echo $TEST_SECRET
-          echo $REACT_APP_GOOGLE_CLIENT_ID
-          echo $REACT_APP_NODE_SERVER
+          echo "REACT_APP_GOOGLE_OATH_REDIRECT_URL=${REACT_APP_NODE_SERVER}/oauth2callback" >> .env.local
           
       - name: Install Dependencies
         run: |
@@ -36,7 +33,7 @@ jobs:
       - name: Set CI to false
         run: echo "CI=false" >> $GITHUB_ENV
 
-      - name: Run Build #build
+      - name: Run Build
         run: |
           npm run build
 
