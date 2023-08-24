@@ -89,6 +89,11 @@ function SortButton({ reviews, setReviews }) {
           MenuListProps={{
             "aria-labelledby": "basic-button",
           }}
+          PaperProps={{ //Deprecated
+            style: {
+              backgroundColor: `${theme.palette.secondary.main}`, // Color of the dropdown containing MenuItems
+            },
+          }}
         >
           <MenuItem
             onClick={() => {
@@ -96,7 +101,7 @@ function SortButton({ reviews, setReviews }) {
             }}
           >
             <TodayIcon color="text"/>
-            <Typography color="text.main">
+            <Typography color="secondary.contrastText">
               Most Recent
             </Typography>
           </MenuItem>
@@ -106,7 +111,7 @@ function SortButton({ reviews, setReviews }) {
             }}
           >
             <TodayIcon color="text"/>
-            <Typography color="text.main">
+            <Typography color="secondary.contrastText">
               Least Recent
             </Typography>
           </MenuItem>
@@ -116,7 +121,7 @@ function SortButton({ reviews, setReviews }) {
             }}
           >
             <StarIcon color="text"/>
-            <Typography color="text.main">
+            <Typography color="secondary.contrastText">
               Highest Difficulty
             </Typography>
           </MenuItem>
@@ -126,7 +131,7 @@ function SortButton({ reviews, setReviews }) {
             }}
           >
             <StarHalfIcon color="text"/>
-            <Typography color="text.main">
+            <Typography color="secondary.contrastText">
               Lowest Difficulty
             </Typography>
           </MenuItem>
@@ -136,7 +141,7 @@ function SortButton({ reviews, setReviews }) {
             }}
           >
             <ThumbUpOffAltIcon color="text"/>
-            <Typography color="text.main">
+            <Typography color="secondary.contrastText">
               Most Helpful
             </Typography>
           </MenuItem>
@@ -146,7 +151,7 @@ function SortButton({ reviews, setReviews }) {
             }}
           >
             <ThumbDownOffAltIcon color="text"/>
-            <Typography color="text.main">
+            <Typography color="secondary.contrastText">
               Least Helpful
             </Typography>
           </MenuItem>
