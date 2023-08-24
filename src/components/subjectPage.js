@@ -20,11 +20,22 @@ import {
 
 function SubjectPage() {
   const theme = themes[useTheme().theme];
-
-  const isMobile = window.innerWidth < 700;
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700); // [1
   const [similarCourseCount, setSimilarCourseCount] = useState([]);
   const { subjectCode } = useParams();
-
+  
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 700) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
   useEffect(() => {
     axios
       .get(
@@ -45,7 +56,7 @@ function SubjectPage() {
         bgcolor="background.main"
         sx={{
           display: "flex",
-          overflow: "auto",
+          overflow: "scroll",
           alignItems: "center",
           width: "100%",
           flexDirection: "column",
@@ -69,18 +80,18 @@ function SubjectPage() {
             align="center"
             color="text.main"
             sx={{ marginTop: "20px" }}
+            fontSize={isMobile ? 40 : 50}
           >
-            {similarCourseCount} {subjectCode} courses at University of
-            California, Riverside
+            {similarCourseCount} {subjectCode} courses at {isMobile ? "UCR" : "University of California, Riverside"}
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
             <Typography
                 color = "text.main"
                 sx={{ marginRight: "10px" }}
             >
                 Search for other courses  
             </Typography>
-            <SearchBar width={isMobile ? 350 : 500} height={50} />
+            <SearchBar width={isMobile ? 300 : 500} height={50} />
           </Box>
           <Box
           sx={{
@@ -99,7 +110,7 @@ function SubjectPage() {
           sx={{ color: `${theme.palette.accent.contrastText}` }}
         />
       </Divider>
-      <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%"}}>
+        <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%" }}>
           <Subject subject={subjectCode} />
         </Box>
       </Box>

@@ -6,11 +6,19 @@
     align-items: center;
   }
 
-  .subject-center {
-    display: flex;
-  }
+.subject-center {
+  display: flex;
+}
 
-  .subject {
-    min-width: 450px;
+.subject {
+    width: 450px;
+    min-width: 300px;
     max-width: 600px;
+}
+
+@media (max-width: 700px) {
+  .subject {
+    width: 100%;
+    max-width: 300px;
   }
+}

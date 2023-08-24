@@ -38,7 +38,7 @@ function HomePage() {
                 }
                 className="App-logo"
                 style={{
-                  width: isMobile ? "95%" : "60%",
+                  width: isMobile ? "95%" : "85dvh",
                   height: "auto",
                   marginLeft: "auto",
                   marginRight: "auto",

@@ -46,9 +46,22 @@ function textColor(difficulty, theme) {
 
 function Subject({ subject }) {
   const theme = themes[useTheme().theme];
-
+  var isMobile = window.innerWidth < 700;
   const [similarCourses, setSimilarCourses] = useState([]);
   const navigate = useNavigate();
+  
+  // useEffect for reziable window
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 700) {
+        isMobile = true;
+      } else {
+        isMobile = false;
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     axios
@@ -85,7 +98,6 @@ function Subject({ subject }) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                width: "450px",
                 bgcolor: theme.palette.secondary.main,
               }}
               style={{ backgroundColor: theme.palette.secondary.main }}

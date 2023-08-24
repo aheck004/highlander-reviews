@@ -17,7 +17,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
-
 const GroupHeader = styled("div")(({ theme }) => ({
   position: "sticky",
   top: "-8px",
@@ -75,7 +74,7 @@ function SearchBar({ width, height }) {
           option.class_name === value.class_name
         }
         PopperComponent={(props) => (
-          <Popper {...props} style={{ paddingTop: "8px", width: width }}>
+          <Popper {...props} style={{paddingTop: "5px", width: width }}>
             <Paper style={{ maxHeight: isMobile ? "45dvh" : "35dvh", overflowY: "auto" }}>
               {props.children}
             </Paper>
@@ -83,7 +82,7 @@ function SearchBar({ width, height }) {
         )}
         filterOptions={(x) => x}
         options={options}
-        groupBy={(option) => option.subject_code}
+        groupBy={(option) => option.subject_code + " - " + option.subject_description}
         autoComplete
         freeSolo
         includeInputInList
@@ -165,8 +164,12 @@ function SearchBar({ width, height }) {
         }}
         renderGroup={(params) => {
           return (
-            <li key={params.key}>
-              <GroupHeader theme={theme}>{params.group}</GroupHeader>
+            <li> 
+              <GroupHeader
+                onClick={() => {
+                  navigate(`/Course/${params.group.split(" - ")[0]}`);
+                }}
+                theme={theme}>{params.group}</GroupHeader>
               <GroupItems theme={theme}>{params.children}</GroupItems>
             </li>
           );
