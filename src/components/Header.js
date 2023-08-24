@@ -27,6 +27,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import SearchIcon from "@mui/icons-material/Search";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import banner from "../banner_small_on_blue.svg";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -142,6 +143,9 @@ export default function PrimarySearchAppBar() {
       <Box sx={{ width: "100%" }}>
         <AppBar position="static">
           <Toolbar>
+            <a href="/">
+              <img style= {{width: "auto", height: '30px', marginRight: "10px", display: isSearchBarOpen ? "none" : "flex"}}src={banner} className="App-logo" alt="logo"/>
+            </a>
             {isMobile ? (
               <ClickAwayListener
                 onClickAway={() => {
@@ -160,6 +164,9 @@ export default function PrimarySearchAppBar() {
                   >
                     <Box
                       sx={{
+                        position: "absolute",
+                        top: "6px",
+                        left: "0px",
                         width: "100%",
                         display: "flex",
                         justifyContent: "center",

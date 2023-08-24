@@ -37,6 +37,7 @@ function SearchBar({ width, height }) {
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const navigate = useNavigate();
+  const isMobile = window.innerWidth < 700;
 
   const theme = themes[useTheme().theme];
 
@@ -75,7 +76,7 @@ function SearchBar({ width, height }) {
         }
         PopperComponent={(props) => (
           <Popper {...props} style={{ paddingTop: "8px", width: width }}>
-            <Paper style={{ maxHeight: "300px", overflowY: "auto" }}>
+            <Paper style={{ maxHeight: isMobile ? "45dvh" : "35dvh", overflowY: "auto" }}>
               {props.children}
             </Paper>
           </Popper>
