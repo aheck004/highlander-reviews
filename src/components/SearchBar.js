@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, {autocompleteClasses} from "@mui/material/Autocomplete";
 import Grid from "@mui/material/Grid";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { styled } from "@mui/system";
 import { InputBase, Paper } from "@mui/material";
-import Popper from "@mui/material/Popper";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
@@ -17,9 +16,26 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
+//Removes white gap from searchbar menu
+const StyledAutocompletePopper = styled('div')(({ theme }) => ({
+  [`& .${autocompleteClasses.listbox}`]: {
+    padding: 0,
+    [`& .${autocompleteClasses.option}`]: {
+      padding: 8,
+    },
+  },
+}));
+
+function PopperComponent(props) {
+  const { disablePortal, anchorEl, open, ...other } = props;
+  return <StyledAutocompletePopper {...other} />;
+}
+
+//end Removes white gap from searchbar menu
+
 const GroupHeader = styled("div")(({ theme }) => ({
   position: "sticky",
-  top: "-8px",
+  top: "0px",
   padding: "4px 10px",
   color: theme.palette.accent.contrastText,
   backgroundColor: theme.palette.accent.main,
@@ -77,7 +93,8 @@ function SearchBar({ width, height }) {
         options={options}
         groupBy={(option) => option.subject_code + " - " + option.subject_description}
         autoComplete
-        freeSolo //Comment out to debug background color
+        freeSolo
+        PopperComponent={PopperComponent} //Removes white gap
         includeInputInList
         filterSelectedOptions
         value={value}
