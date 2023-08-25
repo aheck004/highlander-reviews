@@ -73,18 +73,11 @@ function SearchBar({ width, height }) {
         isOptionEqualToValue={(option, value) =>
           option.class_name === value.class_name
         }
-        PopperComponent={(props) => (
-          <Popper {...props} style={{paddingTop: "5px", width: width }}>
-            <Paper style={{ maxHeight: isMobile ? "45dvh" : "35dvh", overflowY: "auto" }}>
-              {props.children}
-            </Paper>
-          </Popper>
-        )}
         filterOptions={(x) => x}
         options={options}
         groupBy={(option) => option.subject_code + " - " + option.subject_description}
         autoComplete
-        freeSolo
+        freeSolo //Comment out to debug background color
         includeInputInList
         filterSelectedOptions
         value={value}
