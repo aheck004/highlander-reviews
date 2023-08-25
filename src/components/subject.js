@@ -79,7 +79,7 @@ function Subject({ subject }) {
     <ThemeProvider theme={theme}>
       {similarCourses.map((course, _id) => {
         return (
-          <Zoom in={true} timeout={500} style={{transitionDelay: 100*Math.sqrt(_id)}} >
+          <Zoom key={course.subject_code+_id} in={true} timeout={500} style={{transitionDelay: 100*Math.sqrt(_id)}} >
           <ButtonBase
             key={_id}
             onClick={() => {

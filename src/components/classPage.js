@@ -12,7 +12,12 @@ import {
   Chip,
   Button,
   Skeleton,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Link,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import CourseSlider from "./CourseSlider";
 import SortButton from "./SortButton";
 import PrimarySearchAppBar from "./Header";
@@ -27,6 +32,190 @@ import { useTheme } from "./ThemeContext";
 const REVIEW_LIMIT = 10;
 //TODO: Change to add transition group
 
+function MobileClassPageHero({courseData, graphData, googleUser}) {
+  const [expanded, setExpanded] = useState(false);
+  const theme = themes[useTheme().theme];
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  return (
+    <Box style={{width:"95vw"}}>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={{
+        backgroundColor: theme.palette.secondary.main,
+      }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+        >
+          <Typography sx={{ color: 'secondary.contrastText', width: '40%', flexShrink: 0 }}>
+            Course Description
+          </Typography>
+          <Typography sx={{color: 'text.secondary', textOverflow:"ellipsis"}}>{courseData.course_description.split('.')[0]}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography sx={{color: 'secondary.contrastText'}}>
+            {courseData.course_description.split('.').slice(1).join('.')}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} sx={{
+        backgroundColor: theme.palette.secondary.main,
+      }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2bh-content"
+          id="panel2bh-header"
+        >
+          <Typography sx={{ width: '40%', flexShrink: 0 }}>Average Difficulty</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={{display:"flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+          <Typography>data sourced from {courseData.number_of_reviews} reviews</Typography>  
+          <Box sx={{marginTop:"-80px"}}>
+            <DifficultyGraph review_data={graphData} />
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} sx={{
+        backgroundColor: theme.palette.secondary.main,
+      }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3bh-content"
+          id="panel3bh-header"
+        >
+          <Typography sx={{ width: '40%', flexShrink: 0 }}>
+            Similar Courses
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography sx={{color:"secondary.constrastText"}}>
+            All {courseData.subject_code} courses can be found {''}
+            <Link href={`#/Course/${courseData.subject_code}`}>here</Link>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      {googleUser && courseData ? (
+              <CreateReviewModal
+                avg_diff={courseData.average_diff}
+              />
+            ) : (
+              <Button
+                endIcon={<GoogleIcon />}
+                variant="contained"
+                color="primary"
+                href={getGoogleOAuthURL(window.location.href)}
+              >
+                Login to Review
+              </Button>
+            )}
+    </Box>
+  )
+}
+
+function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
+  const theme = themes[useTheme().theme];
+
+  return (
+  <Box>
+            <Box
+          sx={{
+            display: "flex",
+            gap: 10,
+          }}
+        >
+          <Box
+            className="course-hero-left"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 350,
+              gap: 5,
+            }}
+          >
+              <Box>
+                <Typography
+                  sx={{
+                    alignSelf: "start",
+                    fontWeight: "bold",
+                  }}
+                  variant="body1"
+                  color="background.contrastText"
+                >
+                  Course Description:
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="background.contrastText"
+                  fontSize={".9rem"}
+                >
+                  {courseData.course_description}
+                </Typography>
+              </Box>
+            {googleUser && courseData ? (
+              <CreateReviewModal
+                total_reviews={reviews.length}
+                avg_diff={courseData.average_diff}
+              />
+            ) : (
+              <Button
+                endIcon={<GoogleIcon />}
+                variant="contained"
+                color="primary"
+                href={getGoogleOAuthURL(window.location.href)}
+              >
+                Login to Review
+              </Button>
+            )}
+          </Box>
+          <Box className="course-hero-right">
+            <Paper
+              sx={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                bgcolor: theme.palette.secondary.main,
+                flexDirection: "column-reverse",
+              }}
+            >
+                  <DifficultyGraph review_data={graphData} />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: "10px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography color="secondary.contrastText">
+                      Average Difficulty
+                    </Typography>
+                    <Typography variant="h2" color="secondary.contrastText">
+                      {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
+                    </Typography>
+                  </Box>
+            </Paper>
+              <Box key={courseData.subject_code}>
+                <CourseSlider subject={courseData.subject_code} />
+              </Box>
+          </Box>
+        </Box>
+      </Box>
+  )
+}
+
 function ClassPage() {
   const [reviews, setReviews] = useState([]);
   const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
@@ -35,10 +224,20 @@ function ClassPage() {
   const course = subjectCode + courseNumber;
   const [googleUser, setGoogleUser] = React.useState(null);
   const theme = themes[useTheme().theme];
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))
       setGoogleUser(JSON.parse(Cookie.get("googleUser").slice(2)));
+  }, []);
+
+  //useEffect to detect window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 700);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -84,7 +283,7 @@ function ClassPage() {
           overflow: "hidden",
           justifyContent: "center",
           alignItems: "center",
-          width: "100%",
+          width: "100vw",
           minHeight: "100vh",
           flexDirection: "column",
         }}
@@ -105,123 +304,25 @@ function ClassPage() {
             margin: "10px",
           }}
         >
-          {courseData ? (
+          {courseData ? 
+          <>
             <Typography sx={{ textAlign: "center"}}
+            fontSize={isMobile ? 40 : 50}
               variant="h2" align="center" color="background.contrastText">
               {courseData.class_name}
             </Typography>
-          ) : (
-            <Skeleton variant="rectangular" width={210} height={118} />
-          )}
-
-          {courseData ? (
             <Typography sx={{ textAlign: "center", textWrap: "balance" }} 
+            fontSize={isMobile ? 40 : 50}
               variant="h2" align="center" color="background.contrastText">
               {courseData.course_title}
-            </Typography>
-          ) : (
-            <Skeleton variant="rectangular" width={210} height={118} />
-          )}
-          <Box
-            sx={{
-              display: "flex",
-              gap: 10,
-            }}
-          >
-            <Box
-              className="course-hero-left"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: 350,
-                gap: 5,
-              }}
-            >
-              {courseData ? (
-                <Box>
-                  <Typography
-                    sx={{
-                      alignSelf: "start",
-                      fontWeight: "bold",
-                    }}
-                    variant="body1"
-                    color="background.contrastText"
-                  >
-                    Course Description:
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="background.contrastText"
-                    fontSize={".9rem"}
-                  >
-                    {courseData.course_description}
-                  </Typography>
-                </Box>
-              ) : (
-                <Skeleton variant="rectangular" width={350} height={300} />
-              )}
-              {googleUser && courseData ? (
-                <CreateReviewModal
-                  total_reviews={reviews.length}
-                  avg_diff={courseData.average_diff}
-                />
-              ) : (
-                <Button
-                  endIcon={<GoogleIcon />}
-                  variant="contained"
-                  color="primary"
-                  href={getGoogleOAuthURL(window.location.href)}
-                >
-                  Login to Review
-                </Button>
-              )}
-            </Box>
-            <Box className="course-hero-right">
-              <Paper
-                sx={{
-                  position: "relative",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  bgcolor: theme.palette.secondary.main,
-                  flexDirection: "column-reverse",
-                }}
-              >
-                {courseData ? (
-                  <>
-                    <DifficultyGraph review_data={graphData} />
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: "10px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Typography color="secondary.contrastText">
-                        Average Difficulty
-                      </Typography>
-                      <Typography variant="h2" color="secondary.contrastText">
-                        {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
-                      </Typography>
-                    </Box>
-                  </>
-                ) : (
-                  <Skeleton variant="rectangular" width={350} height={300} />
-                )}
-              </Paper>
-              {courseData ? (
-                <Box key={courseData.subject_code}>
-                  <CourseSlider subject={courseData.subject_code} />
-                </Box>
-              ) : (
-                <Skeleton variant="rounded" width={300} height={150} />
-              )}
-            </Box>
-          </Box>
+            </Typography> 
+          </>
+           : null}
+          {isMobile ?  
+              courseData ? (<MobileClassPageHero courseData={courseData} graphData={graphData} googleUser={googleUser}/>) : null :
+              courseData ? 
+              (<DesktopClassPageHero courseData={courseData} graphData={graphData} googleUser={googleUser} reviews={reviews} theme={theme} />) : null
+          }
         </Box>
         <Box
           sx={{
@@ -245,8 +346,8 @@ function ClassPage() {
           </Divider>
           <Divider orientation="horizontal" sx={{ flex: 1 }} />
         </Box>
-        {reviews.length > 0 ? (
-          <Box className="review-column">
+        {courseData && reviews.length > 0 ? (
+          <Box key={courseData.subject_code+courseData.course_number} className="review-column">
             <Box sx={{alignSelf:'flex-end'}}>
               <SortButton
                 reviews={reviews}
@@ -264,6 +365,7 @@ function ClassPage() {
             sx={{marginBottom: 'auto', textAlign:'center', whiteSpace:'normal', marginTop: 'auto', textWrap: 'balance'}}
             variant="h2"
             color="background.contrastText"
+            fontSize={isMobile ? 40 : 50}
           >
             No Reviews Yet
           </Typography>

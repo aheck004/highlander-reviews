@@ -6,10 +6,6 @@
     align-items: center;
   }
 
-.subject-center {
-  display: flex;
-}
-
 .subject {
     width: 450px;
     min-width: 300px;

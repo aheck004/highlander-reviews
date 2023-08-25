@@ -64,14 +64,13 @@ function SubjectPage() {
       >
         <PrimarySearchAppBar title={subjectCode} />
         <Box
-          className="subject-center"
           sx={{
             display: "flex",
             gap: "20px",
             flexWrap: "wrap",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: isMobile ? "flex-start": "center",
             margin: "10px",
           }}
         >
@@ -79,7 +78,7 @@ function SubjectPage() {
             variant="h2"
             align="center"
             color="text.main"
-            sx={{ marginTop: "20px" }}
+            sx={{marginTop: "20px", margin: "auto"}}
             fontSize={isMobile ? 40 : 50}
           >
             {similarCourseCount} {subjectCode} courses at {isMobile ? "UCR" : "University of California, Riverside"}
@@ -92,7 +91,7 @@ function SubjectPage() {
                 Search for other courses  
             </Typography>
             <SearchBar width={isMobile ? 300 : 500} height={50} />
-          </Box>
+        </Box>
           <Box
           sx={{
             display: "flex",

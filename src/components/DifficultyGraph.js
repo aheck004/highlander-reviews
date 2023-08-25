@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
-function DifficultyGraph({ review_data }) {
+function DifficultyGraph({ review_data, height=300 }) {
   const theme = themes[useTheme().theme];
 
   return (
@@ -14,7 +14,7 @@ function DifficultyGraph({ review_data }) {
         xAxis={[{ scaleType: "band", data: ["5", "4", "3", "2", "1"] }]}
         series={[{ data: review_data }]}
         width={350}
-        height={300}
+        height={height}
       />
     </ThemeProvider>
   );

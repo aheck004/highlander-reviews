@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Paper, Box, ButtonBase, Typography } from "@mui/material";
+import { Paper, Box, ButtonBase, Typography, Link } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
@@ -63,9 +63,9 @@ function CourseSlider({ subject }) {
           bgcolor: theme.palette.secondary.main,
         }}
       >
-        <Typography variant="h5" color="text.main">
+        <Link href={`#/Course/${subject}`} variant="h5" color="text.main">
           Similar Courses
-        </Typography>
+        </Link>
         <Box
           width={350}
           height={80}
