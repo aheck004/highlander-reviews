@@ -11,7 +11,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
-function SortButton({ reviews, setReviews }) {
+function SortButton({ setSort }) {
   const theme = themes[useTheme().theme];
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,36 +25,19 @@ function SortButton({ reviews, setReviews }) {
 
   const sortReviews = (sortType) => {
     if (sortType === "leastrecent") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-      });
-      setReviews(sortedReviews);
+      setSort({ date: 1 })
     } else if (sortType === "mostrecent") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      })
-      setReviews(sortedReviews);
+      setSort({ date: -1 }); 
     } else if (sortType === "highestdifficulty") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return b.difficulty - a.difficulty;
-      });
-      setReviews(sortedReviews);
+      setSort({ difficulty: -1 }); 
     } else if (sortType === "lowestdifficulty") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return a.difficulty - b.difficulty;
-      });
-      setReviews(sortedReviews);
+      setSort({ difficulty: 1 }); 
     } else if (sortType === "mosthelpful") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return b.like - b.dislike - (a.like - a.dislike);
-      });
-      setReviews(sortedReviews);
+      setSort({ like: -1 });
     } else if (sortType === "leasthelpful") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return b.dislike - b.like - (a.dislike - a.like);
-      });
-      setReviews(sortedReviews);
+      setSort({ dislike: -1 });
     }
+    console.log(sortType);
     handleClose();
   };
 
@@ -102,7 +85,7 @@ function SortButton({ reviews, setReviews }) {
           >
             <TodayIcon color="text"/>
             <Typography color="secondary.contrastText">
-              Most Recent
+              Newest
             </Typography>
           </MenuItem>
           <MenuItem
@@ -112,7 +95,7 @@ function SortButton({ reviews, setReviews }) {
           >
             <TodayIcon color="text"/>
             <Typography color="secondary.contrastText">
-              Least Recent
+              Oldest
             </Typography>
           </MenuItem>
           <MenuItem

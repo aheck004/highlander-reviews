@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { createTheme, useTheme, ThemeProvider } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { BarChart } from '@mui/x-charts/BarChart'
 import { themes } from './themes.js';
-import Cookie from 'js-cookie';
 
 import {
   blueberryTwilightPalette,

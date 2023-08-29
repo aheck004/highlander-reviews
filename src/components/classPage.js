@@ -28,6 +28,7 @@ import { themes } from "./themes";
 import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
 import { useTheme } from "./ThemeContext";
+import qs from "qs";
 
 const REVIEW_LIMIT = 10;
 //TODO: Change to add transition group
@@ -225,6 +226,7 @@ function ClassPage() {
   const [googleUser, setGoogleUser] = React.useState(null);
   const theme = themes[useTheme().theme];
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+  const [sort, setSort] = useState();
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))
@@ -232,7 +234,7 @@ function ClassPage() {
   }, []);
 
   //useEffect to detect window resize
-  useEffect(() => {
+  useEffect(() => { 
     const handleResize = () => {
       setIsMobile(window.innerWidth < 700);
     };
@@ -241,12 +243,8 @@ function ClassPage() {
   }, []);
 
   useEffect(() => {
-    const query_params = new URLSearchParams({
-      skip: reviews.length,
-      limit: REVIEW_LIMIT,
-    });
     axios
-      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews-graph-data/${course}`)
       .then((response) => {
         setReviews(response.data); //updates useState reviews to redraw the DOM
         const data = [0, 0, 0, 0, 0];
@@ -263,14 +261,33 @@ function ClassPage() {
       });
   }, [subjectCode, courseNumber]);
 
+  useEffect(() => {
+    console.log(sort)
+    console.log(reviews.length)
+    const query_params = qs.stringify({
+      sort: sort,
+      skip: 0,
+      limit: reviews.length === 0 ? REVIEW_LIMIT : reviews.length,
+    })
+    axios
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
+      .then((response) => {
+        console.log(response.data)
+        setReviews(response.data);
+      });
+  }, [sort]);
+
   const loadMoreReviews = () => {
-    const query_params = new URLSearchParams({
+    const query_params = qs.stringify({
+      sort: sort,
       skip: reviews.length,
       limit: REVIEW_LIMIT,
-    });
-    axios.get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`).then((response) => {
-      setReviews([...reviews, ...response.data]);
-    });
+    })
+    axios
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
+      .then((response) => {
+        setReviews([...reviews, ...response.data]);
+      });
   };
 
   return (
@@ -350,8 +367,7 @@ function ClassPage() {
           <Box key={courseData.subject_code+courseData.course_number} className="review-column">
             <Box sx={{alignSelf:'flex-end'}}>
               <SortButton
-                reviews={reviews}
-                setReviews={setReviews}
+                setSort={setSort}
               />
             </Box>
             {reviews.map((review, _id) => {
