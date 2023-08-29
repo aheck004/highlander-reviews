@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import "./hompage.css";
 import { Box, Button, Typography } from "@mui/material";
@@ -11,10 +11,22 @@ import bannerLight from "../lightlogo1.svg";
 import bannerDark from "../darklogo1.svg";
 
 function HomePage() {
-  const isMobile = window.innerWidth < 700;
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700); 
 
   const theme = themes[useTheme().theme];
   const setTheme = useTheme().toggleTheme;
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 700) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

@@ -94,7 +94,7 @@ function SearchBar({ width, height }) {
         groupBy={(option) => option.subject_code + " - " + option.subject_description}
         autoComplete
         freeSolo
-        PopperComponent={PopperComponent} //Removes white gap
+        //PopperComponent={PopperComponent} //Removes white gap
         includeInputInList
         filterSelectedOptions
         value={value}

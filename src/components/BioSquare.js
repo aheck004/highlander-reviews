@@ -15,7 +15,7 @@ function BioSquare({ name, title, description, image, linkedin=null, twitter=nul
       <Box
         sx={{ width: 200, height: 200, borderRadius: "10px",
         border: `2px solid ${theme.palette.divider}`,
-        bgcolor: theme.palette.secondary,
+        bgcolor: "secondary.main",
         padding: "10px" }}
       >
         <Box display="flex" alignItems="flex-start"

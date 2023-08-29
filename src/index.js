@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import ClassPage from "./components/classPage";
 import HomePage from "./components/HomePage";
+import AboutPage from "./components/AboutPage";
 import subjectPage from "./components/subjectPage";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
@@ -30,6 +31,7 @@ root.render(
           path="/Course/:subjectCode/:courseNumber"
           element={<ClassPage />}
         />
+        <Route path="/About" element={<AboutPage />}/>
       </Routes>
     </HashRouter>
   </ThemeProvider>
