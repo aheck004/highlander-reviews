@@ -31,20 +31,15 @@ import banner from "../banner_small_on_blue.svg";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const { subjectCode, courseNumber } = useParams();
   const [URL, setURL] = useState(window.location.href);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const [googleUser, setGoogleUser] = useState(null);
 
   const theme = themes[useTheme().theme];
   const setTheme = useTheme().toggleTheme;
-  //console.log("The theme is: ", useTheme().theme);
-  //console.log("Set Theme", setTheme);
 
   useEffect(() => {
     if (Cookie.get("googleUser"))
@@ -65,25 +60,13 @@ export default function PrimarySearchAppBar() {
     };
   }, []);
 
-  const navigate = useNavigate();
-
-  const handleProfileMenuOpen = (event) => {
+  const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
+  }
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -93,7 +76,6 @@ export default function PrimarySearchAppBar() {
         horizontal: "right",
       }}
       id={menuId}
-      keepMounted
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
@@ -101,43 +83,15 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={
+        () => {
+          setGoogleUser(null);
+          handleMenuClose();
+          Cookie.remove("googleUser");
+      }}>Log Out</MenuItem> 
     </Menu>
   );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <Typography>Login</Typography>
-      </MenuItem>
-    </Menu>
-  );
-
+  
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ width: "100%" }}>
@@ -289,25 +243,35 @@ export default function PrimarySearchAppBar() {
                     sx={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
                     {!isMobile && (
-                      <Typography variant="h6" noWrap component="div">
-                        Welcome, {googleUser.given_name}!
+                      <Typography noWrap component="div">
+                        Logged in as {googleUser.name}
                       </Typography>
                     )}
-                    <Avatar src={googleUser.picture} />
+                    <IconButton
+                      size="medium"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      onClick={handleMenuOpen}>
+                    <Avatar sx={{ width: 30, height: 30 }} src={googleUser.picture} />
+                    </IconButton>
                   </Box>
                 ) : (
                   <IconButton
-                    size="large"
+                    size="medium"
                     edge="end"
                     aria-label="account of current user"
                     aria-controls={menuId}
                     aria-haspopup="true"
                     href={getGoogleOAuthURL(URL)}
                     color="inherit"
+                    
                   >
-                    <AccountCircle />
+                    <AccountCircle /> 
                   </IconButton>
                 )}
+                {renderMenu}
               </Box>
             )}
           </Toolbar>

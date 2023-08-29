@@ -174,6 +174,14 @@ function SearchBar({ width, height }) {
             </li>
           );
         }}
+        ListboxProps={
+          {
+            style: {
+              backgroundColor: theme.palette.secondary.main,
+              color: theme.palette.secondary.contrastText,
+            }
+          }
+        }
         renderOption={(props, option) => {
           const matches = match(option.class_name + " " + option.course_title, inputValue, {
             insideWords: true,

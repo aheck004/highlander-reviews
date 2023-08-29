@@ -77,7 +77,7 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
         <AccordionDetails sx={{display:"flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
           <Typography>data sourced from {courseData.number_of_reviews} reviews</Typography>  
           <Box sx={{marginTop:"-80px"}}>
-            <DifficultyGraph review_data={graphData} />
+            <DifficultyGraph key={theme.palette.name.main} theme_mode={theme.palette.name.main} review_data={graphData} />
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -188,7 +188,7 @@ function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
                 flexDirection: "column-reverse",
               }}
             >
-                  <DifficultyGraph review_data={graphData} />
+                  <DifficultyGraph key={theme.palette.name.main} theme_mode={theme.palette.name.main} review_data={graphData} />
                   <Box
                     sx={{
                       position: "absolute",

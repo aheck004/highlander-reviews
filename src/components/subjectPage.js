@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 import SearchBar from "./SearchBar";
+import SubjectSearchBar from "./SubjectSearchBar";
 import Subject from "./subject.js"
 import {
   Box,
@@ -78,19 +79,30 @@ function SubjectPage() {
             variant="h2"
             align="center"
             color="text.main"
-            sx={{marginTop: "20px", margin: "auto"}}
+            sx={{  marginTop: "20px", margin: "auto"}}
             fontSize={isMobile ? 40 : 50}
           >
             {similarCourseCount} {subjectCode} courses at {isMobile ? "UCR" : "University of California, Riverside"}
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
-            <Typography
+          <Box sx={{flex:"1", display: "flex", alignItems: "center", justifyContent: "center",}}>
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
+              <Typography
+                  color = "text.main"
+                  sx={{ marginRight: "10px" }}
+              >
+                  Search for other courses  
+              </Typography>
+              <SearchBar width={isMobile ? 300 : 500} height={50} />
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
+              <Typography
                 color = "text.main"
-                sx={{ marginRight: "10px" }}
-            >
-                Search for other courses  
-            </Typography>
-            <SearchBar width={isMobile ? 300 : 500} height={50} />
+                sx={{ marginLeft: "10px" }}
+              >
+                or search for other subjects
+              </Typography>
+              <SubjectSearchBar width={isMobile ? 300 : 500} height={50} />
+            </Box>
+          </Box>
         </Box>
           <Box
           sx={{
@@ -103,7 +115,7 @@ function SubjectPage() {
         >
         </Box>
         </Box>
-      <Divider orientation="horizontal" sx={{ flex: 1, width:"80%"}}>
+      <Divider orientation="horizontal" sx={{ width:"80%"}}>
         <Chip color="accent"
           label={similarCourseCount}
           sx={{ color: `${theme.palette.accent.contrastText}` }}
