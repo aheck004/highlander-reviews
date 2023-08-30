@@ -17,7 +17,7 @@ import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
 function convertToMMDDYYYY(isoDate) {
-  const dateParts = isoDate.split("-");
+  const dateParts = isoDate.split("/");
   const MMDDYYYY = dateParts[1] + "/" + dateParts[2].split("T")[0] + "/" + dateParts[0];
   return MMDDYYYY;
 }
