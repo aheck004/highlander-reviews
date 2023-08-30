@@ -4,19 +4,25 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { themes } from './themes';
+import { Typography } from '@mui/material';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
 
-export default function ComboBox() {
+
+export default function SubjectSearchBar({width, height}) {
   const [value, setValue] = React.useState(null);
   const theme = themes[useTheme().theme];
 
   return (
     <Autocomplete
+      sx={{ width: width, height: height }}
       disablePortal
       id="combo-box-demo"
       options={subjectList}
+      freeSolo
       getOptionLabel={(option) => option.subject_description}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Subject" />}
       onChange={(event, newValue) => {
           if (newValue) {
             setValue(newValue.subject_code);
@@ -29,19 +35,72 @@ export default function ComboBox() {
             color: theme.palette.secondary.contrastText,
           }}
       }
-      renderOption={(props, option, state, ownerState) => (
-            <Box
+      renderInput={(params) => {
+          const { InputLabelProps, InputProps, ...rest } = params;
+          return (
+            <Paper
               sx={{
-                backgroundColor: theme.palette.secondary.main,
-                color: theme.palette.secondary.contrastText,
+                width: width,
+                height: height ,
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                borderBottomRightRadius: "20px",
+                borderBottomLeftRadius: "20px",
+                borderTopRightRadius: "20px",
+                borderTopLeftRadius: "20px",
+                color: 'text.main',
+                bgcolor: 'background.main',
+                border: `1px solid ${theme.palette.text.main}`,
+                '&:hover': {
+                  bgcolor: 'secondary.main', // Background color on hover
+                  border: '0',
+                  margin: '1px',
+                  boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.3)'
+                },
               }}
-              component="li"
-              {...props}
             >
-              {ownerState.getOptionLabel(option)}
-            </Box>
-          )
-      }
+              <InputBase
+                {...params.InputProps}
+                {...rest}
+                sx={{
+                  paddingLeft: "20px",
+                  color: 'text.main',
+                }}
+                placeholder="Search for Subject"
+                endAdornment={
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "10px",
+                      transform: "translateY(-50%)",
+                    }}
+                  >
+                    <SearchIcon sx={{ color: 'text.main'}}/>
+                  </div>
+                }
+              />
+            </Paper>
+          );
+        }}
+
+      renderOption={(props, option) => {
+          return (
+            <li {...props} key={option.class_name}>
+              <Grid container alignItems="center">
+                <Grid
+                  item
+                  sx={{ width: "calc(100% - 44px)", wordWrap: "break-word" }}
+                >
+                  <Typography>
+                    {option.subject_description}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </li>
+          );
+        }}
     />
   );
 }

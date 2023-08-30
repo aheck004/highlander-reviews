@@ -68,6 +68,7 @@ function SearchBar({ width, height }) {
   return (
     <ThemeProvider theme={theme}>
       <Autocomplete
+        sx={{ width: width, height: height }}
         id="UCR_Class_Searchbar"
         getOptionLabel={(option) => typeof option === 'object' ?  option.subject_code : ''}
         isOptionEqualToValue={(option, value) =>

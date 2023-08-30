@@ -73,7 +73,7 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
           sx={{display:"flex"}}
         >
           <Typography sx={{ color: 'secondary.contrastText', width: '40%', flexShrink: 0 }}>Average Difficulty</Typography>
-          <Typography sx={{ color: 'secondary.contrastText', justifySelf:'flex-end' }}>
+          <Typography sx={{ color: 'secondary.contrastText' }}>
             {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
           </Typography>
         </AccordionSummary>

@@ -8,7 +8,7 @@ import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 import SearchBar from "./SearchBar";
 import SubjectSearchBar from "./SubjectSearchBar";
-import Subject from "./subject.js"
+import Subject from "./subject.js";
 import {
   Box,
   Paper,
@@ -24,7 +24,7 @@ function SubjectPage() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700); // [1
   const [similarCourseCount, setSimilarCourseCount] = useState([]);
   const { subjectCode } = useParams();
-  
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 700) {
@@ -36,7 +36,7 @@ function SubjectPage() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   useEffect(() => {
     axios
       .get(
@@ -71,7 +71,7 @@ function SubjectPage() {
             flexWrap: "wrap",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: isMobile ? "flex-start": "center",
+            alignItems: isMobile ? "flex-start" : "center",
             margin: "10px",
           }}
         >
@@ -79,49 +79,65 @@ function SubjectPage() {
             variant="h2"
             align="center"
             color="text.main"
-            sx={{  marginTop: "20px", margin: "auto"}}
+            sx={{ marginTop: "20px", margin: "auto" }}
             fontSize={isMobile ? 40 : 50}
           >
-            {similarCourseCount} {subjectCode} courses at {isMobile ? "UCR" : "University of California, Riverside"}
+            {similarCourseCount} {subjectCode} courses at{" "}
+            {isMobile ? "UCR" : "University of California, Riverside"}
           </Typography>
-          <Box sx={{flex:"1", display: "flex", alignItems: "center", justifyContent: "center",}}>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
-              <Typography
-                  color = "text.main"
-                  sx={{ marginRight: "10px" }}
-              >
-                  Search for other courses  
+          <Box
+            sx={{
+              flex: "1",
+              flexDirection: "column",
+              gap: "20px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              sx={{  
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <Typography color="text.main" sx={{ marginRight: "10px" }}>
+                Search for other courses
               </Typography>
               <SearchBar width={isMobile ? 300 : 500} height={50} />
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
-              <Typography
-                color = "text.main"
-                sx={{ marginLeft: "10px" }}
-              >
-                or search for other subjects
-              </Typography>
-              <SubjectSearchBar width={isMobile ? 300 : 500} height={50} />
             </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <Typography color="text.main" sx={{ marginRight: "10px" }}>
+                  Search for other subjects
+                </Typography>
+                <SubjectSearchBar width={isMobile ? 300 : 500} height={50} />
+              </Box>
           </Box>
         </Box>
-          <Box
+        <Divider orientation="horizontal" sx={{ width: "80%" }}>
+          <Chip
+            color="accent"
+            label={similarCourseCount}
+            sx={{ color: `${theme.palette.accent.contrastText}` }}
+          />
+        </Divider>
+        <Box
           sx={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "center",
-            alignItems: "center",
             width: "100%",
-            margin: "10px",
           }}
         >
-        </Box>
-        </Box>
-      <Divider orientation="horizontal" sx={{ width:"80%"}}>
-        <Chip color="accent"
-          label={similarCourseCount}
-          sx={{ color: `${theme.palette.accent.contrastText}` }}
-        />
-      </Divider>
-        <Box sx={{display: "flex", flexWrap: "wrap", justifyContent:"center", width: "100%" }}>
           <Subject subject={subjectCode} />
         </Box>
       </Box>
