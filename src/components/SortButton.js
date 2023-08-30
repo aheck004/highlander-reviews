@@ -10,8 +10,10 @@ import { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
+import axios from "axios";
+import qs from "qs";
 
-function SortButton({ setSort }) {
+function SortButton({ course, limit, setReviews, setSort }) {
   const theme = themes[useTheme().theme];
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,20 +26,31 @@ function SortButton({ setSort }) {
   };
 
   const sortReviews = (sortType) => {
+    const sort = {}
     if (sortType === "leastrecent") {
-      setSort({ date: 1 })
+      sort.date = 1;
     } else if (sortType === "mostrecent") {
-      setSort({ date: -1 }); 
+      sort.date = -1;
     } else if (sortType === "highestdifficulty") {
-      setSort({ difficulty: -1 }); 
+      sort.difficulty = -1;
     } else if (sortType === "lowestdifficulty") {
-      setSort({ difficulty: 1 }); 
+      sort.difficulty = 1;
     } else if (sortType === "mosthelpful") {
-      setSort({ like: -1 });
+      sort.like = -1;
     } else if (sortType === "leasthelpful") {
-      setSort({ dislike: -1 });
+      sort.dislike = -1;
     }
-    console.log(sortType);
+    const query_params = qs.stringify({
+      sort: sort,
+      skip: 0,
+      limit: limit,
+    })
+    axios
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
+      .then((response) => {
+        setReviews(response.data);
+      });
+    setSort(sort);
     handleClose();
   };
 

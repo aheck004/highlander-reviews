@@ -164,7 +164,7 @@ function SearchBar({ width, height }) {
         }}
         renderGroup={(params) => {
           return (
-            <li> 
+            <li key={params.group}> 
               <GroupHeader
                 onClick={() => {
                   navigate(`/Course/${params.group.split(" - ")[0]}`);

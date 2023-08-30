@@ -16,6 +16,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
+function convertToMMDDYYYY(isoDate) {
+  const dateParts = isoDate.split("-");
+  const MMDDYYYY = dateParts[1] + "/" + dateParts[2].split("T")[0] + "/" + dateParts[0];
+  return MMDDYYYY;
+}
+
 function Review({ count, review }) {
   const [liked, setLiked] = useState(null);
 
@@ -71,7 +77,7 @@ function Review({ count, review }) {
               }
             )}
           </div>
-          <div className="review-date"> <Typography color="secondary.contrastText">{review.date}</Typography></div>
+          <div className="review-date"> <Typography color="secondary.contrastText">{convertToMMDDYYYY(review.date)}</Typography></div>
         </span>
         <Divider />
         <div className="review-comment"><Typography color="secondary.contrastText">{review.additional_comments}</Typography></div>

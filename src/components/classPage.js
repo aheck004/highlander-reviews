@@ -226,7 +226,7 @@ function ClassPage() {
   const [googleUser, setGoogleUser] = React.useState(null);
   const theme = themes[useTheme().theme];
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
-  const [sort, setSort] = useState();
+  const [sort, setSort] = useState({date: -1});
 
   React.useEffect(() => {
     if (Cookie.get("googleUser"))
@@ -243,10 +243,10 @@ function ClassPage() {
   }, []);
 
   useEffect(() => {
+    setReviews([]);
     axios
       .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews-graph-data/${course}`)
       .then((response) => {
-        setReviews(response.data); //updates useState reviews to redraw the DOM
         const data = [0, 0, 0, 0, 0];
         response.data.map((review) => {
           data[Math.ceil(review.difficulty / 2) - 1]++;
@@ -254,28 +254,22 @@ function ClassPage() {
         setGraphData(data.reverse());
       })
       .catch((error) => console.error(error));
+    const query_params = qs.stringify({
+      sort: sort,
+      skip: 0,
+      limit: REVIEW_LIMIT,
+    })
+    axios
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
+      .then((response) => {
+        setReviews(response.data);
+      });
     axios
       .get(process.env.REACT_APP_NODE_SERVER + `/get-course/${course}`)
       .then((response) => {
         setCourseData(response.data[0]);
       });
   }, [subjectCode, courseNumber]);
-
-  useEffect(() => {
-    console.log(sort)
-    console.log(reviews.length)
-    const query_params = qs.stringify({
-      sort: sort,
-      skip: 0,
-      limit: reviews.length === 0 ? REVIEW_LIMIT : reviews.length,
-    })
-    axios
-      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
-      .then((response) => {
-        console.log(response.data)
-        setReviews(response.data);
-      });
-  }, [sort]);
 
   const loadMoreReviews = () => {
     const query_params = qs.stringify({
@@ -367,6 +361,9 @@ function ClassPage() {
           <Box key={courseData.subject_code+courseData.course_number} className="review-column">
             <Box sx={{alignSelf:'flex-end'}}>
               <SortButton
+                course={course}
+                limit={reviews.length}
+                setReviews={setReviews}
                 setSort={setSort}
               />
             </Box>
