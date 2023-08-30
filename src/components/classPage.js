@@ -42,19 +42,20 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
   };
 
   return (
-    <Box style={{width:"95vw"}}>
+    <Box sx={{display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', width:"95vw", gap:5}}>
+      <Box>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={{
         backgroundColor: theme.palette.secondary.main,
       }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{color: "secondary.contrastText"}} />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
           <Typography sx={{ color: 'secondary.contrastText', width: '40%', flexShrink: 0 }}>
             Course Description
           </Typography>
-          <Typography sx={{color: 'text.secondary', textOverflow:"ellipsis"}}>{courseData.course_description.split('.')[0]}</Typography>
+          <Typography sx={{ color: 'secondary.contrastText', textOverflow:"ellipsis"}}>{courseData.course_description.split('.')[0]}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{color: 'secondary.contrastText'}}>
@@ -66,17 +67,20 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
         backgroundColor: theme.palette.secondary.main,
       }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{color: "secondary.contrastText"}}/>}
           aria-controls="panel2bh-content"
           id="panel2bh-header"
+          sx={{display:"flex"}}
         >
-          <Typography sx={{ width: '40%', flexShrink: 0 }}>Average Difficulty</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
+          <Typography sx={{ color: 'secondary.contrastText', width: '40%', flexShrink: 0 }}>Average Difficulty</Typography>
+          <Typography sx={{ color: 'secondary.contrastText', justifySelf:'flex-end' }}>
             {parseFloat(courseData.average_diff / 2).toFixed(2)}/5
           </Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{display:"flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
-          <Typography>data sourced from {courseData.number_of_reviews} reviews</Typography>  
+        <AccordionDetails sx={{display:"flex", overflow:'hidden', flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+          <Typography sx={{ color: 'secondary.contrastText'}}>
+            data sourced from {courseData.number_of_reviews} reviews
+          </Typography>  
           <Box sx={{marginTop:"-80px"}}>
             <DifficultyGraph key={theme.palette.name.main} theme_mode={theme.palette.name.main} review_data={graphData} />
           </Box>
@@ -86,24 +90,25 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
         backgroundColor: theme.palette.secondary.main,
       }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{color: "secondary.contrastText"}}/>}
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
-          <Typography sx={{ width: '40%', flexShrink: 0 }}>
+          <Typography sx={{ color: 'secondary.contrastText', width: '40%', flexShrink: 0 }}>
             Similar Courses
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
+          <Typography sx={{ color: 'secondary.contrastText' }}>
             
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography sx={{color:"secondary.constrastText"}}>
+          <Typography sx={{color:"secondary.contrastText"}}>
             All {courseData.subject_code} courses can be found {''}
             <Link href={`#/Course/${courseData.subject_code}`}>here</Link>
           </Typography>
         </AccordionDetails>
       </Accordion>
+      </Box>
       {googleUser && courseData ? (
               <CreateReviewModal
                 avg_diff={courseData.average_diff}
