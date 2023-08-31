@@ -137,9 +137,7 @@ export default function PrimarySearchAppBar() {
                 )}
               </ClickAwayListener>
             ) : (
-              <Box>
                 <SearchBar width={350} height={35} />
-              </Box>
             )}
             {!isSearchBarOpen && (
               <Breadcrumbs
