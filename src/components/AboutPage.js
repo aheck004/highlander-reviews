@@ -4,7 +4,7 @@ import { themes } from "./themes";
 import { ThemeProvider } from "@mui/material/styles";
 import "./AboutPage.css";
 import PrimarySearchAppBar from "./Header";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Link } from "@mui/material";
 import Footer from "./footer";
 import { FormatAlignJustify } from "@mui/icons-material";
 import BioSquare from "./BioSquare";
@@ -120,9 +120,9 @@ function AboutPage() {
               information. Our platform has been enriched by their comprehensive
               database, which has allowed us to provide an enhanced experience
               for students seeking course insights. Visit the{" "}
-              <a href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
+              <Link href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
                 UCR Course Difficulty Database
-              </a>
+              </Link>
             </Typography>
           </Box>
           <Box
@@ -181,9 +181,9 @@ function AboutPage() {
                   <GitHub color="accent" />
                 </IconButton>
                 Explore our codebase on&nbsp;
-                <a href="https://github.com/aheck004/highlander-reviews">
+                <Link href="https://github.com/aheck004/highlander-reviews">
                   GitHub
-                </a>
+                </Link>
               </div>
             </Typography>
             <Typography
@@ -199,9 +199,9 @@ function AboutPage() {
                   <Reddit color="accent" />
                 </IconButton>
                 Visit the&nbsp;
-                <a href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
+                <Link href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
                   Course Difficulty Database
-                </a>
+                </Link>
               </div>
             </Typography>
             <Typography
@@ -222,9 +222,9 @@ function AboutPage() {
                 <SpeakerNotes color="accent" />
               </IconButton>
               Want to share feedback? Let us know your thoughts&nbsp;
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link">
+              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link">
                 here
-              </a>
+              </Link>
             </Typography>
             <Typography sx={{ marginBottom: "75px" }} color="text.main">
               <IconButton
@@ -235,9 +235,9 @@ function AboutPage() {
                 <BugReport color="accent" />
               </IconButton>
               Found a bug? Send a report&nbsp;
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link">
+              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link">
                 here
-              </a>
+              </Link>
             </Typography>
           </Box>
         </Box>
