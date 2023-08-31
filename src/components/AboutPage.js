@@ -38,8 +38,8 @@ function AboutPage() {
             justifyContent: "center",
             alignItems: "center",
             gap: "50px", //Gap between page left/right
-            paddingLeft: "15vw",
-            paddingRight: "15vw",
+            paddingLeft: isMobile ? "2vw" : "15vw",
+            paddingRight: isMobile ? "2vw" : "15vw",
           }}
         >
           <Box
@@ -50,7 +50,7 @@ function AboutPage() {
             <Typography
               variant="h2"
               color="text.main"
-              sx={{ marginTop: "75px" }}
+              sx={{ marginTop: "5vw" }}
               fontSize={isMobile ? 40 : 50}
               fontWeight={"bold"}
             >
@@ -113,7 +113,7 @@ function AboutPage() {
             >
               Special Thanks
             </Typography>
-            <Typography color="text.main" sx={{ marginBottom: "75px" }}>
+            <Typography color="text.main" sx={{ marginBottom: isMobile ? "0vw" : "5vw" }}>
               Highlander Reviews extends its sincere gratitude to the creators
               of the UCR Course Difficulty Database for their dedicated effort
               in compiling and maintaining a wealth of valuable academic
@@ -134,7 +134,7 @@ function AboutPage() {
             <Typography
               variant="h2"
               color="text.main"
-              sx={{ marginTop: "75px" }}
+              sx={{ marginTop: isMobile ? "0vw" : "5vw", marginBottom: isMobile ? "10px" : "0px" }}
               fontSize={isMobile ? 35 : 40}
               fontWeight={"bold"}
             >
@@ -146,6 +146,8 @@ function AboutPage() {
                 width: "100%",
                 gap: "5%",
                 flexWrap: "wrap",
+                gap: isMobile ? "10px" : "5%",
+                justifyContent: isMobile ? "center" : "flex-start",
               }}
             >
               <BioSquare
@@ -168,7 +170,7 @@ function AboutPage() {
               />
             </Box>
             <Typography
-              variant="h5"
+              fontWeight={"bold"}
               color="text.main"
               sx={{ marginTop: "15px" }}
             >
@@ -176,7 +178,7 @@ function AboutPage() {
                 <IconButton
                   href={"https://github.com/aheck004/highlander-reviews"}
                 >
-                  <GitHub style={{ fontSize: 30 }} color="accent" />
+                  <GitHub color="accent" />
                 </IconButton>
                 Explore our codebase on&nbsp;
                 <a href="https://github.com/aheck004/highlander-reviews">
@@ -185,9 +187,8 @@ function AboutPage() {
               </div>
             </Typography>
             <Typography
-              variant="h5"
+              fontWeight={"bold"}
               color="text.main"
-              sx={{ marginTop: "15px" }}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
                 <IconButton
@@ -195,7 +196,7 @@ function AboutPage() {
                     "https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/"
                   }
                 >
-                  <Reddit style={{ fontSize: 30 }} color="accent" />
+                  <Reddit color="accent" />
                 </IconButton>
                 Visit the&nbsp;
                 <a href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
@@ -206,7 +207,7 @@ function AboutPage() {
             <Typography
               variant="h2"
               color="text.main"
-              sx={{ marginTop: "45px" }}
+              sx={{ marginTop: "10px" }}
               fontSize={isMobile ? 35 : 40}
               fontWeight={"bold"}
             >
