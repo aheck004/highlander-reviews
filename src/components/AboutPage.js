@@ -4,14 +4,14 @@ import { themes } from "./themes";
 import { ThemeProvider } from "@mui/material/styles";
 import "./AboutPage.css";
 import PrimarySearchAppBar from "./Header";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import Footer from "./footer";
 import { FormatAlignJustify } from "@mui/icons-material";
 import BioSquare from "./BioSquare";
-
+import { GitHub, Reddit, SpeakerNotes, BugReport } from "@mui/icons-material";
 
 function AboutPage() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 700); 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
   const theme = themes[useTheme().theme];
   const setTheme = useTheme().toggleTheme;
 
@@ -74,6 +74,56 @@ function AboutPage() {
             >
               Features:
             </Typography>
+            <Typography color="text.main" sx={{ marginTop: "5px" }}>
+              <span style={{ fontWeight: "bold" }}>
+                Streamlined Search Experience:
+              </span>{" "}
+              Our intuitive search interface lets you effortlessly explore the
+              UCR Course Difficulty database. Whether you're looking for
+              specific subjects or difficulty levels, our platform's advanced
+              filters ensure you find the information you need quickly.
+            </Typography>
+            <Typography color="text.main" sx={{ marginTop: "10px" }}>
+              <span style={{ fontWeight: "bold" }}>
+                Empowering Student Voices:
+              </span>{" "}
+              Our user-friendly review system simplifies the process of sharing
+              your thoughts. Just a few clicks, and your review is added to the
+              database, accessible to fellow students seeking guidance.
+              Similarly, reading reviews is hassle-free, ensuring you receive
+              firsthand accounts that aid in your decision-making. This
+              interactive approach transforms course exploration into a
+              collaborative endeavor, fostering a sense of unity and mutual
+              support among UCR students.
+            </Typography>
+            <Typography color="text.main" sx={{ marginTop: "10px" }}>
+              <span style={{ fontWeight: "bold" }}>User-Focused Design:</span>{" "}
+              Our platform is designed with you in mind. We've crafted an
+              intuitive and user-friendly interface that ensures a seamless
+              experience. Whether you're accessing Highlander Reviews from your
+              computer, tablet, or smartphone, you can effortlessly navigate and
+              access the information you seek.
+            </Typography>
+            <Typography
+              variant="h2"
+              color="text.main"
+              sx={{ marginTop: "10px" }}
+              fontSize={isMobile ? 35 : 40}
+              fontWeight={"bold"}
+            >
+              Special Thanks
+            </Typography>
+            <Typography color="text.main" sx={{ marginBottom: "75px" }}>
+              Highlander Reviews extends its sincere gratitude to the creators
+              of the UCR Course Difficulty Database for their dedicated effort
+              in compiling and maintaining a wealth of valuable academic
+              information. Our platform has been enriched by their comprehensive
+              database, which has allowed us to provide an enhanced experience
+              for students seeking course insights. Visit the{" "}
+              <a href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
+                UCR Course Difficulty Database
+              </a>
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -91,7 +141,12 @@ function AboutPage() {
               Developers
             </Typography>
             <Box
-              sx={{display:"flex", width:"100%", gap: "5%", flexWrap: "wrap"}}
+              sx={{
+                display: "flex",
+                width: "100%",
+                gap: "5%",
+                flexWrap: "wrap",
+              }}
             >
               <BioSquare
                 name="Juan Alvarez"
@@ -112,6 +167,77 @@ function AboutPage() {
                 flag="us"
               />
             </Box>
+            <Typography
+              variant="h5"
+              color="text.main"
+              sx={{ marginTop: "15px" }}
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <IconButton
+                  href={"https://github.com/aheck004/highlander-reviews"}
+                >
+                  <GitHub style={{ fontSize: 30 }} color="accent" />
+                </IconButton>
+                Explore our codebase on&nbsp;
+                <a href="https://github.com/aheck004/highlander-reviews">
+                  GitHub
+                </a>
+              </div>
+            </Typography>
+            <Typography
+              variant="h5"
+              color="text.main"
+              sx={{ marginTop: "15px" }}
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <IconButton
+                  href={
+                    "https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/"
+                  }
+                >
+                  <Reddit style={{ fontSize: 30 }} color="accent" />
+                </IconButton>
+                Visit the&nbsp;
+                <a href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
+                  Course Difficulty Database
+                </a>
+              </div>
+            </Typography>
+            <Typography
+              variant="h2"
+              color="text.main"
+              sx={{ marginTop: "45px" }}
+              fontSize={isMobile ? 35 : 40}
+              fontWeight={"bold"}
+            >
+              Feedback
+            </Typography>
+            <Typography color="text.main">
+              <IconButton
+                href={
+                  "https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"
+                }
+              >
+                <SpeakerNotes color="accent" />
+              </IconButton>
+              Want to share feedback? Let us know your thoughts&nbsp;
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link">
+                here
+              </a>
+            </Typography>
+            <Typography sx={{ marginBottom: "75px" }} color="text.main">
+              <IconButton
+                href={
+                  "https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"
+                }
+              >
+                <BugReport color="accent" />
+              </IconButton>
+              Found a bug? Send a report&nbsp;
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link">
+                here
+              </a>
+            </Typography>
           </Box>
         </Box>
       </Box>
