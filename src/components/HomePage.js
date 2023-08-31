@@ -78,7 +78,7 @@ function HomePage() {
           <RoutingButton
             header={"About"}
             body={"Learn more about our goal and how we started"}
-            to={"/about"}
+            to={"/About"}
           />
           <RoutingButton
             header={"Contact"}
