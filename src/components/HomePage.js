@@ -9,6 +9,8 @@ import Footer from "./footer";
 import { useTheme } from "./ThemeContext";
 import bannerLight from "../lightlogo1.svg";
 import bannerDark from "../darklogo1.svg";
+import RoutingButton from "./RoutingButton.js";
+
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700); 
@@ -39,7 +41,6 @@ function HomePage() {
             justifyContent: "flex-start",
             marginTop: isMobile ? "32%" : "7%",
             alignItems: "center",
-            flexGrow: 1,
           }}
         >
           <Box sx={{ marginBottom: "20px" }}>
@@ -70,9 +71,42 @@ function HomePage() {
               Find reviews for courses at University of California, Riverside
             </Typography>
           </Box>
-          <Box className="homepage-center">
             <SearchBar width={isMobile ? 350 : 500} height={50} />
-          </Box>
+        </Box>
+        <Box
+          sx={{
+            justifySelf: "flex-start",
+            display: "flex",
+            rowGap: "1vh",
+            columnGap: "1vh",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            width: isMobile ? "90vw" : "60vw",
+            marginTop: isMobile ? "3vh" : "5vh",
+            alignItems: "center",
+          }}
+        >
+          <RoutingButton
+            header={"About"}
+            body={"Learn more about our goal and how we started"}
+            to={"/About"}
+          />
+          <RoutingButton
+            header={"Contact"}
+            body={"Contact us for any questions or concerns"}
+            to={"/contact"}
+          />
+          <RoutingButton
+            header={"FAQ"}
+            body={"Find answers to frequently asked questions"}
+            to={"/faq"}
+          />
+          <RoutingButton
+            header={"Terms of Service"}
+            body={"Read our terms of service"}
+            to={"/tos"}
+          />
         </Box>
       </Box>
       <Footer />

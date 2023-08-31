@@ -1,3 +1,18 @@
+# Purpose: To scrape the UCR course catalog and store the data in a MongoDB database
+# This script relies on the requests library and the pymongo library
+# This script is meant to be run on a local machine, not on the server
+# This script is meant to be run once, when the database is first created
+# And only after the courses collection has been created
+# Instructions:
+# 1. Go to https://registrationssb.ucr.edu/StudentRegistrationSsb/ssb/classSearch/classSearch
+# 2. Click Browse Catalog & Select the term you want to scrape
+# 3. Click "Search" without entering any search criteria
+# 4. Copy the JSESSIONID and BIGipServerp_registrationssb_ucr_edu_8443 cookies from your browser
+# 5. Paste them into the JSESSIONID and BIGipServerp_registrationssb_ucr_edu_8443 variables below
+# 6. The uniqueSessionId variable (if important at all) can be found by inspecting the network requests
+# 6. Run this script
+
+
 import requests
 from pymongo import MongoClient, UpdateOne  # pip3 install pymongo
 import math
@@ -17,11 +32,13 @@ def fixCourseTitle(courseTitle):
         return word
     return re.sub(r'(?<=\s)\w+\b', capitalize_word, courseTitle)
 
-
 pageMaxSize = 500
-JSESSIONID="5BE2A6BE006821F6FB9092ADC67E1E43"
+JSESSIONID="CCB27D5666CF757651B7360C9DC20A42"
+BIGipServerp_registrationssb_ucr_edu_8443="2677280940.64288.0000"
+uniqueSessionId="zu5h61692772421598"
 
 url = 'https://registrationssb.ucr.edu/StudentRegistrationSsb/ssb/courseSearchResults/'
+
 course_search_results_header = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Sec-Fetch-Site': 'same-origin',

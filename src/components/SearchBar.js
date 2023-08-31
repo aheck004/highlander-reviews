@@ -84,6 +84,7 @@ function SearchBar({ width, height }) {
   return (
     <ThemeProvider theme={theme}>
       <Autocomplete
+        sx={{ width: width, height: height }}
         id="UCR_Class_Searchbar"
         getOptionLabel={(option) => typeof option === 'object' ?  option.subject_code : ''}
         isOptionEqualToValue={(option, value) =>
@@ -174,7 +175,7 @@ function SearchBar({ width, height }) {
         }}
         renderGroup={(params) => {
           return (
-            <li> 
+            <li key={params.group}> 
               <GroupHeader
                 onClick={() => {
                   navigate(`/Course/${params.group.split(" - ")[0]}`);
@@ -184,6 +185,14 @@ function SearchBar({ width, height }) {
             </li>
           );
         }}
+        ListboxProps={
+          {
+            style: {
+              backgroundColor: theme.palette.secondary.main,
+              color: theme.palette.secondary.contrastText,
+            }
+          }
+        }
         renderOption={(props, option) => {
           const matches = match(option.class_name + " " + option.course_title, inputValue, {
             insideWords: true,

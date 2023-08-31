@@ -10,8 +10,10 @@ import { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
+import axios from "axios";
+import qs from "qs";
 
-function SortButton({ reviews, setReviews }) {
+function SortButton({ course, limit, setReviews, setSort }) {
   const theme = themes[useTheme().theme];
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,37 +26,31 @@ function SortButton({ reviews, setReviews }) {
   };
 
   const sortReviews = (sortType) => {
+    const sort = {}
     if (sortType === "leastrecent") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-      });
-      setReviews(sortedReviews);
+      sort.date = 1;
     } else if (sortType === "mostrecent") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      })
-      setReviews(sortedReviews);
+      sort.date = -1;
     } else if (sortType === "highestdifficulty") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return b.difficulty - a.difficulty;
-      });
-      setReviews(sortedReviews);
+      sort.difficulty = -1;
     } else if (sortType === "lowestdifficulty") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return a.difficulty - b.difficulty;
-      });
-      setReviews(sortedReviews);
+      sort.difficulty = 1;
     } else if (sortType === "mosthelpful") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return b.like - b.dislike - (a.like - a.dislike);
-      });
-      setReviews(sortedReviews);
+      sort.like = -1;
     } else if (sortType === "leasthelpful") {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        return b.dislike - b.like - (a.dislike - a.like);
-      });
-      setReviews(sortedReviews);
+      sort.dislike = -1;
     }
+    const query_params = qs.stringify({
+      sort: sort,
+      skip: 0,
+      limit: limit,
+    })
+    axios
+      .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
+      .then((response) => {
+        setReviews(response.data);
+      });
+    setSort(sort);
     handleClose();
   };
 
@@ -102,7 +98,7 @@ function SortButton({ reviews, setReviews }) {
           >
             <TodayIcon color="text"/>
             <Typography color="secondary.contrastText">
-              Most Recent
+              Newest
             </Typography>
           </MenuItem>
           <MenuItem
@@ -112,7 +108,7 @@ function SortButton({ reviews, setReviews }) {
           >
             <TodayIcon color="text"/>
             <Typography color="secondary.contrastText">
-              Least Recent
+              Oldest
             </Typography>
           </MenuItem>
           <MenuItem

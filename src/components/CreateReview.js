@@ -21,7 +21,7 @@ import { useTheme } from "./ThemeContext";
 import Cookie from "js-cookie";
 import { Snackbar, Alert } from "@mui/material";
 
-export default function CreateReviewModal({ total_reviews, avg_diff }) {
+export default function CreateReviewModal({ avg_diff }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -110,8 +110,7 @@ export default function CreateReviewModal({ total_reviews, avg_diff }) {
         class_name: course,
         additional_comments: comment.user_review,
         difficulty: rating * 2, //Align with database
-        date: date.format(currentDate, "M/D/YYYY"),
-        current_review_count: total_reviews,
+        date: date.format(currentDate, "YYYY/MM/DD"),
         current_review_avg: avg_diff,
         like: 0,
         dislike: 0,

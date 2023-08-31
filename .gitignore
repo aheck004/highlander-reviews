@@ -36,3 +36,4 @@ server/courses_data.json
 server/server_scripts/test.py
 server/services/*.json
 server/server_scripts/test.py
+playgound-2.mongodb.js
