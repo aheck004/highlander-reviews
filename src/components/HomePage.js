@@ -90,22 +90,22 @@ function HomePage() {
           <RoutingButton
             header={"About"}
             body={"Learn more about our goal and how we started"}
-            to={"/About"}
+            to={"#/About"}
           />
           <RoutingButton
-            header={"Contact"}
-            body={"Contact us for any questions or concerns"}
-            to={"/contact"}
+            header={"Feedback"}
+            body={"Let us know your thoughts or comments"}
+            to={"https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"}
           />
           <RoutingButton
-            header={"FAQ"}
-            body={"Find answers to frequently asked questions"}
-            to={"/faq"}
+            header={"Bug Report"}
+            body={"Found a bug or issue, let us know about it"}
+            to={"https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"}
           />
           <RoutingButton
-            header={"Terms of Service"}
-            body={"Read our terms of service"}
-            to={"/tos"}
+            header={"Course Difficulty Database"}
+            body={"View the UCR Course Difficulty Database"}
+            to={"https://docs.google.com/spreadsheets/d/1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0"}
           />
         </Box>
       </Box>

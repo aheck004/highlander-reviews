@@ -20,7 +20,7 @@ export default function RoutingButton(props) {
           flex: 1,
         }}
         onClick={() => {
-          navigate(props.to);
+          window.location.href = props.to;
         }}
         onMouseEnter={() => {
           setHover(true);
