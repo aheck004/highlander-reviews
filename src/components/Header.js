@@ -27,7 +27,8 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import SearchIcon from "@mui/icons-material/Search";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import banner from "../banner_small_on_blue.svg";
+import smallBannerLight from "../banner_small_light.svg";
+import smallBannerBlue from "../banner_small_on_blue.svg";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -66,7 +67,7 @@ export default function PrimarySearchAppBar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-  }
+  };
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -83,22 +84,39 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={
-        () => {
+      <MenuItem
+        onClick={() => {
           setGoogleUser(null);
           handleMenuClose();
           Cookie.remove("googleUser");
-      }}>Log Out</MenuItem> 
+        }}
+      >
+        Log Out
+      </MenuItem>
     </Menu>
   );
-  
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ width: "100%" }}>
         <AppBar position="static">
           <Toolbar>
             <a href="/">
-              <img style= {{width: "auto", height: '30px', marginRight: "10px", display: isSearchBarOpen ? "none" : "flex"}}src={banner} className="App-logo" alt="logo"/>
+              <img
+                style={{
+                  width: "auto",
+                  height: "30px",
+                  marginRight: "10px",
+                  display: isSearchBarOpen ? "none" : "flex",
+                }}
+                src={
+                  theme.palette.name.main === "light"
+                    ? smallBannerLight
+                    : smallBannerBlue
+                }
+                className="App-logo"
+                alt="logo"
+              />
             </a>
             {isMobile ? (
               <ClickAwayListener
@@ -137,7 +155,7 @@ export default function PrimarySearchAppBar() {
                 )}
               </ClickAwayListener>
             ) : (
-                <SearchBar width={350} height={35} />
+              <SearchBar width={350} height={35} />
             )}
             {!isSearchBarOpen && (
               <Breadcrumbs
@@ -148,7 +166,9 @@ export default function PrimarySearchAppBar() {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                separator={<ArrowRightIcon sx={{ color:"primary.contrastText" }} />}
+                separator={
+                  <ArrowRightIcon sx={{ color: "primary.contrastText" }} />
+                }
                 maxItems={3}
                 aria-label="breadcrumb"
               >
@@ -158,7 +178,7 @@ export default function PrimarySearchAppBar() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    color: "primary.contrastText"
+                    color: "primary.contrastText",
                   }}
                   underline="hover"
                   color="inherit"
@@ -167,7 +187,7 @@ export default function PrimarySearchAppBar() {
                   {!isMobile && (
                     <HomeIcon
                       color="background"
-                      sx={{ marginRight: "5px", color: "primary.contrastText"}}
+                      sx={{ marginRight: "5px", color: "primary.contrastText" }}
                       fontSize="small"
                     />
                   )}
@@ -180,7 +200,7 @@ export default function PrimarySearchAppBar() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      color: "primary.contrastText"
+                      color: "primary.contrastText",
                     }}
                     underline="hover"
                     color="primary.contrastText"
@@ -205,7 +225,7 @@ export default function PrimarySearchAppBar() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      color: "primary.contrastText"
+                      color: "primary.contrastText",
                     }}
                     underline="hover"
                     color="inherit"
@@ -234,7 +254,11 @@ export default function PrimarySearchAppBar() {
                     setTheme(); // Call setTheme function
                   }}
                 >
-                  {theme.palette.name.main === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                  {theme.palette.name.main === "dark" ? (
+                    <Brightness7Icon />
+                  ) : (
+                    <Brightness4Icon />
+                  )}
                 </IconButton>
                 {googleUser ? (
                   <Box
@@ -251,8 +275,12 @@ export default function PrimarySearchAppBar() {
                       aria-label="account of current user"
                       aria-controls={menuId}
                       aria-haspopup="true"
-                      onClick={handleMenuOpen}>
-                    <Avatar sx={{ width: 30, height: 30 }} src={googleUser.picture} />
+                      onClick={handleMenuOpen}
+                    >
+                      <Avatar
+                        sx={{ width: 30, height: 30 }}
+                        src={googleUser.picture}
+                      />
                     </IconButton>
                   </Box>
                 ) : (
@@ -264,9 +292,8 @@ export default function PrimarySearchAppBar() {
                     aria-haspopup="true"
                     href={getGoogleOAuthURL(URL)}
                     color="inherit"
-                    
                   >
-                    <AccountCircle /> 
+                    <AccountCircle />
                   </IconButton>
                 )}
                 {renderMenu}
