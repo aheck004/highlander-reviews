@@ -1,12 +1,30 @@
-import React, { useState } from "react";
-import { ThemeProvider } from "@mui/system"
-import { Box, Typography, Paper, Divider } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { ThemeProvider } from "@mui/system";
+import { Box, Typography, Paper, Divider, Link } from "@mui/material";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
-import BioSquare from "./BioSquare.js";
+import bannerLight from "../lightlogo1.svg";
+import bannerDark from "../darklogo1.svg";
+import bannerBlue from "../onbluelogo1.svg";
+import smallBannerLight from "../banner_small_light.svg";
+import smallBannerDark from "../banner_small_dark.svg";
+import smallBannerBlue from "../banner_small_on_blue.svg";
 
 function Footer() {
   const theme = themes[useTheme().theme];
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 700) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -91,7 +109,7 @@ function Footer() {
         </Box>
       </Box>
     </ThemeProvider>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
