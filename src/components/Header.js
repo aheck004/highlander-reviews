@@ -17,7 +17,7 @@ import { useTheme } from "./ThemeContext";
 import getGoogleOAuthURL from "../getGoogleURL";
 import Cookie from "js-cookie";
 import { Avatar, Grow } from "@mui/material";
-import { Breadcrumbs, Link } from "@mui/material";
+import { Breadcrumbs, Link , Tooltip} from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ListIcon from "@mui/icons-material/List";
@@ -248,18 +248,20 @@ export default function PrimarySearchAppBar() {
             <Box sx={{ flexGrow: 1 }} />
             {!isSearchBarOpen && (
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <IconButton
-                  sx={{ color: "primary.contrastText" }}
-                  onClick={() => {
-                    setTheme(); // Call setTheme function
-                  }}
-                >
-                  {theme.palette.name.main === "dark" ? (
-                    <Brightness7Icon />
-                  ) : (
-                    <Brightness4Icon />
-                  )}
-                </IconButton>
+                <Tooltip title="Toggle Theme">
+                  <IconButton
+                    sx={{ color: "primary.contrastText" }}
+                    onClick={() => {
+                      setTheme(); // Call setTheme function
+                    }}
+                  >
+                    {theme.palette.name.main === "dark" ? (
+                      <Brightness7Icon />
+                    ) : (
+                      <Brightness4Icon />
+                    )}
+                  </IconButton>
+                </Tooltip>
                 {googleUser ? (
                   <Box
                     sx={{ display: "flex", alignItems: "center", gap: "10px" }}
@@ -284,17 +286,19 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                   </Box>
                 ) : (
+                  <Tooltip title="Sign In">
                   <IconButton
-                    size="medium"
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-controls={menuId}
-                    aria-haspopup="true"
-                    href={getGoogleOAuthURL(URL)}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
+                      size="medium"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      href={getGoogleOAuthURL(URL)}
+                      color="inherit"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  </Tooltip>
                 )}
                 {renderMenu}
               </Box>
