@@ -87,7 +87,7 @@ export default function PrimarySearchAppBar() {
         () => {
           setGoogleUser(null);
           handleMenuClose();
-          Cookie.remove("googleUser");
+          Cookie.remove("googleUser", { domain: `.${window.location.hostname}` });
       }}>Log Out</MenuItem> 
     </Menu>
   );

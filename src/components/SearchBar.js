@@ -16,24 +16,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
 
-//Removes white gap from searchbar menu
-const StyledAutocompletePopper = styled('div')(({ theme }) => ({
-  [`& .${autocompleteClasses.listbox}`]: {
-    padding: 0,
-    [`& .${autocompleteClasses.option}`]: {
-      padding: 8,
-    },
-  },
-}));
-
-function PopperComponent(props) {
-  const { disablePortal, anchorEl, open, ...other } = props;
-  return <StyledAutocompletePopper {...other} />;
-}
-
-//end Removes white gap from searchbar menu
-
 const GroupHeader = styled("div")(({ theme }) => ({
+  cursor: "pointer",
   position: "sticky",
   top: "0px",
   padding: "4px 10px",
@@ -52,7 +36,6 @@ function SearchBar({ width, height }) {
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const navigate = useNavigate();
-  const isMobile = window.innerWidth < 700;
 
   const theme = themes[useTheme().theme];
 
@@ -95,7 +78,6 @@ function SearchBar({ width, height }) {
         groupBy={(option) => option.subject_code + " - " + option.subject_description}
         autoComplete
         freeSolo
-        //PopperComponent={PopperComponent} //Removes white gap
         includeInputInList
         filterSelectedOptions
         value={value}

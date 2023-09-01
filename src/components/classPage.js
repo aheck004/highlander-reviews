@@ -78,9 +78,6 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{display:"flex", overflow:'hidden', flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
-          <Typography sx={{ color: 'secondary.contrastText'}}>
-            data sourced from {courseData.number_of_reviews} reviews
-          </Typography>  
           <Box sx={{marginTop:"-80px"}}>
             <DifficultyGraph key={theme.palette.name.main} theme_mode={theme.palette.name.main} review_data={graphData} />
           </Box>

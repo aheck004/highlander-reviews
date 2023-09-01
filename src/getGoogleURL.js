@@ -4,6 +4,7 @@ function getGoogleOAuthURL(URL) {
   const options = {
     redirect_uri: String(process.env.REACT_APP_GOOGLE_OATH_REDIRECT_URL),
     client_id: String(process.env.REACT_APP_GOOGLE_CLIENT_ID),
+    hosted_domain: "ucr.edu",
     access_type: "offline",
     response_type: "code",
     prompt: "consent",
