@@ -36,6 +36,9 @@ const REVIEW_LIMIT = 10;
 function MobileClassPageHero({courseData, graphData, googleUser}) {
   const [expanded, setExpanded] = useState(false);
   const theme = themes[useTheme().theme];
+  const courseRedirect = courseData.is_redirect ? courseData.is_redirect : "";
+  const matchCourseRedirect = courseRedirect.match(/([A-Za-z]+)(\d+[A-Za-z]*)/);
+
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -78,9 +81,6 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{display:"flex", overflow:'hidden', flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
-          <Typography sx={{ color: 'secondary.contrastText'}}>
-            data sourced from {courseData.number_of_reviews} reviews
-          </Typography>  
           <Box sx={{marginTop:"-80px"}}>
             <DifficultyGraph key={theme.palette.name.main} theme_mode={theme.palette.name.main} review_data={graphData} />
           </Box>
@@ -109,26 +109,45 @@ function MobileClassPageHero({courseData, graphData, googleUser}) {
         </AccordionDetails>
       </Accordion>
       </Box>
-      {googleUser && courseData ? (
-              <CreateReviewModal
-                avg_diff={courseData.average_diff}
-              />
-            ) : (
-              <Button
-                endIcon={<GoogleIcon />}
-                variant="contained"
-                color="primary"
-                href={getGoogleOAuthURL(window.location.href)}
-              >
-                Login to Review
-              </Button>
-            )}
+      {courseData.is_redirect ? (<>
+        <Typography
+          color="background.contrastText"
+        >
+          This course is cross-listed with {courseData.is_redirect}
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          href={`#/Course/${matchCourseRedirect[1]}/${matchCourseRedirect[2]}`}
+        >
+          Go to {courseData.is_redirect} instead
+        </Button>
+      </>
+      ) : (
+        (googleUser && courseData) ? (
+          <CreateReviewModal
+            avg_diff={courseData.average_diff}
+          />
+        ) : (
+          <Button
+            endIcon={<GoogleIcon />}
+            variant="contained"
+            color="primary"
+            href={getGoogleOAuthURL(window.location.href)}
+          >
+            Login to Review
+          </Button>
+        )
+      )}
     </Box>
   )
 }
 
 function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
   const theme = themes[useTheme().theme];
+  const courseRedirect = courseData.is_redirect ? courseData.is_redirect : "";
+  const matchCourseRedirect = courseRedirect.match(/([A-Za-z]+)(\d+[A-Za-z]*)/);
+  console.log(matchCourseRedirect);
 
   return (
   <Box>
@@ -167,9 +186,24 @@ function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
                   {courseData.course_description}
                 </Typography>
               </Box>
-            {googleUser && courseData ? (
+            {courseData.is_redirect ? (
+            <>
+            <Typography
+              color="background.contrastText"
+            >
+              This course is cross-listed with {courseData.is_redirect}
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              href={`#/Course/${matchCourseRedirect[1]}/${matchCourseRedirect[2]}`}
+            >
+              Go to {courseData.is_redirect} instead
+            </Button>
+            </>
+          ) : (
+            (googleUser && courseData) ? (
               <CreateReviewModal
-                total_reviews={reviews.length}
                 avg_diff={courseData.average_diff}
               />
             ) : (
@@ -181,8 +215,9 @@ function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
               >
                 Login to Review
               </Button>
-            )}
-          </Box>
+            )
+          )}
+            </Box>
           <Box className="course-hero-right">
             <Paper
               sx={{

@@ -18,6 +18,7 @@ export default function RoutingButton(props) {
       <ButtonBase
         sx={{
           flex: 1,
+          borderRadius: '10px',
         }}
         onClick={() => {
           window.location.href = props.to;
