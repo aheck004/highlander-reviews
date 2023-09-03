@@ -40,7 +40,9 @@ function CourseSlider({ subject }) {
   const theme = themes[useTheme().theme];
 
   useEffect(() => {
-    axios
+    axios.create({
+        withCredentials: true,
+      })
       .get(
         process.env.REACT_APP_NODE_SERVER +
           `/get-courses-from-subject-code/${subject}`

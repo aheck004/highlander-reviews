@@ -111,7 +111,6 @@ export default function CreateReviewModal({ avg_diff }) {
         additional_comments: comment.user_review,
         difficulty: rating * 2, //Align with database
         date: date.format(currentDate, "YYYY/MM/DD"),
-        current_review_avg: avg_diff,
         like: 0,
         dislike: 0,
       };
@@ -119,7 +118,8 @@ export default function CreateReviewModal({ avg_diff }) {
       async function submitReview(newReview) {
         //Request node server for classes named inputValye
         await axios
-          .post(process.env.REACT_APP_NODE_SERVER + `/submit-review`, newReview)
+          .create({ withCredentials: true })
+          .post(process.env.REACT_APP_NODE_SERVER + '/submit-review', newReview)
           .then((response) => {
             if (response.data === `You already reviewed ${course}`) {
               setStatus("warning");

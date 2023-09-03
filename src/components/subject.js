@@ -64,7 +64,9 @@ function Subject({ subject }) {
   }, []);
 
   useEffect(() => {
-    axios
+    axios.create({
+        withCredentials: true,
+      })
       .get(
         process.env.REACT_APP_NODE_SERVER +
           `/get-courses-from-subject-code/${subject}`

@@ -45,7 +45,9 @@ function SortButton({ course, limit, setReviews, setSort }) {
       skip: 0,
       limit: limit,
     })
-    axios
+    axios.create({
+        withCredentials: true,
+      })
       .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
       .then((response) => {
         setReviews(response.data);

@@ -50,7 +50,9 @@ function Review({ count, review }) {
       type: type,
     };
 
-    axios
+    axios.create({
+        withCredentials: true,
+      })
       .post(process.env.REACT_APP_NODE_SERVER + `/liked`, data)
       .then((response) => {})
       .catch((error) => {});

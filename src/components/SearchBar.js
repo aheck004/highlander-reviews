@@ -44,7 +44,9 @@ function SearchBar({ width, height }) {
 
     async function getReviews() {
       //Request node server for classes named inputValye
-      await axios
+      await axios.create({
+        withCredentials: true,
+      })
         .get(process.env.REACT_APP_NODE_SERVER + `/query-course/${inputValue}`)
         .then((response) => {
           setOptions(response.data);

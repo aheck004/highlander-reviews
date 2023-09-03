@@ -38,7 +38,9 @@ function SubjectPage() {
   }, []);
 
   useEffect(() => {
-    axios
+    axios.create({
+        withCredentials: true,
+      })
       .get(
         process.env.REACT_APP_NODE_SERVER +
           `/get-course-count-from-subject-code/${subjectCode}`

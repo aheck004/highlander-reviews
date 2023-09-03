@@ -29,6 +29,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import smallBannerLight from "../banner_small_light.svg";
 import smallBannerBlue from "../banner_small_on_blue.svg";
+import axios from "axios";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -88,7 +89,14 @@ export default function PrimarySearchAppBar() {
         onClick={() => {
           setGoogleUser(null);
           handleMenuClose();
-          Cookie.remove("googleUser", { domain: `.${window.location.hostname}` });
+          axios
+            .create({ withCredentials: true })
+            .get(process.env.REACT_APP_NODE_SERVER+"/logout").then((res) => {
+              Cookie.remove("googleUser", { domain: `.${window.location.hostname}` });
+            }
+          ).catch((err) => {
+            console.log(err);
+          });
       }}>Log Out</MenuItem> 
     </Menu>
   );
