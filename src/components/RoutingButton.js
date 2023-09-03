@@ -1,17 +1,11 @@
 import React from 'react';
 import { Box, ButtonBase } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { Paper } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import { themes } from './themes.js';
-import { useTheme } from '@mui/material/styles';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import Typography from '@mui/material/Typography';
 
 export default function RoutingButton(props) {
-  const theme = themes[useTheme().theme];
   const isMobile = window.innerWidth < 700;
-  const navigate = useNavigate();
   const [hover, setHover] = React.useState(false);
 
   return (
@@ -47,6 +41,10 @@ export default function RoutingButton(props) {
               minWidth: '100px',
               minHeight: '40px',
             },
+            '@media (max-height: 400px)': {
+              minWidth: '25vw',
+              minHeight: '20vw',
+            }
           }}
         >
         <Box sx={{
@@ -70,10 +68,9 @@ export default function RoutingButton(props) {
               position: 'absolute',
               top: 'calc(50% - 12px)',
               right: '10px',
-              transform: 'translateY(-50%)',
+              transform: 'rotate(90deg) translateY(-15%) scale(1.2)',
               color: 'accent.main',
               transition: 'visibility 0.5s ease-in-out, transform 0.5s ease-in-o',
-              transform: 'scale(1.2) rotate(90deg)',
               visibility: hover ? 'visible' : 'hidden',
             }}
           />

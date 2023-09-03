@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import "./hompage.css";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import PrimarySearchAppBar from "./Header";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
@@ -16,7 +16,6 @@ function HomePage() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700); 
 
   const theme = themes[useTheme().theme];
-  const setTheme = useTheme().toggleTheme;
 
   useEffect(() => {
     function handleResize() {
@@ -32,11 +31,15 @@ function HomePage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className="homepage-root" bgcolor="background.main">
+      <Box className="homepage-root" bgcolor="background.main"
+      sx={{
+          overflow: "scroll"
+        }}>
         <PrimarySearchAppBar title={"Home"} />
         <Box
           sx={{
             display: "flex",
+            flex:1,
             flexDirection: "column",
             justifyContent: "flex-start",
             marginTop: isMobile ? "32%" : "7%",
@@ -72,7 +75,6 @@ function HomePage() {
             </Typography>
           </Box>
             <SearchBar width={isMobile ? 350 : 500} height={50} />
-        </Box>
         <Box
           sx={{
             justifySelf: "flex-start",
@@ -108,8 +110,9 @@ function HomePage() {
             to={"https://docs.google.com/spreadsheets/d/1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0"}
           />
         </Box>
-      </Box>
+        </Box>
       <Footer />
+      </Box>
     </ThemeProvider>
   );
 }

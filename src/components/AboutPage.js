@@ -6,14 +6,12 @@ import "./AboutPage.css";
 import PrimarySearchAppBar from "./Header";
 import { Box, Typography, IconButton, Link } from "@mui/material";
 import Footer from "./footer";
-import { FormatAlignJustify } from "@mui/icons-material";
 import BioSquare from "./BioSquare";
 import { GitHub, Reddit, SpeakerNotes, BugReport } from "@mui/icons-material";
 
 function AboutPage() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
   const theme = themes[useTheme().theme];
-  const setTheme = useTheme().toggleTheme;
 
   useEffect(() => {
     function handleResize() {
@@ -144,7 +142,6 @@ function AboutPage() {
               sx={{
                 display: "flex",
                 width: "100%",
-                gap: "5%",
                 flexWrap: "wrap",
                 gap: isMobile ? "10px" : "5%",
                 justifyContent: isMobile ? "center" : "flex-start",

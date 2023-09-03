@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "@mui/system";
-import { Box, Typography, Paper, Divider, Link } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
-import bannerLight from "../lightlogo1.svg";
-import bannerDark from "../darklogo1.svg";
-import bannerBlue from "../onbluelogo1.svg";
 import smallBannerLight from "../banner_small_light.svg";
-import smallBannerDark from "../banner_small_dark.svg";
 import smallBannerBlue from "../banner_small_on_blue.svg";
 
 function Footer() {
@@ -32,6 +28,7 @@ function Footer() {
         sx={{
           display: "flex",
           width: "100%",
+          marginTop: "5vh",
           justifyContent: "center",
           alignItems: "center",
           background: theme.palette.primary.main,
@@ -59,15 +56,14 @@ function Footer() {
         <Box 
           sx={{
             display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "flex-end",
-            flexDirection: isMobile ? "column" : "row",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            marginX: "5vw",
             width: "100%",
             gap: "5%",
             paddingTop: isMobile ? "1dvh" : "0dvh",
             paddingBottom: isMobile ? "1dvh" : "0dvh",
-            paddingLeft: isMobile ? "8dvh" : "0dvh",
-            paddingRight: isMobile ? "8dvh" : "0dvh",
           }}
         >
           <Link
@@ -78,6 +74,9 @@ function Footer() {
           >
             <Typography fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">About</Typography>
           </Link>
+          <Typography 
+            sx={{ flex: 1, textAlign: "center" }}
+            fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">|</Typography>
           <Link
             href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"
             underline="hover"
@@ -86,6 +85,9 @@ function Footer() {
           >
             <Typography fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">Feedback</Typography>
           </Link>
+          <Typography 
+            sx={{ flex: 1, textAlign: "center" }}
+            fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">|</Typography>
           <Link
             href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"
             underline="hover"
@@ -94,6 +96,9 @@ function Footer() {
           >
             <Typography fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">Bug Report</Typography>
           </Link>
+          <Typography
+            sx={{ flex: 1, textAlign: "center" }}
+            fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">|</Typography>
           <Link
             href="https://github.com/aheck004/highlander-reviews"
             underline="hover"
