@@ -9,7 +9,7 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(cookie_theme ? cookie_theme : "light"); // Initial theme
 
   const toggleTheme = () => {
-    Cookies.set("theme", theme === "light" ? "dark" : "light");
+    Cookies.set("theme", theme === "light" ? "dark" : "light", { sameSite: "Lax" });
     setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
   };
 
