@@ -43,7 +43,7 @@ The Highlander Reviews application is built using the following technology stack
 
 - **State Management**: React's Context API is employed to manage the application's state, including user authentication and course reviews.
 
-- **User Authentication**: For user authentication, the application uses Google OAuth 2.0, providing a secure and trusted login process.
+- **User Authentication**: For user authentication, the application uses Google OAuth 2.0 and Express-sessions, providing a secure and trusted login process.
 
 - **Backend**: The server-side application is built using Node.js with Express.js to handle user authentication, review submissions, and data retrieval from MongoDB and Google Authentication API. The Backend is hosted by Heroku and a repo to it can be found [here](https://github.com/KilloPillers/Highlander-Review-Server/tree/master).
 
