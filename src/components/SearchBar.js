@@ -19,7 +19,7 @@ import { useTheme } from "./ThemeContext";
 const GroupHeader = styled("div")(({ theme }) => ({
   cursor: "pointer",
   position: "sticky",
-  top: "0px",
+  top: "-8px",
   padding: "4px 10px",
   color: theme.palette.accent.contrastText,
   backgroundColor: theme.palette.accent.main,
