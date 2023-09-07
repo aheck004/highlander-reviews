@@ -31,10 +31,7 @@ function HomePage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className="homepage-root" bgcolor="background.main"
-      sx={{
-          overflow: "scroll"
-        }}>
+      <Box className="homepage-root" bgcolor="background.main">
         <PrimarySearchAppBar title={"Home"} />
         <Box
           sx={{
@@ -111,8 +108,8 @@ function HomePage() {
           />
         </Box>
         </Box>
-      <Footer />
       </Box>
+      <Footer />
     </ThemeProvider>
   );
 }

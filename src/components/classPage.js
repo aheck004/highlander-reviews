@@ -147,9 +147,9 @@ function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
   const theme = themes[useTheme().theme];
   const courseRedirect = courseData.is_redirect ? courseData.is_redirect : "";
   const matchCourseRedirect = courseRedirect.match(/([A-Za-z]+)(\d+[A-Za-z]*)/);
+  console.log(matchCourseRedirect);
 
   return (
-  <Box>
             <Box
           sx={{
             display: "flex",
@@ -252,7 +252,6 @@ function DesktopClassPageHero({courseData, graphData, googleUser, reviews}) {
               </Box>
           </Box>
         </Box>
-      </Box>
   )
 }
 
@@ -284,9 +283,6 @@ function ClassPage() {
   useEffect(() => {
     setReviews([]);
     axios
-      .create({
-        withCredentials: true,
-      })
       .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews-graph-data/${course}`)
       .then((response) => {
         const data = [0, 0, 0, 0, 0];
@@ -301,16 +297,12 @@ function ClassPage() {
       skip: 0,
       limit: REVIEW_LIMIT,
     })
-    axios.create({
-        withCredentials: true,
-      })
+    axios
       .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
       .then((response) => {
         setReviews(response.data);
       });
-    axios.create({
-        withCredentials: true,
-      })
+    axios
       .get(process.env.REACT_APP_NODE_SERVER + `/get-course/${course}`)
       .then((response) => {
         setCourseData(response.data[0]);
@@ -323,9 +315,7 @@ function ClassPage() {
       skip: reviews.length,
       limit: REVIEW_LIMIT,
     })
-    axios.create({
-        withCredentials: true,
-      })
+    axios
       .get(process.env.REACT_APP_NODE_SERVER + `/course-reviews/${course}?${query_params}`)
       .then((response) => {
         setReviews([...reviews, ...response.data]);
@@ -335,14 +325,13 @@ function ClassPage() {
   return (
     <ThemeProvider theme={theme}>
       <Box
-        className="class-page-root"
         bgcolor="background.main"
         sx={{
           display: "flex",
           overflow: "hidden",
           justifyContent: "center",
           alignItems: "center",
-          width: "100vw",
+          width: "100%",
           minHeight: "100vh",
           flexDirection: "column",
         }}
