@@ -10,7 +10,6 @@ import Menu from "@mui/material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { themes } from "./themes";
 import { useTheme } from "./ThemeContext";
