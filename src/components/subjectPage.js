@@ -15,6 +15,7 @@ import {
   Divider,
   Chip,
 } from "@mui/material";
+import Footer from "./footer";
 
 function SubjectPage() {
   const theme = themes[useTheme().theme];
@@ -54,8 +55,8 @@ function SubjectPage() {
         key={"subject-page-" + subjectCode}
         bgcolor="background.main"
         sx={{
+          minHeight: "100dvh", 
           display: "flex",
-          overflow: "scroll",
           alignItems: "center",
           width: "100%",
           flexDirection: "column",
@@ -139,6 +140,7 @@ function SubjectPage() {
           <Subject subject={subjectCode} />
         </Box>
       </Box>
+    <Footer/>
     </ThemeProvider>
   );
 }

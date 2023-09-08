@@ -29,6 +29,7 @@ import Cookie from "js-cookie";
 import getGoogleOAuthURL from "../getGoogleURL.js";
 import { useTheme } from "./ThemeContext";
 import qs from "qs";
+import Footer from "./footer";
 
 const REVIEW_LIMIT = 10;
 //TODO: Change to add transition group
@@ -424,6 +425,7 @@ function ClassPage() {
           <Button color="accent" onClick={loadMoreReviews}>Load More</Button>
         ) : null}
       </Box>
+      <Footer/>
     </ThemeProvider>
   );
 }
