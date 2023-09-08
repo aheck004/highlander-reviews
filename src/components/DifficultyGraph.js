@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { createTheme, useTheme, ThemeProvider } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BarChart } from '@mui/x-charts/BarChart'
 
 

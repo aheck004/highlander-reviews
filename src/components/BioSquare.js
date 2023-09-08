@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Badge, Box, ThemeProvider, Typography } from "@mui/material";
 import { Avatar, IconButton } from "@mui/material";
 import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";

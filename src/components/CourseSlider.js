@@ -73,7 +73,7 @@ function CourseSlider({ subject }) {
           height={80}
           sx={{
             display: "flex",
-            overflow: "scroll",
+            overflowX: "scroll",
             gap: "10px",
             padding: "10px",
           }}

@@ -11,12 +11,9 @@ import SubjectSearchBar from "./SubjectSearchBar";
 import Subject from "./subject.js";
 import {
   Box,
-  Paper,
   Typography,
   Divider,
   Chip,
-  Button,
-  Skeleton,
 } from "@mui/material";
 
 function SubjectPage() {
@@ -55,7 +52,6 @@ function SubjectPage() {
     <ThemeProvider theme={theme}>
       <Box
         key={"subject-page-" + subjectCode}
-        className="subject-page-root"
         bgcolor="background.main"
         sx={{
           display: "flex",
