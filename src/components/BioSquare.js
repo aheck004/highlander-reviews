@@ -47,6 +47,7 @@ function BioSquare({ name, title, description, image, linkedin=null, twitter=nul
             {linkedin ?
             <IconButton
               href={linkedin}
+              target="_blank"
             >
               <LinkedIn color="accent"/>
             </IconButton>
@@ -61,6 +62,7 @@ function BioSquare({ name, title, description, image, linkedin=null, twitter=nul
             {github ?  
             <IconButton
             href={github}
+            target="_blank"
             >
               <GitHub color="accent"/>
             </IconButton>

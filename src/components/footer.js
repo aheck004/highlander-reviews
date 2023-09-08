@@ -79,6 +79,7 @@ function Footer() {
             fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">|</Typography>
           <Link
             href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"
+            target="_blank"
             underline="hover"
             color="inherit"
             sx={{ color: "primary.contrastText" }}
@@ -90,6 +91,7 @@ function Footer() {
             fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">|</Typography>
           <Link
             href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"
+            target="_blank"
             underline="hover"
             color="inherit"
             sx={{ color: "primary.contrastText" }}
@@ -101,6 +103,7 @@ function Footer() {
             fontSize={isMobile ? ".6rem" : ".9rem"} color="primary.contrastText">|</Typography>
           <Link
             href="https://github.com/aheck004/highlander-reviews"
+            target="_blank"
             underline="hover"
             color="primary.contrastText"
           >

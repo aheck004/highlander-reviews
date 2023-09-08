@@ -174,11 +174,15 @@ function AboutPage() {
               <div style={{ display: "flex", alignItems: "center" }}>
                 <IconButton
                   href={"https://github.com/aheck004/highlander-reviews"}
+                  target="_blank"
                 >
                   <GitHub color="accent" />
                 </IconButton>
                 Explore our codebase on&nbsp;
-                <Link href="https://github.com/aheck004/highlander-reviews">
+                <Link 
+                  href="https://github.com/aheck004/highlander-reviews"
+                  target="_blank"
+                >
                   GitHub
                 </Link>
               </div>
@@ -192,11 +196,15 @@ function AboutPage() {
                   href={
                     "https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/"
                   }
+                  target="_blank"
                 >
                   <Reddit color="accent" />
                 </IconButton>
                 Visit the&nbsp;
-                <Link href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/">
+                <Link 
+                  href="https://www.reddit.com/r/ucr/comments/638mh5/megathread_ucr_course_database/"
+                  target="_blank"
+                >
                   Course Difficulty Database
                 </Link>
               </div>
@@ -215,11 +223,15 @@ function AboutPage() {
                 href={
                   "https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"
                 }
+                target="_blank"
               >
                 <SpeakerNotes color="accent" />
               </IconButton>
               Want to share feedback? Let us know your thoughts&nbsp;
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link">
+              <Link 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"
+                target="_blank"
+              >
                 here
               </Link>
             </Typography>
@@ -228,11 +240,15 @@ function AboutPage() {
                 href={
                   "https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"
                 }
+                target="_blank"
               >
                 <BugReport color="accent" />
               </IconButton>
               Found a bug? Send a report&nbsp;
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link">
+              <Link 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"
+                target="_blank"
+              >
                 here
               </Link>
             </Typography>

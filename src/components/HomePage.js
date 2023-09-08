@@ -98,16 +98,19 @@ function HomePage() {
             header={"Feedback"}
             body={"Let us know your thoughts or comments"}
             to={"https://docs.google.com/forms/d/e/1FAIpQLSeZOC6LLk1OQ9Jctm3Pr_ZIJ4Vhio0ayoqJkkmzw1OjQhZzQg/viewform?usp=sf_link"}
+            newTab
           />
           <RoutingButton
             header={"Bug Report"}
             body={"Found a bug or issue, let us know about it"}
             to={"https://docs.google.com/forms/d/e/1FAIpQLSfvZsY3kayTVhC8gfwCsXk6JJhGUyzC8wAkm1V_s5c8yNDsPg/viewform?usp=sf_link"}
+            newTab
           />
           <RoutingButton
-            header={"Course Difficulty Database"}
-            body={"View the UCR Course Difficulty Database"}
-            to={"https://docs.google.com/spreadsheets/d/1qiy_Oi8aFiPmL4QSTR3zHe74kmvc6e_159L1mAUUlU0/edit#gid=0"}
+            header={"Highlander Reviews GitHub"}
+            body={"View the codebase for Highlander Reviews"}
+            to={"https://github.com/aheck004/highlander-reviews"}
+            newTab
           />
         </Box>
         </Box>

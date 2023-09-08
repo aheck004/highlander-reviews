@@ -15,7 +15,12 @@ export default function RoutingButton(props) {
           borderRadius: '10px',
         }}
         onClick={() => {
-          window.location.href = props.to;
+          if (props.newTab) {
+            window.open(props.to, '_blank');
+          }
+          else {
+            window.location.href = props.to;
+          }
         }}
         onMouseEnter={() => {
           setHover(true);
